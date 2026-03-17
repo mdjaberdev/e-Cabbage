@@ -1,7 +1,7 @@
-import Container from "../Container";
+import Container from "../common/Container";
 import { FaRegUser } from "react-icons/fa";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import Images from "../Images";
+import Images from "../common/Images";
 import topLogo from "/src/assets/topLogo.png";
 
 const HeaderTop = () => {

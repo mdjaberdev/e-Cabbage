@@ -1,10 +1,10 @@
 import React from 'react'
-import Container from '../Container'
-import Images from '../Images';
 import blogOne from '/src/assets/lastBlogOne.png'
 import { IoIosEye } from "react-icons/io";
 import { FaCalendarAlt } from "react-icons/fa";
 import { FaCircleChevronRight } from "react-icons/fa6";
+import Container from '../common/Container';
+import Images from '../common/Images';
 
 const LastBlog = () => {
   return (

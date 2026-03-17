@@ -1,6 +1,4 @@
 import React from "react";
-import Container from "../Container";
-import Images from "../Images";
 import ProfacilitiesImg from "/src/assets/productsFacilitiesImg.png";
 import ProfacilitiesOne from "/src/assets/productsFacilitiesOne.png";
 import ProfacilitiesTwo from "/src/assets/productsFacilitiesTwo.png";
@@ -8,6 +6,8 @@ import ProfacilitiesThree from "/src/assets/productsFacilitiesThree.png";
 import ProfacilitiesFour from "/src/assets/productsFacilitieFour.png";
 import ProfacilitiesFive from "/src/assets/productsFacilitiesFive.png";
 import ProfacilitiesSix from "/src/assets/productsFacilitiesSix.png";
+import Container from "../common/Container";
+import Images from "../common/Images";
 
 const ProductsFacilities = () => {
   return (

@@ -1,7 +1,8 @@
 import React from "react";
-import Container from "../Container";
-import Images from "../Images";
 import trProOne from "/src/assets/trendingProTwo.png";
+import Container from "../common/Container";
+import Images from "../common/Images";
+
 
 const TredingProductsTwo = () => {
   return (

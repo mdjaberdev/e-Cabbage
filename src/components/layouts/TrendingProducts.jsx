@@ -1,16 +1,14 @@
 import React from "react";
-import Container from "../Container";
-import productImg from "/src/assets/products.png";
-import Products from "../Products";
 import { FaCircleChevronRight, FaRegHeart } from "react-icons/fa6";
-import Images from "../Images";
 import trendingImg from "/src/assets/trendingBgImg.png";
-import Badge from "../Badge";
 import tpOne from "/src/assets/trendingProductsOne.png";
 import star from "/src/assets/productsStat.png";
 import stardark from "/src/assets/productStardrak.png";
 import { LuShoppingCart } from "react-icons/lu";
 import { AiOutlineZoomIn } from "react-icons/ai";
+import Container from "../common/Container";
+import Images from "../common/Images";
+import Badge from "../common/Badge";
 
 const TrendingProducts = () => {
   return (

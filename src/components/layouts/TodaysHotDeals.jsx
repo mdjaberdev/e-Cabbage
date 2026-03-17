@@ -1,6 +1,7 @@
 import React from "react";
-import Container from "../Container";
-import Button from "../Button";
+import Container from "../common/Container";
+import Button from "../common/Button";
+
 
 const TodaysHotDeals = () => {
   (function () {

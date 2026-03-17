@@ -1,6 +1,4 @@
 import React from "react";
-import Container from "../Container";
-import Images from "../Images";
 import bnrLogo from "/src/assets/bannerLogo.png";
 
 import { MdArrowRightAlt } from "react-icons/md";
@@ -12,6 +10,8 @@ import trustFour from "/src/assets/trustFour.png";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import Images from "../common/Images";
+import Container from "../common/Container";
 
 const Banner = () => {
   var settings = {

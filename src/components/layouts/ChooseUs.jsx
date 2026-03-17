@@ -1,10 +1,10 @@
 import React from "react";
-import Container from "../Container";
-import Images from "../Images";
 import cOne from "/src/assets/chooseOne.png";
 import cTwo from "/src/assets/chooseTwo.png";
 import cThree from "/src/assets/chooseThree.png";
 import cFour from "/src/assets/chooseFour.png";
+import Container from "../common/Container";
+import Images from "../common/Images";
 
 const ChooseUs = () => {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
-import Container from "../Container";
-import Images from "../Images";
 import aboutOne from "/src/assets/aboutOne.png";
+import Container from "../common/Container";
+import Images from "../common/Images";
 
 const AboutUs = () => {
   return (
@@ -18,15 +18,17 @@ const AboutUs = () => {
           <h3 className="text-Primary text-[50px] font-Inter font-bold leading-16 w-[528px]">
             Trusted Organic Food Store For People
           </h3>
-          <p className="text-[#546375] text-[18px] font-Nunito leading-7 w-[528px] mt-5">
-            Buy natural, sustainable and chemicalfree products from local the
-            country. We are a strong community of 100,000+
-            <p className="mt-7">
-              sellers who aspire to be good, do good, and spread goodness. We
-              democratic, self-sustaining, two-sided marketplace which thrives
-              on trust and is built on community and quality content.
+          <div className="text-[#546375] text-[18px] font-Nunito leading-7 w-[528px] mt-5">
+            <p>
+              Buy natural, sustainable and chemicalfree products from local the
+              country. We are a strong community of 100,000+
             </p>
-          </p>
+              <p className="mt-7">
+                sellers who aspire to be good, do good, and spread goodness. We
+                democratic, self-sustaining, two-sided marketplace which thrives
+                on trust and is built on community and quality content.
+              </p>
+          </div>
           <h4 className="text-[#223645] text-base font-bold font-Playfair mt-5">
             Jerry Henson
           </h4>

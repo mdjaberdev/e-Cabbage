@@ -1,16 +1,16 @@
+import AboutUs from "../layouts/AboutUs"
+import Banner from "../layouts/Banner"
+import ChooseUs from "../layouts/ChooseUs"
+import Companylogo from "../layouts/Companylogo"
+import LastBlog from "../layouts/LastBlog"
+import Ourproducts from "../layouts/Ourproducts"
+import ProductsFacilities from "../layouts/ProductsFacilities"
+import Testmonial from "../layouts/Testmonial"
+import TodaysHotDeals from "../layouts/TodaysHotDeals"
+import TredingProductsTwo from "../layouts/TredingProductsTwo"
+import TrendingProducts from "../layouts/TrendingProducts"
+import Video from "../layouts/Video"
 
-import Banner from '../layouts/Banner'
-import AboutUs from '../layouts/AboutUs'
-import ChooseUs from '../layouts/ChooseUs'
-import Ourproducts from '../layouts/Ourproducts'
-import TodaysHotDeals from '../layouts/TodaysHotDeals'
-import TrendingProducts from '../layouts/TrendingProducts'
-import Video from '../layouts/Video'
-import ProductsFacilities from '../layouts/ProductsFacilities'
-import TredingProductsTwo from '../layouts/TredingProductsTwo'
-import Testmonial from '../layouts/Testmonial'
-import Companylogo from '../layouts/Companylogo'
-import LastBlog from '../layouts/LastBlog'
 
 
 const Home = () => {

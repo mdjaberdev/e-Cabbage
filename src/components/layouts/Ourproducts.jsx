@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
-import Container from "../Container";
-import Button from "../Button";
-import Products from "../Products";
 import mixitup from "mixitup";
 import productImg from "/src/assets/products.png";
-import Badge from "../Badge";
+import Container from "../common/Container";
+import Button from "../common/Button";
+import Products from "../common/Products";
+import Badge from "../common/Badge";
 
 const Ourproducts = () => {
   const containerRef = useRef(null);

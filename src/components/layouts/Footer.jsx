@@ -1,14 +1,14 @@
 import React from "react";
-import Container from "../Container";
+import Container from "../common/Container";
 import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaVimeoV } from "react-icons/fa";
 import { FaPinterestP } from "react-icons/fa";
-import Images from "../Images";
-import footerLogo from '/src/assets/footerLogo.png'
+import Images from "../common/Images";
+import footerLogo from "/src/assets/footerLogo.png";
 import { IoLocationOutline } from "react-icons/io5";
-import Button from "../Button";
-import fbb from '/src/assets/footerBB.png'
+import Button from "../common/Button";
+import fbb from "/src/assets/footerBB.png";
 import { Link } from "react-router-dom";
 
 const Footer = () => {

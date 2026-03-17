@@ -1,10 +1,11 @@
 import React from "react";
-import Container from "../Container";
-import Images from "../Images";
 import clientTst from "/src/assets/clientTestimonial.png";
 import Slider from "react-slick";
-import NextArrow from "../NextArrow";
-import PreveArrow from "../PreveArrow";
+import Container from "../common/Container";
+import Images from "../common/Images";
+import NextArrow from "../common/NextArrow";
+import PreveArrow from "../common/PreveArrow";
+
 
 const Testmonial = () => {
   var settings = {

@@ -1,6 +1,6 @@
 import React from "react";
-import Container from "../Container";
-import Images from "../Images";
+import Container from "../common/Container";
+import Images from "../common/Images";
 import logo from "/src/assets/logo.png";
 import { IoSearchOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
