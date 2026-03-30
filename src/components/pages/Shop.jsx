@@ -5,6 +5,7 @@ import { IoGridSharp, IoSearchOutline } from "react-icons/io5";
 import Products from "../common/Products";
 import productImg from "/src/assets/products.png";
 import Badge from "../common/Badge";
+import Pagination from "../common/Pagination";
 
 const Shop = () => {
   return (
@@ -153,6 +154,9 @@ const Shop = () => {
           />
         </div>
       </Container>
+      <div className="mt-16.5 mb-29.75">
+        <Pagination itemsPerPage={3} />
+      </div>
     </div>
   );
 };
