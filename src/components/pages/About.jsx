@@ -5,11 +5,26 @@ import Images from "../common/Images";
 import aboutOne from "/src/assets/aboutOne.png";
 import memberOne from "/src/assets/teamMemberOne.png";
 import { FaTwitter, FaFacebookF, FaInstagram } from "react-icons/fa";
+import client from '/src/assets/clientTastm.png'
+import NextArrow from "../common/NextArrow";
+import PreveArrow from "../common/PreveArrow";
+import Slider from "react-slick";
+import NextArrowTwo from "../common/NextArrowTwo";
+import PreveArrowTwo from "../common/PreveArrowTwo";
 
 
 const About = () => {
+   var settings = {
+     dots: true,
+     infinite: true,
+     speed: 500,
+     slidesToShow: 1,
+     slidesToScroll: 1,
+      nextArrow: <NextArrowTwo/>,
+      prevArrow: <PreveArrowTwo />,
+   };
   return (
-    <div className="">
+    <section className="">
       <div className="bg-[url('/src/assets/commonBanner.png')] bg-no-repeat bg-cover bg-center py-37.5">
         <Container>
           <div className="">
@@ -141,9 +156,46 @@ const About = () => {
               requirements.
             </p>
           </div>
+          <div className=" about testmonial">
+            <Slider {...settings}>
+              <div className="w-[890px] bg-white pt-10 pb-[105px] mx-auto shadow-[0_5px_40px_0_rgba(12,0,46,0.102)] text-center mt-[55px]">
+                <Images srcImg={client} className={"mx-auto"} />
+                <h4 className="text-[#222D39] text-lg font-bold font-Inter pt-[30px]">
+                  Lurch Schpellchek
+                </h4>
+                <h5 className="text-[#959CB1] text-sm font-Nunito">
+                  UI/UX designer
+                </h5>
+                <p className="text-[#5C727D] text-base font-Nunito px-[260px] leading-[22px] pt-[24px]">
+                  What a load of rubbish bits and bobs pear shaped owt to do
+                  with me bubble and squeak jolly good morish tinkety tonk old
+                  fruit, car boot my good sir buggered plastered cheeky David,
+                  haggle young delinquent say so I said bite your arm off easy
+                  peasy. Skive off it's all gone to pot buggered.
+                </p>
+              </div>
+              {/* Two  */}
+              <div className="w-[890px] bg-white pt-10 pb-[105px] mx-auto shadow-[0_5px_40px_0_rgba(12,0,46,0.102)] text-center mt-[55px]">
+                <Images srcImg={client} className={"mx-auto"} />
+                <h4 className="text-[#222D39] text-lg font-bold font-Inter pt-[30px]">
+                  Lurch Schpellchek
+                </h4>
+                <h5 className="text-[#959CB1] text-sm font-Nunito">
+                  UI/UX designer
+                </h5>
+                <p className="text-[#5C727D] text-base font-Nunito px-[260px] leading-[22px] pt-[24px]">
+                  What a load of rubbish bits and bobs pear shaped owt to do
+                  with me bubble and squeak jolly good morish tinkety tonk old
+                  fruit, car boot my good sir buggered plastered cheeky David,
+                  haggle young delinquent say so I said bite your arm off easy
+                  peasy. Skive off it's all gone to pot buggered.
+                </p>
+              </div>
+            </Slider>
+          </div>
         </Container>
       </div>
-    </div>
+    </section>
   );
 };
 

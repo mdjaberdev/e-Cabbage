@@ -40,3 +40,9 @@
   margin-bottom: 10px;
   background-color: white;
 }
+.about .slick-dots {
+  top: 400px;
+  display: flex !important;
+  column-gap: 8px;
+  justify-content: center;
+}
