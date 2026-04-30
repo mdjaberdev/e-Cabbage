@@ -154,9 +154,9 @@ const Shop = () => {
           />
         </div>
       </Container>
-      <div className="mt-16.5 mb-29.75">
+      {/* <div className="mt-16.5 mb-29.75">
         <Pagination itemsPerPage={3} />
-      </div>
+      </div> */}
     </div>
   );
 };
