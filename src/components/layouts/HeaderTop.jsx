@@ -3,6 +3,7 @@ import { FaRegUser } from "react-icons/fa";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import Images from "../common/Images";
 import topLogo from "/src/assets/topLogo.png";
+import { Link } from "react-router-dom";
 
 const HeaderTop = () => {
   return (
@@ -17,7 +18,10 @@ const HeaderTop = () => {
             <marquee>Welcome to Xprako! </marquee>
           </div>
           <div className="flex gap-x-4 items-center text-white text-2xl font-Nunito">
-            <FaRegUser />
+            <Link to={"/loging"}>
+         
+              <FaRegUser />
+            </Link>
             <AiOutlineShoppingCart />
             <p>|</p>
             <div className="flex items-center gap-x-2">

@@ -7,6 +7,7 @@ import Shop from "./components/pages/Shop";
 import Pages from "./components/pages/Pages";
 import Blog from "./components/pages/Blog";
 import Contacts from "./components/pages/Contacts";
+import Loging from "./components/pages/Loging";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/pages" element={<Pages />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/Contact" element={<Contacts />} />
+          <Route path="/loging" element={<Loging />} />
         </Route>
       </Routes>
     </>

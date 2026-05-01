@@ -99,7 +99,7 @@ const Contacts = () => {
                 {/* Mail Address  */}
                 <div className="py-[14px] px-[17px] bg-[#F5F5F7] border-2 border-[#F5F5F7] duration-500 focus-within:border-2 focus-within:border-[#80B500] flex justify-between group">
                   <input
-                    type="text"
+                    type="email"
                     className="w-[265px] text-Primary text-base font-Nunito outline-0 bg-transparent"
                     placeholder="Mail Address"
                   />
