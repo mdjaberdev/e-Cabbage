@@ -5,9 +5,9 @@ import Home from "./components/pages/Home";
 import About from "./components/pages/About";
 import Shop from "./components/pages/Shop";
 import Pages from "./components/pages/Pages";
-import Blog from "./components/pages/Blog";
 import Contacts from "./components/pages/Contacts";
 import Loging from "./components/pages/Loging";
+import Blog from "./components/pages/Blog";
 
 function App() {
   return (
