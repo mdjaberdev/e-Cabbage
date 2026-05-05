@@ -1,5 +1,13 @@
 import React from "react";
-import { FaAngleRight } from "react-icons/fa";
+import {
+  FaAngleRight,
+  FaFacebookF,
+  FaPinterestP,
+  FaTwitter,
+  FaVimeoV,
+  FaInstagram,
+  FaGooglePlusG,
+} from "react-icons/fa";
 import Container from "../common/Container";
 import Images from "../common/Images";
 import blogOne from "/src/assets/blogCard.png";
@@ -8,6 +16,8 @@ import { FaCircleChevronRight } from "react-icons/fa6";
 import clitent from "/src/assets/blogpageClient.png";
 import star from "/src/assets/productsStat.png";
 import stardark from "/src/assets/productStardrak.png";
+import { Link } from "react-router-dom";
+import { IoSearchOutline } from "react-icons/io5";
 
 const Blog = () => {
   return (
@@ -117,6 +127,43 @@ const Blog = () => {
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
                   do eiusmod tempor incididunt ut labore
                 </p>
+                <div className="flex justify-center gap-x-2 mt-6">
+                  <div className="p-3 bg-white text-[#6A7695] rounded-full hover:bg-[#80B500] hover:text-white duration-200">
+                    <Link>
+                      <FaFacebookF />
+                    </Link>
+                  </div>
+                  <div className="p-3 bg-white text-[#6A7695] rounded-full hover:bg-[#80B500] hover:text-white duration-200">
+                    <Link>
+                      <FaTwitter />
+                    </Link>
+                  </div>
+                  <div className="p-3 bg-white text-[#6A7695] rounded-full hover:bg-[#80B500] hover:text-white duration-200">
+                    <Link>
+                      <FaInstagram />
+                    </Link>
+                  </div>
+                  <div className="p-3 bg-white text-[#6A7695] rounded-full hover:bg-[#80B500] hover:text-white duration-200">
+                    <Link>
+                      <FaGooglePlusG />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              <div className="py-[39px] px-[21px] bg-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] mt-[30px]">
+                <h4 className="text-Primary text-xl font-Inter font-bold">
+                  Serarch
+                </h4>
+                <div className=" mt-[24px] p-3 relative border border-[#BDBDD8] ">
+                  <input
+                    type="text"
+                    placeholder="Search"
+                    className="outline-0 text-sm text-[#797D95] font-Nunito h-7.5 w-[196px]"
+                  />
+                  <div className="bg-[#80B500] h-full border border-[#80B500]  w-[70px] flex justify-center items-center absolute top-0 right-0">
+                    <IoSearchOutline className=" text-white w-10   " />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
