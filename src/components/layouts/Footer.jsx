@@ -21,7 +21,7 @@ const Footer = () => {
               <h4 className="text-white text-[22px] font-bold font-Inter">
                 About Us.
               </h4>
-              <p className="text-white text-base font-Nunito leading-6 mt-4 w-[310px]">
+              <p className="text-white text-base font-Nunito leading-6 mt-4 w-77.5">
                 orporate clients and leisure travelers has been relying on
                 Groundlink for dependable safe, and professional chauffeured car
                 service in major cities across World. Indeed it has been more
@@ -78,7 +78,7 @@ const Footer = () => {
             </div>
             <div className="">
               <Images srcImg={footerLogo} />
-              <p className="text-white text-base font-Nunito leading-6 w-[330px] mt-4">
+              <p className="text-white text-base font-Nunito leading-6 w-82.5 mt-4">
                 We are a team of designers and developers create high quality
                 Magento, Prestashop,
               </p>

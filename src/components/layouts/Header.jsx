@@ -37,13 +37,13 @@ const Header = () => {
               </li>
             </ul>
           </div>
-          <div className="w-[300px] flex justify-between items-center py-1 px-3 bg-[#F4F4F4] rounded-[50px]">
+          <div className="w-75 flex justify-between items-center py-1 px-3 bg-[#F4F4F4] rounded-[50px]">
             <input
               type="text"
               placeholder="Find Products"
               className="outline-0 text-sm text-[#797D95] font-Nunito"
             />
-            <IoSearchOutline className="text-5xl text-white bg-[#80B500] w-[80px] py-3 rounded-4xl" />
+            <IoSearchOutline className="text-5xl text-white bg-[#80B500] w-20 py-3 rounded-4xl" />
           </div>
         </div>
       </div>

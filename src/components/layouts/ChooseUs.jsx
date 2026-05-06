@@ -27,7 +27,7 @@ const ChooseUs = () => {
                 <h4 className="text-Primary text-[22px] font-Inter font-bold">
                   Eat More Healthfully
                 </h4>
-                <p className="text-[#5C727D] group-hover:text-white text-base font-Nunito w-[345px] leading-5">
+                <p className="text-[#5C727D] group-hover:text-white text-base font-Nunito w-86.25 leading-5">
                   Lorem ipsum dolor sit amet, consectetur adipisic do eiusmod
                   tempor incididunt ut labore et
                 </p>
@@ -41,7 +41,7 @@ const ChooseUs = () => {
                 <h4 className="text-Primary text-[22px] font-Inter font-bold">
                   Eat More Healthfully
                 </h4>
-                <p className="text-[#5C727D] group-hover:text-white text-base font-Nunito w-[345px] leading-5">
+                <p className="text-[#5C727D] group-hover:text-white text-base font-Nunito w-86.25 leading-5">
                   Lorem ipsum dolor sit amet, consectetur adipisic do eiusmod
                   tempor incididunt ut labore et
                 </p>
@@ -57,7 +57,7 @@ const ChooseUs = () => {
                 <h4 className="text-Primary text-[22px] font-Inter font-bold">
                   Eat More Healthfully
                 </h4>
-                <p className="text-[#5C727D] group-hover:text-white text-base font-Nunito w-[345px] leading-5">
+                <p className="text-[#5C727D] group-hover:text-white text-base font-Nunito w-86.25 leading-5">
                   Lorem ipsum dolor sit amet, consectetur adipisic do eiusmod
                   tempor incididunt ut labore et
                 </p>
@@ -71,7 +71,7 @@ const ChooseUs = () => {
                 <h4 className="text-Primary text-[22px] font-Inter font-bold">
                   Eat More Healthfully
                 </h4>
-                <p className="text-[#5C727D] group-hover:text-white text-base font-Nunito w-[345px] leading-5">
+                <p className="text-[#5C727D] group-hover:text-white text-base font-Nunito w-86.25 leading-5">
                   Lorem ipsum dolor sit amet, consectetur adipisic do eiusmod
                   tempor incididunt ut labore et
                 </p>

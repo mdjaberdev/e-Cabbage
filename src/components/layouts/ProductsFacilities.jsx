@@ -30,7 +30,7 @@ const ProductsFacilities = () => {
                 <h4 className="text-Primary text-[22px] font-bold font-Inter">
                   Eat Healthy Food
                 </h4>
-                <p className="text-[#666E77] text-base font-Nunito leading-5 w-[240px]">
+                <p className="text-[#666E77] text-base font-Nunito leading-5 w-60">
                   Est ante in nibh mauris. Ullamcor morbi tincidunt ornare massa
                 </p>
               </div>
@@ -41,7 +41,7 @@ const ProductsFacilities = () => {
                 <h4 className="text-Primary text-[22px] font-bold font-Inter">
                   Pesticide Free
                 </h4>
-                <p className="text-[#666E77] text-base font-Nunito leading-5 w-[240px]">
+                <p className="text-[#666E77] text-base font-Nunito leading-5 w-60">
                   Est ante in nibh mauris. Ullamcor morbi tincidunt ornare massa
                 </p>
               </div>
@@ -52,7 +52,7 @@ const ProductsFacilities = () => {
                 <h4 className="text-Primary text-[22px] font-bold font-Inter">
                   Sweet Exotic Food
                 </h4>
-                <p className="text-[#666E77] text-base font-Nunito leading-5 w-[240px]">
+                <p className="text-[#666E77] text-base font-Nunito leading-5 w-60">
                   Est ante in nibh mauris. Ullamcor morbi tincidunt ornare massa
                 </p>
               </div>
@@ -67,7 +67,7 @@ const ProductsFacilities = () => {
                 <h4 className="text-Primary text-[22px] font-bold font-Inter">
                   Order Flexibility
                 </h4>
-                <p className="text-[#666E77] text-base font-Nunito leading-5 w-[240px]">
+                <p className="text-[#666E77] text-base font-Nunito leading-5 w-60">
                   Est ante in nibh mauris. Ullamcor morbi tincidunt ornare massa
                 </p>
               </div>
@@ -78,7 +78,7 @@ const ProductsFacilities = () => {
                 <h4 className="text-Primary text-[22px] font-bold font-Inter">
                   Livestock Product
                 </h4>
-                <p className="text-[#666E77] text-base font-Nunito leading-5 w-[240px]">
+                <p className="text-[#666E77] text-base font-Nunito leading-5 w-60">
                   Est ante in nibh mauris. Ullamcor morbi tincidunt ornare massa
                 </p>
               </div>
@@ -89,7 +89,7 @@ const ProductsFacilities = () => {
                 <h4 className="text-Primary text-[22px] font-bold font-Inter">
                   Variety & Selection
                 </h4>
-                <p className="text-[#666E77] text-base font-Nunito leading-5 w-[240px]">
+                <p className="text-[#666E77] text-base font-Nunito leading-5 w-60">
                   Est ante in nibh mauris. Ullamcor morbi tincidunt ornare massa
                 </p>
               </div>

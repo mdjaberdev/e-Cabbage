@@ -39,7 +39,7 @@ const LastBlog = () => {
             <h3 className="text-Primary text-[24px] font-Inter font-bold py-5 hover:text-[#80B500] duration-200">
               Pure is the most healthy and most nourishing food
             </h3>
-            <p className="text-[#647589] text-sm font-Nunito leading-5 w-[307px]">
+            <p className="text-[#647589] text-sm font-Nunito leading-5 w-76.75">
               Owt to do with me cracking goal arse over tit cup of tea brolly in
               my flat victoria sponge cup of
             </p>
@@ -66,7 +66,7 @@ const LastBlog = () => {
             <h3 className="text-Primary text-[24px] font-Inter font-bold py-5 hover:text-[#80B500] duration-200">
               Pure is the most healthy and most nourishing food
             </h3>
-            <p className="text-[#647589] text-sm font-Nunito leading-5 w-[307px]">
+            <p className="text-[#647589] text-sm font-Nunito leading-5 w-76.75">
               Owt to do with me cracking goal arse over tit cup of tea brolly in
               my flat victoria sponge cup of
             </p>
@@ -94,7 +94,7 @@ const LastBlog = () => {
             <h3 className="text-Primary text-[24px] font-Inter font-bold py-5 hover:text-[#80B500] duration-200">
               Pure is the most healthy and most nourishing food
             </h3>
-            <p className="text-[#647589] text-sm font-Nunito leading-5 w-[307px]">
+            <p className="text-[#647589] text-sm font-Nunito leading-5 w-76.75">
               Owt to do with me cracking goal arse over tit cup of tea brolly in
               my flat victoria sponge cup of
             </p>

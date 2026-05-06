@@ -53,14 +53,14 @@ const TodaysHotDeals = () => {
   return (
     <div className="bg-[url('/src/assets/todaysBnr.png')] bg-no-repeat bg-cover bg-center">
       <Container>
-        <div className="ml-[650px] pt-50 pb-20">
+        <div className="ml-162.5 pt-50 pb-20">
           <h4 className="text-[#80B500] text-base font-Nunito font-bold">
             Todays Hot Deals
           </h4>
           <h3 className="text-Primary text-[50px] font-Inter font-bold leading-15 mt-2">
             Original Stock Honey Combo Package
           </h3>
-          <p className="text-[#546375] text-base font-Nunito w-[450px] leading-5 mt-5">
+          <p className="text-[#546375] text-base font-Nunito w-112.5 leading-5 mt-5">
             Cur tantas regiones barbarorum obiit, tot maria transmist summo bono
             fruitur id est voluptate barbarorum{" "}
           </p>

@@ -24,11 +24,11 @@ const TrendingProducts = () => {
           </p>
         </div>
         <div className="flex gap-x-5 justify-center mt-10">
-          <div className="bg-[#F5F5F5] p-6 h-[233px] w-1/4">
+          <div className="bg-[#F5F5F5] p-6 h-58.25 w-1/4">
             <h4 className="text-[#80B500] text-[10px] font-bold font-Nunito">
               FRUITS & ORGANIC
             </h4>
-            <h3 className="text-Primary text-[18px] font-bold font-Inter w-[143px] leading-5 py-2">
+            <h3 className="text-Primary text-[18px] font-bold font-Inter w-35.75 leading-5 py-2">
               50% off in Fresh Mango Drinks
             </h3>
             <button className="flex items-center gap-x-1 text-[#80B500] text-[13px] font-bold font-Nunito mt-3">
@@ -47,11 +47,11 @@ const TrendingProducts = () => {
               <div className="flex items-center gap-x-3">
                 <h4 className="text-[#283C54] text-sm font-Nunito">$32.00</h4>
                 <div className="flex items-center gap-x-0.5">
-                  <Images srcImg={star} className={"w-[13px] h-[13px]"} />
-                  <Images srcImg={star} className={"w-[13px] h-[13px]"} />
-                  <Images srcImg={star} className={"w-[13px] h-[13px]"} />
-                  <Images srcImg={star} className={"w-[13px] h-[13px]"} />
-                  <Images srcImg={stardark} className={"w-[13px] h-[13px]"} />
+                  <Images srcImg={star} className={"w-3.25 h-3.25"} />
+                  <Images srcImg={star} className={"w-3.25 h-3.25"} />
+                  <Images srcImg={star} className={"w-3.25 h-3.25"} />
+                  <Images srcImg={star} className={"w-3.25 h-3.25"} />
+                  <Images srcImg={stardark} className={"w-3.25 h-3.25"} />
                 </div>
               </div>
             </div>
@@ -79,9 +79,9 @@ const TrendingProducts = () => {
               <div className="flex items-center gap-x-3">
                 <h4 className="text-[#283C54] text-sm font-Nunito">$32.00</h4>
                 <div className="flex items-center gap-x-0.5">
-                  <Images srcImg={star} className={"w-[13px] h-[13px]"} />
-                  <Images srcImg={star} className={"w-[13px] h-[13px]"} />
-                  <Images srcImg={star} className={"w-[13px] h-[13px]"} />
+                  <Images srcImg={star} className={"w-3.25 h-3.25"} />
+                  <Images srcImg={star} className={"w-3.25 h-3.25"} />
+                  <Images srcImg={star} className={"w-3.25 h-3.25"} />
                   <Images srcImg={star} className={"w-[13px] h-[13px]"} />
                   <Images srcImg={stardark} className={"w-[13px] h-[13px]"} />
                 </div>
@@ -119,7 +119,7 @@ const TrendingProducts = () => {
                   <Images srcImg={star} className={"w-[13px] h-[13px]"} />
                   <Images srcImg={star} className={"w-[13px] h-[13px]"} />
                   <Images srcImg={star} className={"w-[13px] h-[13px]"} />
-                  <Images srcImg={stardark} className={"w-[13px] h-[13px]"} />
+                  <Images srcImg={stardark} className={"w-3.25 h-[13px]"} />
                 </div>
               </div>
             </div>
@@ -143,7 +143,7 @@ const TrendingProducts = () => {
               <h4 className="text-[#80B500] text-[10px] font-bold font-Nunito">
                 - 29% OFF
               </h4>
-              <h3 className="text-Primary text-[18px] font-bold font-Inter w-[143px] leading-5 py-2">
+              <h3 className="text-Primary text-[18px] font-bold font-Inter w-35.75 leading-5 py-2">
                 Green lemon & Orange Juice
               </h3>
               <button className="flex items-center gap-x-1 text-[#80B500] text-[13px] font-bold font-Nunito mt-3">

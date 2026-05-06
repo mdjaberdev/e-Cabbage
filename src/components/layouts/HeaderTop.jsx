@@ -25,7 +25,7 @@ const HeaderTop = () => {
             <AiOutlineShoppingCart />
             <p>|</p>
             <div className="flex items-center gap-x-2">
-              <Images className={"w-[25px] h-[25px]"} srcImg={topLogo} />
+              <Images className={"w-6.25 h-6.25"} srcImg={topLogo} />
               <p>EN</p>
             </div>
           </div>
