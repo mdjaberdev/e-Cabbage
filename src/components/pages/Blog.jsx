@@ -36,14 +36,14 @@ const Blog = () => {
       </div>
 
       <Container>
-        <div className="mt-[120px] mb-[300px]  ">
+        <div className="mt-30 mb-75  ">
           <div className="flex gap-x-10">
-            <div className="space-y-[180px]">
+            <div className="space-y-45">
               {/* Blog Card One */}
-              <div className="relative w-[770px]">
+              <div className="relative w-192.5">
                 <Images srcImg={blogOne} />
-                <div className="p-[36px] bg-white w-[727px]  shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] absolute left-1/2 -bottom-1/2 -translate-1/2">
-                  <div className="flex gap-x-[17px]">
+                <div className="p-9 bg-white w-181.75  shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] absolute left-1/2 -bottom-1/2 -translate-1/2">
+                  <div className="flex gap-x-4.25">
                     <p className="flex gap-x-1  text-[#647589] text-base font-bold font-Nunito">
                       <FaCalendarAlt className="text-[#80B500]" /> July 27, 2020
                     </p>
@@ -51,11 +51,11 @@ const Blog = () => {
                       <FaCommentDots className="text-[#80B500]" /> 1 Comments
                     </p>
                   </div>
-                  <h4 className="text-Primary text-[26px] font-Inter font-bold w-[468px] leading-[31px]">
+                  <h4 className="text-Primary text-[26px] font-Inter font-bold w-117 leading-7.75">
                     Lorem Ipsum has been the industry's standard dummy text ever
                     since
                   </h4>
-                  <p className="text-[#5C727D] text-base font-Nunito w-[540px] leading-[22px] mt-5">
+                  <p className="text-[#5C727D] text-base font-Nunito w-135 leading-5.5 mt-5">
                     It is a long established fact that a reader will be
                     distracted by the readable looking at its layout. The point
                     of using Lorem Ipsum is that{" "}
@@ -69,8 +69,8 @@ const Blog = () => {
               {/* Blog Card One */}
               <div className="relative">
                 <Images srcImg={blogOne} />
-                <div className="p-[36px] bg-white w-[727px] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] absolute left-[50%] -bottom-[50%] -translate-[50%]">
-                  <div className="flex gap-x-[17px]">
+                <div className="p-9 bg-white w-181.75 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] absolute left-[50%] -bottom-[50%] -translate-[50%]">
+                  <div className="flex gap-x-4.25">
                     <p className="flex gap-x-1  text-[#647589] text-base font-bold font-Nunito">
                       <FaCalendarAlt className="text-[#80B500]" /> July 27, 2020
                     </p>
@@ -78,11 +78,11 @@ const Blog = () => {
                       <FaCommentDots className="text-[#80B500]" /> 1 Comments
                     </p>
                   </div>
-                  <h4 className="text-Primary text-[26px] font-Inter font-bold w-[468px] leading-[31px]">
+                  <h4 className="text-Primary text-[26px] font-Inter font-bold w-117 leading-7.75">
                     Lorem Ipsum has been the industry's standard dummy text ever
                     since
                   </h4>
-                  <p className="text-[#5C727D] text-base font-Nunito w-[540px] leading-[22px] mt-5">
+                  <p className="text-[#5C727D] text-base font-Nunito w-135 leading-5.5 mt-5">
                     It is a long established fact that a reader will be
                     distracted by the readable looking at its layout. The point
                     of using Lorem Ipsum is that{" "}
@@ -95,9 +95,9 @@ const Blog = () => {
               </div>
             </div>
             <div className="">
-              <div className="py-[27px] text-center px-[55px] bg-white shadow-[0_0_36px_0_rgba(42,50,168,0.071)]">
+              <div className="py-6.75 text-center px-13.75 bg-white shadow-[0_0_36px_0_rgba(42,50,168,0.071)]">
                 <Images className={"mx-auto"} srcImg={clitent} />
-                <h4 className="text-Primary text-xl font-Inter font-bold mt-[19px]">
+                <h4 className="text-Primary text-xl font-Inter font-bold mt-4.75">
                   Jehnny Rose
                 </h4>
                 <p className="text-[#5C727D] text-[12px] font-Nunito">
@@ -123,7 +123,7 @@ const Blog = () => {
                     (1 Review)
                   </p>
                 </div>
-                <p className="text-[#5C727D] text-sm font-Nunito leading-[19px] mt-4">
+                <p className="text-[#5C727D] text-sm font-Nunito leading-4.75 mt-4">
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
                   do eiusmod tempor incididunt ut labore
                 </p>
@@ -150,17 +150,17 @@ const Blog = () => {
                   </div>
                 </div>
               </div>
-              <div className="py-[39px] px-[21px] bg-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] mt-[30px]">
+              <div className="py-9.75 px-5.25 bg-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] mt-7.5">
                 <h4 className="text-Primary text-xl font-Inter font-bold">
                   Serarch
                 </h4>
-                <div className=" mt-[24px] p-3 relative border border-[#BDBDD8] ">
+                <div className=" mt-6 p-3 relative border border-[#BDBDD8] ">
                   <input
                     type="text"
                     placeholder="Search"
-                    className="outline-0 text-sm text-[#797D95] font-Nunito h-7.5 w-[196px]"
+                    className="outline-0 text-sm text-[#797D95] font-Nunito h-7.5 w-49"
                   />
-                  <div className="bg-[#80B500] h-full border border-[#80B500]  w-[70px] flex justify-center items-center absolute top-0 right-0">
+                  <div className="bg-[#80B500] h-full border border-[#80B500]  w-17.5 flex justify-center items-center absolute top-0 right-0">
                     <IoSearchOutline className=" text-white w-10   " />
                   </div>
                 </div>

@@ -5,24 +5,23 @@ import Images from "../common/Images";
 import aboutOne from "/src/assets/aboutOne.png";
 import memberOne from "/src/assets/teamMemberOne.png";
 import { FaTwitter, FaFacebookF, FaInstagram } from "react-icons/fa";
-import client from '/src/assets/clientTastm.png'
+import client from "/src/assets/clientTastm.png";
 import NextArrow from "../common/NextArrow";
 import PreveArrow from "../common/PreveArrow";
 import Slider from "react-slick";
 import NextArrowTwo from "../common/NextArrowTwo";
 import PreveArrowTwo from "../common/PreveArrowTwo";
 
-
 const About = () => {
-   var settings = {
-     dots: true,
-     infinite: true,
-     speed: 500,
-     slidesToShow: 1,
-     slidesToScroll: 1,
-      nextArrow: <NextArrowTwo/>,
-      prevArrow: <PreveArrowTwo />,
-   };
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    nextArrow: <NextArrowTwo />,
+    prevArrow: <PreveArrowTwo />,
+  };
   return (
     <section className="">
       <div className="bg-[url('/src/assets/commonBanner.png')] bg-no-repeat bg-cover bg-center py-37.5">
@@ -38,24 +37,24 @@ const About = () => {
         </Container>
       </div>
       <Container>
-        <div className="my-[120px] flex gap-x-[71px]">
+        <div className="my-30 flex gap-x-17.75">
           <div className="">
             <h5 className="text-[#80B500] text-lg font-Nunito font-bold">
               Know More About Shop
             </h5>
-            <h3 className="text-Primary text-[50px] font-Inter font-bold w-[528px] leading-[61px] pt-2">
+            <h3 className="text-Primary text-[50px] font-Inter font-bold w-132 leading-15.25 pt-2">
               Trusted Organic Food Store For People
             </h3>
-            <p className="text-[#546375] text-lg font-Nunito w-[528px] pt-[35px]">
+            <p className="text-[#546375] text-lg font-Nunito w-132 pt-8.75">
               Buy natural, sustainable and chemicalfree products from local the
               country. We are a strong community of 100,000+
             </p>
-            <p className="text-[#546375] text-lg font-Nunito w-[540px] pt-[22px]">
+            <p className="text-[#546375] text-lg font-Nunito w-135 pt-5.5">
               sellers who aspire to be good, do good, and spread goodness. We
               democratic, self-sustaining, two-sided marketplace which thrives
               on trust and is built on community and quality content.
             </p>
-            <h4 className="text-Primary text-base font-bold italic font-Inter pt-[29px]">
+            <h4 className="text-Primary text-base font-bold italic font-Inter pt-7.25">
               Jerry Henson
             </h4>
             <h6 className="text-[#808B94] text-[12px] font-Nunito">
@@ -68,9 +67,9 @@ const About = () => {
           </div>
         </div>
       </Container>
-      <div className="bg-[url('/src/assets/aboutPgvideo.png')] bg-no-repeat bg-cover bg-center py-[165px]"></div>
+      <div className="bg-[url('/src/assets/aboutPgvideo.png')] bg-no-repeat bg-cover bg-center py-41.25"></div>
       <Container>
-        <div className="mt-[106px] mb-[124px] text-center">
+        <div className="mt-26.5 mb-31 text-center">
           <h3 className="text-Primary text-[48px] font-Inter font-bold">
             Team Member
           </h3>
@@ -78,13 +77,13 @@ const About = () => {
             A highly efficient slip-ring scanner for today's diagnostic
             requirements.
           </p>
-          <div className="mt-[55px] flex justify-center gap-x-[79px]">
+          <div className="mt-13.75 flex justify-center gap-x-19.75">
             <div className="">
               <Images srcImg={memberOne} className={"mx-auto"} />
               <h4 className="text-Primary tet-[28px] font-Inter font-bold pt-5">
                 John Abraham
               </h4>
-              <p className="text-[#80B500] text-xl font-Nunito pb-[19px]">
+              <p className="text-[#80B500] text-xl font-Nunito pb-4.75">
                 Consultant
               </p>
               <div className="p-3 inline-block bg-[#e8f2d1] rounded-full cursor-pointer hover:bg-[#80B500] hover:text-white">
@@ -105,7 +104,7 @@ const About = () => {
               <h4 className="text-Primary tet-[28px] font-Inter font-bold pt-5">
                 John Abraham
               </h4>
-              <p className="text-[#80B500] text-xl font-Nunito pb-[19px]">
+              <p className="text-[#80B500] text-xl font-Nunito pb-4.75">
                 Organizer
               </p>
               <div className="p-3 inline-block bg-[#e8f2d1] rounded-full cursor-pointer hover:bg-[#80B500] hover:text-white">
@@ -126,7 +125,7 @@ const About = () => {
               <h4 className="text-Primary tet-[28px] font-Inter font-bold pt-5">
                 John Abraham
               </h4>
-              <p className="text-[#80B500] text-xl font-Nunito pb-[19px]">
+              <p className="text-[#80B500] text-xl font-Nunito pb-4.75">
                 Manager
               </p>
               <div className="p-3 inline-block bg-[#e8f2d1] rounded-full cursor-pointer hover:bg-[#80B500] hover:text-white">
@@ -145,28 +144,28 @@ const About = () => {
           </div>
         </div>
       </Container>
-      <div className="bg-[#f7f5eb] py-[110px]">
+      <div className="bg-[#f7f5eb] py-27.5">
         <Container>
           <div className="text-center">
             <h3 className="text-Primary text-[48px] font-bold font-Inter">
               Client Testimonial
             </h3>
-            <p className="text-[#546375] text-base font-Nunito pt-[19px]">
+            <p className="text-[#546375] text-base font-Nunito pt-4.75">
               A highly efficient slip-ring scanner for today's diagnostic
               requirements.
             </p>
           </div>
           <div className=" about testmonial">
             <Slider {...settings}>
-              <div className="w-[890px] bg-white pt-10 pb-[105px] mx-auto shadow-[0_5px_40px_0_rgba(12,0,46,0.102)] text-center mt-[55px]">
+              <div className="w-222.5 bg-white pt-10 pb-26.25 mx-auto shadow-[0_5px_40px_0_rgba(12,0,46,0.102)] text-center mt-13.75">
                 <Images srcImg={client} className={"mx-auto"} />
-                <h4 className="text-[#222D39] text-lg font-bold font-Inter pt-[30px]">
+                <h4 className="text-[#222D39] text-lg font-bold font-Inter pt-7.5">
                   Lurch Schpellchek
                 </h4>
                 <h5 className="text-[#959CB1] text-sm font-Nunito">
                   UI/UX designer
                 </h5>
-                <p className="text-[#5C727D] text-base font-Nunito px-[260px] leading-[22px] pt-[24px]">
+                <p className="text-[#5C727D] text-base font-Nunito px-65 leading-5.5 pt-6">
                   What a load of rubbish bits and bobs pear shaped owt to do
                   with me bubble and squeak jolly good morish tinkety tonk old
                   fruit, car boot my good sir buggered plastered cheeky David,
@@ -175,15 +174,15 @@ const About = () => {
                 </p>
               </div>
               {/* Two  */}
-              <div className="w-[890px] bg-white pt-10 pb-[105px] mx-auto shadow-[0_5px_40px_0_rgba(12,0,46,0.102)] text-center mt-[55px]">
+              <div className="w-222.5 bg-white pt-10 pb-26.25 mx-auto shadow-[0_5px_40px_0_rgba(12,0,46,0.102)] text-center mt-13.75">
                 <Images srcImg={client} className={"mx-auto"} />
-                <h4 className="text-[#222D39] text-lg font-bold font-Inter pt-[30px]">
+                <h4 className="text-[#222D39] text-lg font-bold font-Inter pt-7.5">
                   Lurch Schpellchek
                 </h4>
                 <h5 className="text-[#959CB1] text-sm font-Nunito">
                   UI/UX designer
                 </h5>
-                <p className="text-[#5C727D] text-base font-Nunito px-[260px] leading-[22px] pt-[24px]">
+                <p className="text-[#5C727D] text-base font-Nunito px-65 leading-5.5 pt-6">
                   What a load of rubbish bits and bobs pear shaped owt to do
                   with me bubble and squeak jolly good morish tinkety tonk old
                   fruit, car boot my good sir buggered plastered cheeky David,
