@@ -1,4 +1,5 @@
 @import "tailwindcss";
+
 @theme {
   --font-Nunito: "Nunito", sans-serif;
   --font-Inter: "Inter", sans-serif;

@@ -19,10 +19,11 @@ const HeaderTop = () => {
           </div>
           <div className="flex gap-x-4 items-center text-white text-2xl font-Nunito">
             <Link to={"/loging"}>
-         
               <FaRegUser />
             </Link>
-            <AiOutlineShoppingCart />
+            <Link to={"/cart"}>
+              <AiOutlineShoppingCart />
+            </Link>
             <p>|</p>
             <div className="flex items-center gap-x-2">
               <Images className={"w-6.25 h-6.25"} srcImg={topLogo} />
