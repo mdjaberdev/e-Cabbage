@@ -150,8 +150,8 @@ const Blog = () => {
                   </div>
                 </div>
               </div>
-              <div className="py-9.75 px-5.25 bg-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] mt-7.5">
-                <h4 className="text-Primary text-xl font-Inter font-bold">
+              <div className="py-9.75 px-5.25 bg-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] my-7.5 ">
+                <h4 className="text-Primary text-xl font-Inter font-bold border-b border-[#BDBDD8]">
                   Serarch
                 </h4>
                 <div className=" mt-6 p-3 relative border border-[#BDBDD8] ">
@@ -162,6 +162,28 @@ const Blog = () => {
                   />
                   <div className="bg-[#80B500] h-full border border-[#80B500]  w-17.5 flex justify-center items-center absolute top-0 right-0">
                     <IoSearchOutline className=" text-white w-10   " />
+                  </div>
+                </div>
+              </div>
+              <div className="py-9.75 px-5.25 bg-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]">
+                <h4 className="text-Primary text-xl font-Inter font-bold border-b border-[#BDBDD8]">
+                  Catagories
+                </h4>
+                <div className="">
+                  <div className="text-[#80B500] text-sm font-Nunito py-[9px] px-[19px] bg-[#e9eae4] mt-[27px] hover:text-white hover:bg-[#80B500] duration-200">
+                    Vegetables items (14)
+                  </div>
+                  <div className="text-[#80B500] text-sm font-Nunito py-[9px] px-[19px] bg-[#e9eae4] my-[18px] hover:text-white hover:bg-[#80B500] duration-200">
+                    Herbel Medicine (21)
+                  </div>
+                  <div className="text-[#80B500] text-sm font-Nunito py-[9px] px-[19px] bg-[#e9eae4] my-[18px] hover:text-white hover:bg-[#80B500] duration-200">
+                    Olive Oil massage (17)
+                  </div>
+                  <div className="text-[#80B500] text-sm font-Nunito py-[9px] px-[19px] bg-[#e9eae4] my-[18px] hover:text-white hover:bg-[#80B500] duration-200">
+                    Organic Foods (09)
+                  </div>
+                  <div className="text-[#80B500] text-sm font-Nunito py-[9px] px-[19px] bg-[#e9eae4] mt-[18px] hover:text-white hover:bg-[#80B500] duration-200">
+                    Fishes & meats (265)
                   </div>
                 </div>
               </div>
