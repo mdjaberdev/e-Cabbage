@@ -42,7 +42,6 @@ const Checkout = () => {
 
     setIsLoading(true);
 
-    // ১ সেকেন্ডের ফেক লোডিং ডিলে দিয়ে প্রফেশনাল ফিল আনা হয়েছে
     setTimeout(() => {
       const orderData = {
         customer: formData,
@@ -55,7 +54,6 @@ const Checkout = () => {
       setIsLoading(false);
       setIsOrderPlaced(true);
 
-      // কার্ট ক্লিয়ার করার নিরাপদ উপায়
       if (clearCart) {
         clearCart();
       } else if (setCartItems) {

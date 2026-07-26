@@ -197,8 +197,6 @@ const ProductCard = ({ item, onZoom }) => {
   );
 };
 
-// ================= Main Component =================
-
 const TrendingProducts = () => {
   const [products, setProducts] = useState([]);
   const [zoomedProduct, setZoomedProduct] = useState(null);

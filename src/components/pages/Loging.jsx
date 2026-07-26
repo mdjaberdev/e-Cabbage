@@ -12,8 +12,11 @@ const Loging = () => {
             <h3 className="text-Primary text-[55px] font-bold font-Inter">
               Login Page
             </h3>
-            <h5 className="text-[#133344] text-[18px] font-Nunito flex items-center">
-              Home <FaAngleRight /> Pages <FaAngleRight /> Login
+            <h5 className="text-[#133344] text-[18px] font-Nunito flex items-center gap-2">
+              <Link to="/" className="hover:text-[#80B500]">
+                Home
+              </Link>{" "}
+              <FaAngleRight /> Login
             </h5>
           </div>
         </Container>
@@ -32,10 +35,18 @@ const Loging = () => {
                 </p>
               </div>
               <div className="py-[15px] px-3 border border-[#C2C5E1] ">
-                <input className='text-Primary text-base font-Nunito outline-0 w-full' type="email" placeholder="Email Address" />
+                <input
+                  className="text-Primary text-base font-Nunito outline-0 w-full"
+                  type="email"
+                  placeholder="Email Address"
+                />
               </div>
               <div className="py-[15px] px-3 border border-[#C2C5E1] my-5">
-                <input className='text-Primary text-base font-Nunito outline-0 w-full' type="password" placeholder="Password" />
+                <input
+                  className="text-Primary text-base font-Nunito outline-0 w-full"
+                  type="password"
+                  placeholder="Password"
+                />
               </div>
               <p className="text-[#546375] text-base font-Nunito">
                 Forgot your password?
@@ -56,19 +67,35 @@ const Loging = () => {
                 </p>
               </div>
               <div className="py-[15px] px-3 border border-[#C2C5E1] ">
-                <input className='text-Primary text-base font-Nunito outline-0 w-full' type="email" placeholder="Email Address" />
+                <input
+                  className="text-Primary text-base font-Nunito outline-0 w-full"
+                  type="email"
+                  placeholder="Email Address"
+                />
               </div>
               <div className="py-[15px] px-3 border border-[#C2C5E1] my-5">
-                <input className='text-Primary text-base font-Nunito outline-0 w-full' type="password" placeholder="Create password" />
+                <input
+                  className="text-Primary text-base font-Nunito outline-0 w-full"
+                  type="password"
+                  placeholder="Create password"
+                />
               </div>
               <p className="text-[#546375] text-base font-Nunito">
                 Password must contain(@, letter ,number)
               </p>
               <div className="py-[15px] px-3 border my-5 border-[#C2C5E1] ">
-                <input className='text-Primary text-base font-Nunito outline-0 w-full' type="text" placeholder="First Name" />
+                <input
+                  className="text-Primary text-base font-Nunito outline-0 w-full"
+                  type="text"
+                  placeholder="First Name"
+                />
               </div>
               <div className="py-[15px] px-3 border  border-[#C2C5E1] ">
-                <input className='text-Primary text-base font-Nunito outline-0 w-full' type="text" placeholder="Last Name" />
+                <input
+                  className="text-Primary text-base font-Nunito outline-0 w-full"
+                  type="text"
+                  placeholder="Last Name"
+                />
               </div>
               <div className="py-[15px] px-3 border my-5 border-[#C2C5E1] ">
                 <input

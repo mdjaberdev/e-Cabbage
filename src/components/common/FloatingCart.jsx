@@ -16,7 +16,7 @@ const FloatingCart = () => {
     <>
       <div
         onClick={() => setIsDrawerOpen(true)}
-        className="fixed bottom-8 right-8 z-50 bg-[#80B500] hover:bg-[#6e9c00] text-white w-14 h-14 rounded-full shadow-2xl cursor-pointer flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 group"
+        className="fixed top-1/2 right-8 z-50 bg-[#80B500] hover:bg-[#6e9c00] text-white w-14 h-14 rounded-full shadow-2xl cursor-pointer flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 group"
         title="View Cart"
       >
         <div className="relative flex items-center justify-center">

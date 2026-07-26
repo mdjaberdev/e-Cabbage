@@ -1,162 +1,243 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Container from "../common/Container";
 import { FaAngleRight, FaThList } from "react-icons/fa";
 import { IoGridSharp, IoSearchOutline } from "react-icons/io5";
 import Products from "../common/Products";
-import productImg from "/src/assets/products.png";
 import Badge from "../common/Badge";
-import Pagination from "../common/Pagination";
+import { useSearch } from "../../context/SearchContext";
+import { Link } from "react-router-dom";
+
 
 const Shop = () => {
+  const [allProducts, setAllProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const { searchQuery, setSearchQuery } = useSearch();
+  const [sortBy, setSortBy] = useState("best-match");
+
+  const [viewMode, setViewMode] = useState("grid");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage, setPerPage] = useState(12);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const { data } = await axios.get(
+          "https://dummyjson.com/products?limit=100",
+        );
+        setAllProducts(data.products);
+        setFilteredProducts(data.products);
+      } catch (error) {
+        console.error("Error fetching shop products:", error);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  useEffect(() => {
+    let result = [...allProducts];
+
+    // 1. Search Filter
+    if (searchQuery && searchQuery.trim() !== "") {
+      result = result.filter(
+        (item) =>
+          item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.category.toLowerCase().includes(searchQuery.toLowerCase()),
+      );
+    }
+
+    // 2. Sorting Filter
+    if (sortBy === "price-low") {
+      result.sort((a, b) => a.price - b.price);
+    } else if (sortBy === "price-high") {
+      result.sort((a, b) => b.price - a.price);
+    } else if (sortBy === "rating") {
+      result.sort((a, b) => b.rating - a.rating);
+    }
+
+    setFilteredProducts(result);
+    setCurrentPage(1);
+  }, [searchQuery, sortBy, allProducts]);
+
+  const handleShopSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  // Pagination Logic
+  const indexOfLastItem = currentPage * perPage;
+  const indexOfFirstItem = indexOfLastItem - perPage;
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstItem,
+    indexOfLastItem,
+  );
+  const totalPages = Math.ceil(filteredProducts.length / perPage);
+
   return (
     <div className="">
+      {/* Banner */}
       <div className="bg-[url('/src/assets/commonBanner.png')] bg-no-repeat bg-cover bg-center py-[150px]">
         <Container>
           <div className="">
             <h3 className="text-Primary text-[55px] font-bold font-Inter">
               Shop
             </h3>
-            <h5 className="text-[#133344] text-[18px] font-Nunito flex items-center">
-              Home <FaAngleRight /> Shop
+            <h5 className="text-[#133344] text-[18px] font-Nunito flex items-center gap-2">
+              <Link to="/" className="hover:text-[#80B500]">
+                Home
+              </Link>{" "}
+              <FaAngleRight /> Shop
             </h5>
           </div>
         </Container>
       </div>
+
       <Container>
+        {/* Controls Bar */}
         <div className="mt-[113px]">
-          <div className="flex items-center justify-between py-5">
+          <div className="flex flex-wrap items-center justify-between py-5 gap-4">
             <div className="">
               <h4 className="text-Primary text-[25px] font-bold font-Inter">
                 Organic Fresh Food Fresh Juices
               </h4>
               <p className="text-[#666E77] text-[15px] font-Nunito">
-                About 9,620 results (0.62 seconds)
+                About {filteredProducts.length} results found
               </p>
             </div>
-            <div className="flex gap-x-1 ml-10">
+
+            {/* Per Page Selection */}
+            <div className="flex items-center gap-x-1 ml-10">
               <h4 className="text-[#0A2C3D] text-base">Per Page:</h4>
-              <div className="py-1 px-2 h-7 border border-[#9C9FB7] text-[#9C9FB7] text-[12px] font-Nunito">
-                <select className="outline-0">
-                  <option value="">12</option>
-                  <option value="">13</option>
-                  <option value="">14</option>
+              <div className="py-1 px-2 h-7 border border-[#9C9FB7] text-[#9C9FB7] text-[12px] font-Nunito flex items-center">
+                <select
+                  value={perPage}
+                  onChange={(e) => {
+                    setPerPage(Number(e.target.value));
+                    setCurrentPage(1);
+                  }}
+                  className="outline-0 bg-transparent cursor-pointer"
+                >
+                  <option value={12}>12</option>
+                  <option value={16}>16</option>
+                  <option value={20}>20</option>
                 </select>
               </div>
             </div>
-            <div className="flex gap-x-1">
+
+            {/* Sort By Selection */}
+            <div className="flex items-center gap-x-1">
               <h4 className="text-[#0A2C3D] text-base">Sort By:</h4>
-              <div className="py-1 px-2 h-7 border border-[#9C9FB7] text-[#9C9FB7] text-[12px] font-Nunito">
-                <select className="outline-0">
-                  <option value="">Best Match</option>
-                  <option value="">Best Match</option>
-                  <option value="">Best Match</option>
+              <div className="py-1 px-2 h-7 border border-[#9C9FB7] text-[#9C9FB7] text-[12px] font-Nunito flex items-center">
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="outline-0 bg-transparent cursor-pointer"
+                >
+                  <option value="best-match">Best Match</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                  <option value="rating">Highest Rating</option>
                 </select>
               </div>
             </div>
-            <div className="p-2 flex items-center justify-center h-7 shadow">
+
+            <div
+              onClick={() => setViewMode("grid")}
+              className={`p-2 flex items-center justify-center h-7 shadow cursor-pointer transition-colors ${
+                viewMode === "grid"
+                  ? "bg-[#80B500] text-white"
+                  : "hover:bg-gray-50 text-gray-700"
+              }`}
+            >
               <IoGridSharp />
             </div>
-            <div className="p-2 flex items-center justify-center h-7 shadow">
+            <div
+              onClick={() => setViewMode("list")}
+              className={`p-2 flex items-center justify-center h-7 shadow cursor-pointer transition-colors ${
+                viewMode === "list"
+                  ? "bg-[#80B500] text-white"
+                  : "hover:bg-gray-50 text-gray-700"
+              }`}
+            >
               <FaThList />
             </div>
 
-            <div className="  relative  pl-3 bg-[#F4F4F4] rounded-md">
+            {/* Live Search Input */}
+            <div className="relative pl-3 bg-[#F4F4F4] rounded-md overflow-hidden">
               <input
                 type="text"
                 placeholder="Search"
-                className="outline-0 text-sm text-[#797D95] font-Nunito h-7.5 w-[196px]"
+                value={searchQuery || ""}
+                onChange={handleShopSearchChange}
+                className="outline-0 text-sm text-[#797D95] font-Nunito h-7.5 w-[196px] bg-transparent"
               />
-              <div className="bg-[#80B500] h-7.5 py-2 absolute top-0 right-0">
-                <IoSearchOutline className=" text-white w-10   " />
+              <div className="bg-[#80B500] h-7.5 py-2 absolute top-0 right-0 px-3 flex items-center justify-center">
+                <IoSearchOutline className="text-white w-5" />
               </div>
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-x-5 mt-10">
-          <Products
-            productImg={productImg}
-            productTitle={"Juicy Orange Pack"}
-            productReview={"(24)"}
-            productPrice={"$19.00"}
-          />
-          <Products
-            productImg={productImg}
-            productTitle={"Juicy Orange Pack"}
-            productReview={"(24)"}
-            productPrice={"$19.00"}
-          />
-          <div className="relative">
-            <Products
-              productImg={productImg}
-              productTitle={"Juicy Orange Pack"}
-              productReview={"(24)"}
-              productPrice={"$19.00"}
-            />
-            <Badge className={"absolute"} badgeTxt={"-29%"} />
+        <div
+          className={
+            viewMode === "grid"
+              ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-10 mt-10 mb-20"
+              : "flex flex-col gap-y-5 mt-10 mb-20"
+          }
+        >
+          {currentProducts.length > 0 ? (
+            currentProducts.map((item) => {
+              const rating = item.rating || 4.5;
+
+              return (
+                <div key={item.id} className="relative">
+                  <Products
+                    id={item.id}
+                    productImg={item.thumbnail}
+                    productTitle={item.title}
+                    productReview={`(${rating})`}
+                    productPrice={`$${item.price.toFixed(2)}`}
+                    stock={item.stock || 10}
+                    className={
+                      viewMode === "list"
+                        ? "sm:flex-row !flex-row items-center"
+                        : ""
+                    }
+                  />
+                  {item.discountPercentage > 0 && (
+                    <Badge
+                      className={"absolute top-2 left-2 z-10"}
+                      badgeTxt={`-${Math.round(item.discountPercentage)}%`}
+                    />
+                  )}
+                </div>
+              );
+            })
+          ) : (
+            <div className="col-span-4 text-center py-20 text-gray-500 text-lg font-Nunito">
+              No products found matching your search.
+            </div>
+          )}
+        </div>
+
+        {/* Pagination Section */}
+        {totalPages > 1 && (
+          <div className="mt-16.5 mb-29.75 flex justify-center">
+            <div className="flex gap-2 items-center">
+              {Array.from({ length: totalPages }, (_, index) => (
+                <button
+                  key={index + 1}
+                  onClick={() => setCurrentPage(index + 1)}
+                  className={`px-4 py-2 border rounded-md font-Nunito text-sm transition-colors duration-200 cursor-pointer ${
+                    currentPage === index + 1
+                      ? "bg-[#80B500] text-white border-[#80B500]"
+                      : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+                  }`}
+                >
+                  {index + 1}
+                </button>
+              ))}
+            </div>
           </div>
-          <Products
-            productImg={productImg}
-            productTitle={"Juicy Orange Pack"}
-            productReview={"(24)"}
-            productPrice={"$19.00"}
-          />
-        </div>
-        <div className="grid grid-cols-4 gap-x-5 mt-10">
-          <Products
-            productImg={productImg}
-            productTitle={"Juicy Orange Pack"}
-            productReview={"(24)"}
-            productPrice={"$19.00"}
-          />
-          <Products
-            productImg={productImg}
-            productTitle={"Juicy Orange Pack"}
-            productReview={"(24)"}
-            productPrice={"$19.00"}
-          />
-          <Products
-            productImg={productImg}
-            productTitle={"Juicy Orange Pack"}
-            productReview={"(24)"}
-            productPrice={"$19.00"}
-          />
-          <Products
-            productImg={productImg}
-            productTitle={"Juicy Orange Pack"}
-            productReview={"(24)"}
-            productPrice={"$19.00"}
-          />
-        </div>
-        <div className="grid grid-cols-4 gap-x-5 mt-10 mb-20">
-          <Products
-            productImg={productImg}
-            productTitle={"Juicy Orange Pack"}
-            productReview={"(24)"}
-            productPrice={"$19.00"}
-          />
-          <Products
-            productImg={productImg}
-            productTitle={"Juicy Orange Pack"}
-            productReview={"(24)"}
-            productPrice={"$19.00"}
-          />
-          <Products
-            productImg={productImg}
-            productTitle={"Juicy Orange Pack"}
-            productReview={"(24)"}
-            productPrice={"$19.00"}
-          />
-          <Products
-            productImg={productImg}
-            productTitle={"Juicy Orange Pack"}
-            productReview={"(24)"}
-            productPrice={"$19.00"}
-          />
-        </div>
+        )}
       </Container>
-      {/* <div className="mt-16.5 mb-29.75">
-        <Pagination itemsPerPage={3} />
-      </div> */}
     </div>
   );
 };

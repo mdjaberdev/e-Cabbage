@@ -11,7 +11,6 @@ import { useCart } from "../../context/CartContext";
 const Cart = () => {
   const { cartItems, addToCart, decreaseQuantity, removeFromCart } = useCart();
 
-  // মোট সাবটোটাল হিসাব করা
   const subtotal = cartItems.reduce((total, item) => {
     const priceNumber =
       parseFloat(item.productPrice.replace(/[^0-9.]/g, "")) || 0;
@@ -27,8 +26,11 @@ const Cart = () => {
             <h3 className="text-Primary text-[55px] font-bold font-Inter">
               Cart Page
             </h3>
-            <h5 className="text-[#133344] text-[18px] font-Nunito flex items-center">
-              <Link to="/">Home</Link> <FaAngleRight /> Cart
+            <h5 className="text-[#133344] text-[18px] font-Nunito flex items-center gap-2">
+              <Link to="/" className="hover:text-[#80B500]">
+                Home
+              </Link>{" "}
+              <FaAngleRight /> Cart
             </h5>
           </div>
         </Container>
@@ -38,7 +40,6 @@ const Cart = () => {
       <div className="my-[115px]">
         <Container>
           {cartItems.length === 0 ? (
-            /* যদি কার্ট খালি থাকে */
             <div className="text-center py-10">
               <h2 className="text-2xl font-bold font-Inter text-Primary mb-4">
                 Your Cart is Empty!
@@ -51,7 +52,6 @@ const Cart = () => {
               </Link>
             </div>
           ) : (
-            /* যদি কার্টে প্রোডাক্ট থাকে */
             <div className="flex flex-col lg:flex-row justify-between gap-10 p-5">
               {/* Left Side: Product List */}
               <div className="w-full lg:w-[900px]">

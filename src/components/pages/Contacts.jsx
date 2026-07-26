@@ -6,6 +6,7 @@ import phone from "../../assets/cpnIcon.png";
 import { FaRegUser, FaMessage } from "react-icons/fa6";
 import Button from "../common/Button";
 import { MdMailOutline, MdOutlineWifiCalling3 } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const Contacts = () => {
   return (
@@ -16,8 +17,11 @@ const Contacts = () => {
             <h3 className="text-Primary text-[55px] font-bold font-Inter">
               Contact Us
             </h3>
-            <h5 className="text-[#133344] text-[18px] font-Nunito flex items-center">
-              Home <FaAngleRight /> Contact
+            <h5 className="text-[#133344] text-[18px] font-Nunito flex items-center gap-2">
+              <Link to="/" className="hover:text-[#80B500]">
+                Home
+              </Link>{" "}
+              <FaAngleRight /> Contact
             </h5>
           </div>
         </Container>

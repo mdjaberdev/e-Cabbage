@@ -6,6 +6,7 @@ import { LuShoppingCart } from "react-icons/lu";
 import { FaRegHeart, FaHeart } from "react-icons/fa6";
 import { AiOutlineZoomIn, AiOutlineClose } from "react-icons/ai";
 import { useCart } from "../../context/CartContext";
+import { Link } from "react-router-dom";
 
 const Products = ({
   id,
@@ -42,8 +43,10 @@ const Products = ({
 
   return (
     <>
-      <div
-        className={`group bg-white border border-gray-200 p-4 h-full flex flex-col justify-between transition-all duration-300 hover:border-[#80B500]/50 ${className}`}
+      {/* Product Card Container as a Link */}
+      <Link
+        to={`/product/${id}`}
+        className={`group bg-white border border-gray-200 p-4 h-full flex flex-col justify-between transition-all duration-300 hover:border-[#80B500]/50 block cursor-pointer ${className}`}
       >
         <div>
           <div className="relative w-full aspect-square overflow-hidden mb-4 bg-gray-50">
@@ -55,23 +58,30 @@ const Products = ({
             <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-x-3">
               {/* Add to Cart Button */}
               <button
-                onClick={() =>
+                onClick={(e) => {
+                  e.preventDefault(); // Link e jabe na
+                  e.stopPropagation(); // Event bubble hote dibe na
                   addToCart({
                     id,
                     productTitle,
                     productPrice,
                     productImg,
                     stock,
-                  })
-                }
+                  });
+                }}
                 aria-label="Add to cart"
                 className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300 p-3.5 bg-white text-[#80B500] hover:bg-[#80B500] hover:text-white rounded-full shadow-lg cursor-pointer"
               >
                 <LuShoppingCart size={18} />
               </button>
 
+              {/* Wishlist Button */}
               <button
-                onClick={() => setIsLoved(!isLoved)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setIsLoved(!isLoved);
+                }}
                 aria-label="Add to wishlist"
                 className={`translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75 p-3.5 bg-white rounded-full shadow-lg cursor-pointer ${
                   isLoved
@@ -82,8 +92,13 @@ const Products = ({
                 {isLoved ? <FaHeart size={18} /> : <FaRegHeart size={18} />}
               </button>
 
+              {/* Quick View Button */}
               <button
-                onClick={() => setIsZoomed(true)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setIsZoomed(true);
+                }}
                 aria-label="Quick view"
                 className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-150 p-3.5 bg-white text-gray-700 hover:bg-[#80B500] hover:text-white rounded-full shadow-lg cursor-pointer"
               >
@@ -127,7 +142,7 @@ const Products = ({
             {productPrice}
           </p>
         </div>
-      </div>
+      </Link>
 
       {/* Zoom Modal */}
       {isZoomed && (

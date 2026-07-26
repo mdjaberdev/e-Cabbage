@@ -11,11 +11,12 @@ import Blog from "./components/pages/Blog";
 import Cart from "./components/pages/Cart";
 import Checkout from "./components/pages/Checkout";
 import FloatingCart from "./components/common/FloatingCart";
-// import CabbageBlogPage from "./components/pages/CabbageBlogPage";
+import { SearchProvider } from "./context/SearchContext";
+import ProductDetails from "./components/common/ProductDetails";
 
 function App() {
   return (
-    <>
+    <SearchProvider>
       <FloatingCart />
       <Routes>
         <Route path="/" element={<RootLayout />}>
@@ -28,9 +29,11 @@ function App() {
           <Route path="/loging" element={<Loging />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+          {/* <-- Dynamic Route */}
         </Route>
       </Routes>
-    </>
+    </SearchProvider>
   );
 }
 

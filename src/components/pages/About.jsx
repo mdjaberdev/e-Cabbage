@@ -11,6 +11,7 @@ import PreveArrow from "../common/PreveArrow";
 import Slider from "react-slick";
 import NextArrowTwo from "../common/NextArrowTwo";
 import PreveArrowTwo from "../common/PreveArrowTwo";
+import { Link } from "react-router-dom";
 
 const About = () => {
   var settings = {
@@ -30,8 +31,11 @@ const About = () => {
             <h3 className="text-Primary text-[55px] font-bold font-Inter">
               About us
             </h3>
-            <h5 className="text-[#133344] text-[18px] font-Nunito flex items-center">
-              Home <FaAngleRight /> About us
+            <h5 className="text-[#133344] text-[18px] font-Nunito flex items-center gap-2">
+              <Link to="/" className="hover:text-[#80B500]">
+                Home
+              </Link>{" "}
+              <FaAngleRight /> About
             </h5>
           </div>
         </Container>
