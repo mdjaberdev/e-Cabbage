@@ -6,9 +6,8 @@ import Images from "../common/Images";
 import NextArrow from "../common/NextArrow";
 import PreveArrow from "../common/PreveArrow";
 
-
 const Testmonial = () => {
-  var settings = {
+  const settings = {
     dots: true,
     infinite: true,
     speed: 500,
@@ -20,32 +19,35 @@ const Testmonial = () => {
     prevArrow: <PreveArrow />,
   };
 
+  // স্লাইড আইটেমের জন্য একটি ডামি অ্যারে
+  const testimonialSlides = [1, 2, 3, 4];
+
   return (
-    <div className="py-20">
+    <div className="py-12 lg:py-20">
       <Container>
+        {/* Heading */}
         <div className="text-center">
-          <h3 className="text-Primary text-5xl font-bold font-Inter ">
+          <h3 className="text-Primary text-3xl sm:text-4xl lg:text-5xl font-bold font-Inter">
             Client Testimonial
           </h3>
-          <p className="text-[#546375] text-base font-Rubik mt-4">
+
+          <p className="text-[#546375] text-sm sm:text-base font-Rubik mt-4">
             A highly efficient slip-ring scanner for today's diagnostic
             requirements.
           </p>
         </div>
-        <div className="relative testmonial">
+
+        {/* Slider */}
+        <div className="relative testmonial mt-10">
           <Slider {...settings}>
-            <div className="outline-0">
-              <Images srcImg={clientTst} className={"mx-auto"} />
-            </div>
-            <div className="outline-0">
-              <Images srcImg={clientTst} className={"mx-auto"} />
-            </div>
-            <div className="outline-0">
-              <Images srcImg={clientTst} className={"mx-auto"} />
-            </div>
-            <div className="outline-0">
-              <Images srcImg={clientTst} className={"mx-auto"} />
-            </div>
+            {testimonialSlides.map((_, index) => (
+              <div key={index} className="outline-0">
+                <Images
+                  srcImg={clientTst}
+                  className={"mx-auto w-full sm:w-auto"}
+                />
+              </div>
+            ))}
           </Slider>
         </div>
       </Container>

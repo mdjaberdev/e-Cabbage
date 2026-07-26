@@ -1,111 +1,209 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "../common/Container";
 import Button from "../common/Button";
 
-
 const TodaysHotDeals = () => {
-  (function () {
-    const second = 1000,
-      minute = second * 60,
-      hour = minute * 60,
-      day = hour * 24;
+  const [time, setTime] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
-    let today = new Date(),
-      dd = String(today.getDate()).padStart(2, "0"),
-      mm = String(today.getMonth() + 1).padStart(2, "0"),
-      yyyy = today.getFullYear(),
-      nextYear = yyyy + 1,
-      dayMonth = "04/08/",
-      birthday = dayMonth + yyyy;
+  useEffect(() => {
+    const second = 1000;
+    const minute = second * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
+
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, "0");
+    let mm = String(today.getMonth() + 1).padStart(2, "0");
+    let yyyy = today.getFullYear();
+
+    let nextYear = yyyy + 1;
+    let dayMonth = "04/08/";
+    let birthday = dayMonth + yyyy;
 
     today = mm + "/" + dd + "/" + yyyy;
+
     if (today > birthday) {
       birthday = dayMonth + nextYear;
     }
 
-    const countDown = new Date(birthday).getTime(),
-      x = setInterval(function () {
-        const now = new Date().getTime(),
-          distance = countDown - now;
+    const countDown = new Date(birthday).getTime();
 
-        (document.getElementById("days").innerText = Math.floor(
-          distance / day
-        )),
-          (document.getElementById("hours").innerText = Math.floor(
-            (distance % day) / hour
-          )),
-          (document.getElementById("minutes").innerText = Math.floor(
-            (distance % hour) / minute
-          )),
-          (document.getElementById("seconds").innerText = Math.floor(
-            (distance % minute) / second
-          ));
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
 
-        if (distance < 0) {
-          document.getElementById("headline").innerText = "It's my birthday!";
-          document.getElementById("countdown").style.display = "none";
-          document.getElementById("content").style.display = "block";
-          clearInterval(x);
-        }
-        //seconds
-      }, 0);
-  })();
+      const distance = countDown - now;
+
+      setTime({
+        days: Math.floor(distance / day),
+        hours: Math.floor((distance % day) / hour),
+        minutes: Math.floor((distance % hour) / minute),
+        seconds: Math.floor((distance % minute) / second),
+      });
+
+      if (distance < 0) {
+        clearInterval(interval);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="bg-[url('/src/assets/todaysBnr.png')] bg-no-repeat bg-cover bg-center">
       <Container>
-        <div className="ml-162.5 pt-50 pb-20">
-          <h4 className="text-[#80B500] text-base font-Nunito font-bold">
+        <div
+          className="
+        lg:ml-162.5 
+        pt-20 
+        pb-20
+
+        sm:pt-28
+
+        lg:pt-50
+        "
+        >
+          <h4
+            className="
+          text-[#80B500] 
+          text-base 
+          font-Nunito 
+          font-bold
+          "
+          >
             Todays Hot Deals
           </h4>
-          <h3 className="text-Primary text-[50px] font-Inter font-bold leading-15 mt-2">
+
+          <h3
+            className="
+          text-Primary 
+          text-3xl
+          sm:text-4xl
+          lg:text-[50px]
+          font-Inter 
+          font-bold 
+          leading-10
+          lg:leading-15
+          mt-2
+          "
+          >
             Original Stock Honey Combo Package
           </h3>
-          <p className="text-[#546375] text-base font-Nunito w-112.5 leading-5 mt-5">
+
+          <p
+            className="
+          text-[#546375] 
+          text-base 
+          font-Nunito 
+          w-full
+          sm:w-[450px]
+          lg:w-112.5
+          leading-5 
+          mt-5
+          "
+          >
             Cur tantas regiones barbarorum obiit, tot maria transmist summo bono
-            fruitur id est voluptate barbarorum{" "}
+            fruitur id est voluptate barbarorum
           </p>
-          <div className="flex gap-x-10 mt-10">
-            <div className="text-center ">
-              <div
-                id="days"
-                className="bg-white hover:bg-[#80B500] text-[#80B500] hover:text-white duration-200 w-15 h-15 flex items-center justify-center rounded-full text-[18px] font-Nunito font-bold"
-              ></div>
-              <h4 className="text-[#223645] text-base font-Inter">Days</h4>
-            </div>
-            <div className="text-center">
-              <div
-                id="hours"
-                className="bg-white hover:bg-[#80B500] text-[#80B500] hover:text-white duration-200 h-15 w-15 flex items-center justify-center rounded-full text-[18px] font-Nunito font-bold"
-              ></div>
-              <h4 className="text-[#223645] text-base font-Inter">Houres</h4>
-            </div>
-            <div className="text-center">
-              <div
-                id="minutes"
-                className="bg-white hover:bg-[#80B500] text-[#80B500] hover:text-white duration-200 h-15 w-15 flex items-center justify-center rounded-full text-[18px] font-Nunito font-bold"
-              ></div>
-              <h4 className="text-[#223645] text-base font-Inter">Minutes</h4>
-            </div>
-            <div className="text-center">
-              <div
-                id="seconds"
-                className="bg-white hover:bg-[#80B500] text-[#80B500] hover:text-white duration-200 h-15 w-15 flex items-center justify-center rounded-full text-[18px] font-Nunito font-bold"
-              ></div>
-              <h4 className="text-[#223645] text-base font-Inter">Seconds</h4>
-            </div>
+
+          {/* Countdown */}
+
+          <div
+            className="
+          flex 
+          flex-wrap
+          gap-5
+          sm:gap-x-10
+          mt-10
+          "
+          >
+            {[
+              {
+                value: time.days,
+                label: "Days",
+              },
+              {
+                value: time.hours,
+                label: "Hours",
+              },
+              {
+                value: time.minutes,
+                label: "Minutes",
+              },
+              {
+                value: time.seconds,
+                label: "Seconds",
+              },
+            ].map((item, index) => (
+              <div key={index} className="text-center">
+                <div
+                  className="
+                  bg-white 
+                  hover:bg-[#80B500] 
+                  text-[#80B500] 
+                  hover:text-white 
+                  duration-200 
+
+                  w-15
+                  h-15
+
+                  flex 
+                  items-center 
+                  justify-center 
+                  rounded-full 
+
+                  text-[18px] 
+                  font-Nunito 
+                  font-bold
+                  "
+                >
+                  {item.value}
+                </div>
+
+                <h4
+                  className="
+                  text-[#223645] 
+                  text-base 
+                  font-Inter
+                  "
+                >
+                  {item.label}
+                </h4>
+              </div>
+            ))}
           </div>
-          <div className="mt-10 flex gap-5">
+
+          {/* Buttons */}
+
+          <div
+            className="
+          mt-10 
+          flex 
+          flex-col
+          sm:flex-row
+          gap-5
+          "
+          >
             <Button
               btnTxt={"Shop Now"}
-              className={
-                "hover:bg-transparent hover:text-[#80B500] duration-200"
-              }
+              className="
+              hover:bg-transparent 
+              hover:text-[#80B500] 
+              duration-200
+              "
             />
+
             <Button
               btnTxt={"Deal of The Day"}
-              className={
-                "hover:bg-transparent hover:text-[#80B500] duration-200"
-              }
+              className="
+              hover:bg-transparent 
+              hover:text-[#80B500] 
+              duration-200
+              "
             />
           </div>
         </div>

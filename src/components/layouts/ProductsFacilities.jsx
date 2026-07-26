@@ -10,91 +10,163 @@ import Container from "../common/Container";
 import Images from "../common/Images";
 
 const ProductsFacilities = () => {
+  const leftFacilities = [
+    {
+      img: ProfacilitiesOne,
+      title: "Eat Healthy Food",
+    },
+    {
+      img: ProfacilitiesTwo,
+      title: "Pesticide Free",
+    },
+    {
+      img: ProfacilitiesThree,
+      title: "Sweet Exotic Food",
+    },
+  ];
+
+  const rightFacilities = [
+    {
+      img: ProfacilitiesFour,
+      title: "Order Flexibility",
+    },
+    {
+      img: ProfacilitiesFive,
+      title: "Livestock Product",
+    },
+    {
+      img: ProfacilitiesSix,
+      title: "Variety & Selection",
+    },
+  ];
+
   return (
     <div className="my-28">
       <Container>
         <div className="text-center">
-          <h3 className="text-Primary text-5xl font-bold font-Inter ">
+          <h3
+            className="
+          text-Primary 
+          text-4xl
+          lg:text-5xl 
+          font-bold 
+          font-Inter
+          "
+          >
             Product Facilities
           </h3>
-          <p className="text-[#546375] text-base font-Rubik mt-4">
+
+          <p
+            className="
+          text-[#546375] 
+          text-base 
+          font-Rubik 
+          mt-4
+          "
+          >
             A highly efficient slip-ring scanner for today's diagnostic
             requirements.
           </p>
         </div>
-        <div className="flex gap-x-10 mt-10">
-          <div className="">
-            <div className="flex items-center">
-              <Images srcImg={ProfacilitiesOne} />
-              <div className="">
-                <h4 className="text-Primary text-[22px] font-bold font-Inter">
-                  Eat Healthy Food
-                </h4>
-                <p className="text-[#666E77] text-base font-Nunito leading-5 w-60">
-                  Est ante in nibh mauris. Ullamcor morbi tincidunt ornare massa
-                </p>
+
+        <div
+          className="
+        flex 
+        flex-col
+        lg:flex-row
+        items-center
+        justify-between
+        gap-10
+        mt-10
+        "
+        >
+          {/* Left Side */}
+
+          <div className="flex flex-col gap-8 order-2 lg:order-1">
+            {leftFacilities.map((item, index) => (
+              <div key={index} className="flex items-center gap-x-4">
+                <Images srcImg={item.img} />
+
+                <div>
+                  <h4
+                    className="
+                    text-Primary 
+                    text-[20px]
+                    lg:text-[22px] 
+                    font-bold 
+                    font-Inter
+                    "
+                  >
+                    {item.title}
+                  </h4>
+
+                  <p
+                    className="
+                    text-[#666E77] 
+                    text-base 
+                    font-Nunito 
+                    leading-5 
+                    w-full
+                    lg:w-60
+                    "
+                  >
+                    Est ante in nibh mauris. Ullamcor morbi tincidunt ornare
+                    massa
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="flex items-center">
-              <Images srcImg={ProfacilitiesTwo} />
-              <div className="">
-                <h4 className="text-Primary text-[22px] font-bold font-Inter">
-                  Pesticide Free
-                </h4>
-                <p className="text-[#666E77] text-base font-Nunito leading-5 w-60">
-                  Est ante in nibh mauris. Ullamcor morbi tincidunt ornare massa
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center">
-              <Images srcImg={ProfacilitiesThree} />
-              <div className="">
-                <h4 className="text-Primary text-[22px] font-bold font-Inter">
-                  Sweet Exotic Food
-                </h4>
-                <p className="text-[#666E77] text-base font-Nunito leading-5 w-60">
-                  Est ante in nibh mauris. Ullamcor morbi tincidunt ornare massa
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
-          <div className="">
-            <Images srcImg={ProfacilitiesImg} />
+
+          {/* Center Image */}
+
+          <div className="order-1 lg:order-2">
+            <Images srcImg={ProfacilitiesImg} className="w-full" />
           </div>
-          <div className="">
-            <div className="flex items-center">
-              <div className="text-end">
-                <h4 className="text-Primary text-[22px] font-bold font-Inter">
-                  Order Flexibility
-                </h4>
-                <p className="text-[#666E77] text-base font-Nunito leading-5 w-60">
-                  Est ante in nibh mauris. Ullamcor morbi tincidunt ornare massa
-                </p>
+
+          {/* Right Side */}
+
+          <div className="flex flex-col gap-8 order-3">
+            {rightFacilities.map((item, index) => (
+              <div
+                key={index}
+                className="
+                flex 
+                items-center 
+                gap-x-4
+                "
+              >
+                <div className="text-right">
+                  <h4
+                    className="
+                    text-Primary 
+                    text-[20px]
+                    lg:text-[22px] 
+                    font-bold 
+                    font-Inter
+                    "
+                  >
+                    {item.title}
+                  </h4>
+
+                  <p
+                    className="
+                    text-[#666E77] 
+                    text-base 
+                    font-Nunito 
+                    leading-5 
+                    w-full
+                    lg:w-60
+                    "
+                  >
+                    Est ante in nibh mauris. Ullamcor morbi tincidunt ornare
+                    massa
+                  </p>
+                </div>
+
+                <Images srcImg={item.img} />
               </div>
-              <Images srcImg={ProfacilitiesFour} />
-            </div>
-            <div className="flex items-center">
-              <div className="text-end">
-                <h4 className="text-Primary text-[22px] font-bold font-Inter">
-                  Livestock Product
-                </h4>
-                <p className="text-[#666E77] text-base font-Nunito leading-5 w-60">
-                  Est ante in nibh mauris. Ullamcor morbi tincidunt ornare massa
-                </p>
-              </div>
-              <Images srcImg={ProfacilitiesFive} />
-            </div>
-            <div className="flex items-center">
-              <div className="text-end">
-                <h4 className="text-Primary text-[22px] font-bold font-Inter">
-                  Variety & Selection
-                </h4>
-                <p className="text-[#666E77] text-base font-Nunito leading-5 w-60">
-                  Est ante in nibh mauris. Ullamcor morbi tincidunt ornare massa
-                </p>
-              </div>
-              <Images srcImg={ProfacilitiesSix} />
-            </div>
+            ))}
           </div>
         </div>
       </Container>

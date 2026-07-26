@@ -1,48 +1,107 @@
+/* ================= Banner Slider ================= */
+
 .slick-dots {
+  position: absolute;
   top: 570px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex !important;
-  column-gap: 8px;
   justify-content: center;
+  gap: 8px;
 }
 
 .slick-dots li {
-  background-color: #80b500;
-  border-radius: 50%;
-  height: 13px !important;
   width: 13px !important;
-  border: 2px solid white;
+  height: 13px !important;
+  border-radius: 50%;
+  background: #80b500;
+  border: 2px solid #fff;
 }
 
 .slick-dots li.slick-active {
-  transform: scale(1.4);
+  transform: scale(1.3);
   border: none;
-  margin-bottom: 10px;
 }
 
 .slick-dots li button::before {
-  content: "" !important;
+  display: none;
 }
+
+/* ================= Testimonial ================= */
+
 .testmonial .slick-dots {
   top: 370px;
-  display: flex !important;
-  column-gap: 8px;
-  justify-content: center;
 }
+
 .testmonial .slick-dots li {
-  background-color: #c6dd8c;
-  border-radius: 50%;
-  height: 15px !important;
   width: 15px !important;
+  height: 15px !important;
+  background: #c6dd8c;
 }
+
 .testmonial .slick-dots li.slick-active {
-  transform: scale(1.4);
+  background: #fff;
   border: 1px solid #90be20;
-  margin-bottom: 10px;
-  background-color: white;
 }
+
+
 .about .slick-dots {
   top: 400px;
-  display: flex !important;
-  column-gap: 8px;
-  justify-content: center;
+}
+
+
+/* Laptop */
+@media (max-width: 1024px) {
+  .slick-dots {
+    top: 470px;
+  }
+
+  .testmonial .slick-dots {
+    top: 320px;
+  }
+
+  .about .slick-dots {
+    top: 340px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .slick-dots {
+    top: 430px;
+  }
+
+  .testmonial .slick-dots {
+    top: 290px;
+  }
+
+  .about .slick-dots {
+    top: 310px;
+  }
+
+  .slick-dots li {
+    width: 11px !important;
+    height: 11px !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .slick-dots {
+    top: 350px;
+    gap: 6px;
+  }
+
+  .testmonial .slick-dots {
+    top: 250px;
+  }
+
+  .about .slick-dots {
+    top: 260px;
+  }
+
+  .slick-dots li {
+    width: 10px !important;
+    height: 10px !important;
+  }
 }
