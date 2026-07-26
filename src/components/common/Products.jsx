@@ -1,63 +1,168 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Images from "./Images";
 import productStar from "/src/assets/productsStat.png";
 import productStarDrk from "/src/assets/productStardrak.png";
 import { LuShoppingCart } from "react-icons/lu";
-import { FaRegHeart } from "react-icons/fa6";
-import { AiOutlineZoomIn } from "react-icons/ai";
+import { FaRegHeart, FaHeart } from "react-icons/fa6";
+import { AiOutlineZoomIn, AiOutlineClose } from "react-icons/ai";
+import { useCart } from "../../context/CartContext";
+
+
 
 const Products = ({
+  id,
   className,
   productPrice,
   productReview,
   productTitle,
   productImg,
 }) => {
+  const [isLoved, setIsLoved] = useState(false);
+  const [isZoomed, setIsZoomed] = useState(false);
+  const { addToCart } = useCart();
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setIsZoomed(false);
+      }
+    };
+    if (isZoomed) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isZoomed]);
+
+  const hasReview =
+    productReview &&
+    productReview !== "(0)" &&
+    productReview !== "0" &&
+    productReview !== "()";
+
   return (
-    <div className={`text-center relative group ${className}`}>
-      <Images srcImg={productImg} className={"w-full"} />
-      <div className="opacity-0 group-hover:opacity-100 duration-300 absolute bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-x-2">
-        <div className="translate-y-10 group-hover:translate-y-0  p-3 bg-white text-[#80B500] hover:bg-[#80B500] hover:text-white duration-200 rounded-[50%]">
-          <LuShoppingCart />
+    <>
+      <div
+        className={`group bg-white border border-gray-200 p-4 h-full flex flex-col justify-between transition-all duration-300 hover:border-[#80B500]/50 ${className}`}
+      >
+        <div>
+          <div className="relative w-full aspect-square overflow-hidden mb-4 bg-gray-50">
+            <Images
+              srcImg={productImg}
+              className="w-full h-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-110"
+            />
+
+            <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-x-3">
+              {/* Add to Cart Button */}
+              <button
+                onClick={() =>
+                  addToCart({ id, productTitle, productPrice, productImg })
+                }
+                aria-label="Add to cart"
+                className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300 p-3.5 bg-white text-[#80B500] hover:bg-[#80B500] hover:text-white rounded-full shadow-lg cursor-pointer"
+              >
+                <LuShoppingCart size={18} />
+              </button>
+
+              <button
+                onClick={() => setIsLoved(!isLoved)}
+                aria-label="Add to wishlist"
+                className={`translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75 p-3.5 bg-white rounded-full shadow-lg cursor-pointer ${
+                  isLoved
+                    ? "text-red-500 hover:bg-red-500 hover:text-white"
+                    : "text-gray-700 hover:bg-[#80B500] hover:text-white"
+                }`}
+              >
+                {isLoved ? <FaHeart size={18} /> : <FaRegHeart size={18} />}
+              </button>
+
+              <button
+                onClick={() => setIsZoomed(true)}
+                aria-label="Quick view"
+                className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-150 p-3.5 bg-white text-gray-700 hover:bg-[#80B500] hover:text-white rounded-full shadow-lg cursor-pointer"
+              >
+                <AiOutlineZoomIn size={18} />
+              </button>
+            </div>
+          </div>
+
+          <div className="text-left px-1">
+            <h4 className="text-gray-800 text-sm font-medium font-Inter leading-tight line-clamp-2 group-hover:text-[#80B500] transition-colors">
+              {productTitle}
+            </h4>
+
+            {hasReview ? (
+              <div className="flex items-center gap-x-2 mt-2 mb-2.5 h-4">
+                <div className="flex">
+                  <Images srcImg={productStar} className="w-3 h-3" />
+                  <Images srcImg={productStar} className="w-3 h-3" />
+                  <Images srcImg={productStar} className="w-3 h-3" />
+                  <Images srcImg={productStar} className="w-3 h-3" />
+                  <Images srcImg={productStarDrk} className="w-3 h-3" />
+                </div>
+                <span className="text-gray-400 text-xs font-Nunito -mt-0.5">
+                  {productReview}
+                </span>
+              </div>
+            ) : (
+              <div className="mt-2 mb-2.5 h-4"></div>
+            )}
+          </div>
         </div>
-        <div className="translate-y-10 group-hover:translate-y-0 delay-100 p-3 bg-white text-[#80B500] hover:bg-[#80B500] hover:text-white duration-200 rounded-[50%]">
-          <FaRegHeart />
-        </div>
-        <div className="translate-y-10 group-hover:translate-y-0 delay-200 p-3 bg-white text-[#80B500] hover:bg-[#80B500] hover:text-white duration-200 rounded-[50%]">
-          <AiOutlineZoomIn />
-        </div>
-      </div>
-      <div className="group-hover:shadow-[0_7px_21px_0_rgba(55,55,213,0.14)] py-4 duration-300 w-full">
-        <div className="flex gap-x-1 justify-center items-center ">
-          <span>
-            <Images srcImg={productStar} />
-          </span>
-          <span>
-            {" "}
-            <Images srcImg={productStar} />
-          </span>
-          <span>
-            {" "}
-            <Images srcImg={productStarDrk} />
-          </span>
-          <span>
-            {" "}
-            <Images srcImg={productStarDrk} />
-          </span>
-          <span>
-            {" "}
-            <Images srcImg={productStarDrk} />
-          </span>
-          <p className="text-[#9597AA] text-[10px] font-Nunito">
-            {productReview}
+
+        <div className="text-left px-1 mt-auto pt-2 border-t border-gray-100">
+          <p className="text-gray-950 text-base font-bold font-Nunito">
+            {productPrice}
           </p>
         </div>
-        <h4 className="text-Primary text-base font-bold font-Inter py-2">
-          {productTitle}
-        </h4>
-        <h4 className="text-[#223645] text-sm font-Nunito">{productPrice}</h4>
       </div>
-    </div>
+
+      {/* Zoom Modal */}
+      {isZoomed && (
+        <div
+          onClick={() => setIsZoomed(false)}
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-md p-4 transition-all"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative max-w-3xl w-full bg-white rounded-3xl p-8 shadow-2xl flex flex-col md:flex-row gap-8"
+          >
+            <button
+              onClick={() => setIsZoomed(false)}
+              className="absolute -top-3 -right-3 bg-white text-gray-600 p-2.5 rounded-full shadow-md hover:bg-gray-100 duration-200 cursor-pointer"
+            >
+              <AiOutlineClose size={20} />
+            </button>
+
+            <div className="w-full md:w-1/2 aspect-square flex items-center justify-center bg-gray-50 rounded-2xl p-4">
+              <Images
+                srcImg={productImg}
+                className="max-h-full object-contain mix-blend-multiply"
+              />
+            </div>
+
+            <div className="w-full md:w-1/2 flex flex-col text-left justify-center">
+              <h3 className="text-2xl font-bold font-Inter text-gray-950">
+                {productTitle}
+              </h3>
+              <p className="text-3xl font-bold font-Nunito text-[#80B500] mt-3">
+                {productPrice}
+              </p>
+              <button
+                onClick={() => {
+                  addToCart({ id, productTitle, productPrice, productImg });
+                  setIsZoomed(false);
+                }}
+                className="mt-8 w-full bg-[#80B500] text-white py-3.5 px-8 rounded-full font-semibold hover:bg-[#6e9c00] transition-colors flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <LuShoppingCart /> Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
