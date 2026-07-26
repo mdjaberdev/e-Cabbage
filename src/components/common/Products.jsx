@@ -7,8 +7,6 @@ import { FaRegHeart, FaHeart } from "react-icons/fa6";
 import { AiOutlineZoomIn, AiOutlineClose } from "react-icons/ai";
 import { useCart } from "../../context/CartContext";
 
-
-
 const Products = ({
   id,
   className,
@@ -16,6 +14,7 @@ const Products = ({
   productReview,
   productTitle,
   productImg,
+  stock,
 }) => {
   const [isLoved, setIsLoved] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -57,7 +56,13 @@ const Products = ({
               {/* Add to Cart Button */}
               <button
                 onClick={() =>
-                  addToCart({ id, productTitle, productPrice, productImg })
+                  addToCart({
+                    id,
+                    productTitle,
+                    productPrice,
+                    productImg,
+                    stock,
+                  })
                 }
                 aria-label="Add to cart"
                 className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300 p-3.5 bg-white text-[#80B500] hover:bg-[#80B500] hover:text-white rounded-full shadow-lg cursor-pointer"
@@ -92,6 +97,12 @@ const Products = ({
               {productTitle}
             </h4>
 
+            {stock !== undefined && (
+              <p className="text-xs text-gray-500 mt-1 font-Nunito">
+                Stock: <span className="font-bold text-gray-700">{stock}</span>
+              </p>
+            )}
+
             {hasReview ? (
               <div className="flex items-center gap-x-2 mt-2 mb-2.5 h-4">
                 <div className="flex">
@@ -111,7 +122,7 @@ const Products = ({
           </div>
         </div>
 
-        <div className="text-left px-1 mt-auto pt-2 border-t border-gray-100">
+        <div className="text-left px-1 mt-auto pt-2 border-t border-gray-100 flex items-center justify-between">
           <p className="text-gray-950 text-base font-bold font-Nunito">
             {productPrice}
           </p>
@@ -149,12 +160,26 @@ const Products = ({
               <p className="text-3xl font-bold font-Nunito text-[#80B500] mt-3">
                 {productPrice}
               </p>
+
+              {stock !== undefined && (
+                <p className="text-xs text-gray-500 mt-2">
+                  Available Stock:{" "}
+                  <span className="font-bold text-gray-700">{stock}</span>
+                </p>
+              )}
+
               <button
                 onClick={() => {
-                  addToCart({ id, productTitle, productPrice, productImg });
+                  addToCart({
+                    id,
+                    productTitle,
+                    productPrice,
+                    productImg,
+                    stock,
+                  });
                   setIsZoomed(false);
                 }}
-                className="mt-8 w-full bg-[#80B500] text-white py-3.5 px-8 rounded-full font-semibold hover:bg-[#6e9c00] transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                className="mt-6 w-full bg-[#80B500] text-white py-3.5 px-8 rounded-full font-semibold hover:bg-[#6e9c00] transition-colors flex items-center justify-center gap-2 cursor-pointer"
               >
                 <LuShoppingCart /> Add to Cart
               </button>

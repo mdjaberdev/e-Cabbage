@@ -10,7 +10,6 @@ import Badge from "../common/Badge";
 const Ourproducts = () => {
   const containerRef = useRef(null);
   const mixerRef = useRef(null);
-
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -22,18 +21,11 @@ const Ourproducts = () => {
 
         const allProducts = data.products.map((item, index) => {
           let category = "";
-
-          if (index < 8) {
-            category = "food";
-          } else if (index < 16) {
-            category = "vegetables";
-          } else if (index < 24) {
-            category = "dried";
-          } else if (index < 32) {
-            category = "brek";
-          } else {
-            category = "fish";
-          }
+          if (index < 8) category = "food";
+          else if (index < 16) category = "vegetables";
+          else if (index < 24) category = "dried";
+          else if (index < 32) category = "brek";
+          else category = "fish";
 
           return {
             ...item,
@@ -81,7 +73,6 @@ const Ourproducts = () => {
           <h3 className="text-Primary text-5xl font-bold font-Inter">
             Our Products
           </h3>
-
           <p className="text-[#546375] text-base font-Rubik mt-4">
             A highly efficient slip-ring scanner for today's diagnostic
             requirements.
@@ -91,31 +82,27 @@ const Ourproducts = () => {
         <div className="flex flex-wrap justify-center gap-4 lg:gap-x-10 mt-10">
           <Button
             data-filter=".food"
-            className="[&.mixitup-control-active]:bg-white [&.mixitup-control-active]:text-[#223645] rounded-4xl duration-150"
+            className="[&.mixitup-control-active]:bg-white [&.mixitup-control-active]:text-[#223645] rounded-4xl duration-150 cursor-pointer"
             btnTxt="Food & Drinks"
           />
-
           <Button
             data-filter=".vegetables"
-            className="[&.mixitup-control-active]:bg-white [&.mixitup-control-active]:text-[#223645] rounded-4xl duration-150"
+            className="[&.mixitup-control-active]:bg-white [&.mixitup-control-active]:text-[#223645] rounded-4xl duration-150 cursor-pointer"
             btnTxt="Vegetables"
           />
-
           <Button
             data-filter=".dried"
-            className="[&.mixitup-control-active]:bg-white [&.mixitup-control-active]:text-[#223645] rounded-4xl duration-150"
+            className="[&.mixitup-control-active]:bg-white [&.mixitup-control-active]:text-[#223645] rounded-4xl duration-150 cursor-pointer"
             btnTxt="Dried Foods"
           />
-
           <Button
             data-filter=".brek"
-            className="[&.mixitup-control-active]:bg-white [&.mixitup-control-active]:text-[#223645] rounded-4xl duration-150"
+            className="[&.mixitup-control-active]:bg-white [&.mixitup-control-active]:text-[#223645] rounded-4xl duration-150 cursor-pointer"
             btnTxt="Bread & Cake"
           />
-
           <Button
             data-filter=".fish"
-            className="[&.mixitup-control-active]:bg-white [&.mixitup-control-active]:text-[#223645] rounded-4xl duration-150"
+            className="[&.mixitup-control-active]:bg-white [&.mixitup-control-active]:text-[#223645] rounded-4xl duration-150 cursor-pointer"
             btnTxt="Fish & Meat"
           />
         </div>
@@ -135,6 +122,8 @@ const Ourproducts = () => {
                   productReview={`(${item.rating})`}
                   productTitle={item.title}
                   productPrice={`$${item.price}`}
+                  stock={item.stock}
+                  productItem={item}
                 />
                 {roundedDiscount > 0 && (
                   <Badge badgeTxt={`-${roundedDiscount}%`} />

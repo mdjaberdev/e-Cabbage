@@ -4,41 +4,58 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(() => {
-    const savedCart = localStorage.getItem("cart");
-    return savedCart ? JSON.parse(savedCart) : [];
+    try {
+      const savedCart = localStorage.getItem("cart");
+      return savedCart ? JSON.parse(savedCart) : [];
+    } catch (error) {
+      return [];
+    }
   });
 
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cartItems));
+    try {
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+    } catch (error) {
+      console.error("Could not save cart to localStorage", error);
+    }
   }, [cartItems]);
 
-  // ১. কার্টে প্রোডাক্ট যোগ বা পরিমাণ বাড়ানোর ফাংশন (স্টক চেক সহ)
   const addToCart = (product) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((item) => item.id === product.id);
-
       if (existingItem) {
-        // যদি প্রোডাক্টটি আগেই কার্টে থাকে, তবে স্টক চেক করুন
-        const maxStock = product.stock || 100; // যদি API থেকে stock না আসে ডিফল্ট 100 ধরবে
-        if (existingItem.quantity >= maxStock) {
-          alert(`Sorry! Only ${maxStock} items available in stock.`);
-          return prevItems; // স্টক শেষ হলে বাড়াবে না
+        if (
+          product.stock !== undefined &&
+          existingItem.quantity >= product.stock
+        ) {
+          alert("দুঃখিত, স্টকে আর পণ্য নেই!");
+          return prevItems;
         }
-
-        // স্টক থাকলে পরিমাণ ১ বাড়াবে
         return prevItems.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
             : item,
         );
-      } else {
-        // নতুন প্রোডাক্ট হলে কার্টে যুক্ত করবে (স্টক ইনফরমেশন সহ)
-        return [...prevItems, { ...product, quantity: 1 }];
       }
+      return [...prevItems, { ...product, quantity: 1 }];
     });
   };
 
-  // ২. পরিমাণ কমানোর ফাংশন
+  const increaseQuantity = (id) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) => {
+        if (item.id === id) {
+          if (item.stock !== undefined && item.quantity >= item.stock) {
+            alert("দুঃখিত, এর বেশি স্টক নেই!");
+            return item;
+          }
+          return { ...item, quantity: item.quantity + 1 };
+        }
+        return item;
+      }),
+    );
+  };
+
   const decreaseQuantity = (id) => {
     setCartItems((prevItems) =>
       prevItems
@@ -49,15 +66,8 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  // ৩. কার্ট থেকে সম্পূর্ণ ডিলিট করার ফাংশন
   const removeFromCart = (id) => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
-  };
-
-  // ৪. অর্ডার সম্পন্ন হলে কার্ট খালি করার ফাংশন
-  const clearCart = () => {
-    setCartItems([]);
-    localStorage.removeItem("cart");
   };
 
   return (
@@ -65,9 +75,9 @@ export const CartProvider = ({ children }) => {
       value={{
         cartItems,
         addToCart,
+        increaseQuantity,
         decreaseQuantity,
         removeFromCart,
-        clearCart,
       }}
     >
       {children}
@@ -75,4 +85,10 @@ export const CartProvider = ({ children }) => {
   );
 };
 
-export const useCart = () => useContext(CartContext);
+export const useCart = () => {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error("useCart must be used within a CartProvider");
+  }
+  return context;
+};

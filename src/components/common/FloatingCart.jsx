@@ -5,7 +5,8 @@ import CartDrawer from "./CartDrawer";
 
 const FloatingCart = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const { cartItems = [] } = useCart();
+  const cartContext = useCart();
+  const cartItems = cartContext?.cartItems || cartContext?.cart || [];
 
   const totalItemsCount = Array.isArray(cartItems)
     ? cartItems.reduce((total, item) => total + (item.quantity || 0), 0)
@@ -13,10 +14,9 @@ const FloatingCart = () => {
 
   return (
     <>
-      {/* Floating Cart Button */}
       <div
         onClick={() => setIsDrawerOpen(true)}
-        className="fixed top-1/2 -translate-x-1/2 right-1 z-50 bg-[#80B500] hover:bg-[#6e9c00] text-white w-14 h-14 rounded-full shadow-2xl cursor-pointer flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 group"
+        className="fixed bottom-8 right-8 z-50 bg-[#80B500] hover:bg-[#6e9c00] text-white w-14 h-14 rounded-full shadow-2xl cursor-pointer flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 group"
         title="View Cart"
       >
         <div className="relative flex items-center justify-center">
@@ -32,7 +32,6 @@ const FloatingCart = () => {
         </div>
       </div>
 
-      {/* Slide-over Cart Drawer */}
       <CartDrawer
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}

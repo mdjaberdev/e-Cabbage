@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Container from "../common/Container";
-import { FaAngleRight, FaCheckCircle } from "react-icons/fa";
+import { FaAngleRight, FaCheckCircle, FaSpinner } from "react-icons/fa";
 import Button from "../common/Button";
-
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 
 const Checkout = () => {
-  const { cartItems, clearCart } = useCart(); 
+  const { cartItems, clearCart, setCartItems } = useCart();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -21,6 +21,7 @@ const Checkout = () => {
   });
 
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -38,34 +39,51 @@ const Checkout = () => {
       alert("Your cart is empty!");
       return;
     }
-    const orderData = {
-      customer: formData,
-      items: cartItems,
-      totalAmount: subtotal,
-      date: new Date().toISOString(),
-    };
-    console.log("Order Placed Successfully:", orderData);
-    setIsOrderPlaced(true);
-    if (clearCart) clearCart();
+
+    setIsLoading(true);
+
+    // ১ সেকেন্ডের ফেক লোডিং ডিলে দিয়ে প্রফেশনাল ফিল আনা হয়েছে
+    setTimeout(() => {
+      const orderData = {
+        customer: formData,
+        items: cartItems,
+        totalAmount: subtotal,
+        date: new Date().toISOString(),
+      };
+
+      console.log("Order Placed Successfully:", orderData);
+      setIsLoading(false);
+      setIsOrderPlaced(true);
+
+      // কার্ট ক্লিয়ার করার নিরাপদ উপায়
+      if (clearCart) {
+        clearCart();
+      } else if (setCartItems) {
+        setCartItems([]);
+      }
+    }, 1000);
   };
 
   if (isOrderPlaced) {
     return (
       <Container>
         <div className="py-24 text-center max-w-lg mx-auto">
-          <div className="flex justify-center mb-4 text-[#80B500]">
+          <div className="flex justify-center mb-4 text-[#80B500] animate-bounce">
             <FaCheckCircle size={64} />
           </div>
           <h2 className="text-3xl font-bold font-Inter text-Primary mb-3">
             Thank You For Your Order!
           </h2>
           <p className="text-[#666E77] mb-6">
-            Your order has been successfully placed. We will contact you soon
+            Your order has been successfully placed. We will contact you soon at{" "}
+            <span className="font-semibold text-gray-800">
+              {formData.phone}
+            </span>{" "}
             with your Cash on Delivery details.
           </p>
           <button
             onClick={() => navigate("/")}
-            className="bg-[#80B500] text-white px-8 py-3.5 rounded-full font-semibold hover:bg-[#6e9c00] transition-colors cursor-pointer"
+            className="bg-[#80B500] text-white px-8 py-3.5 rounded-full font-semibold hover:bg-[#6e9c00] transition-colors cursor-pointer shadow-lg"
           >
             Continue Shopping
           </button>
@@ -82,8 +100,11 @@ const Checkout = () => {
             <h3 className="text-Primary text-[55px] font-bold font-Inter">
               Checkout
             </h3>
-            <h5 className="text-[#133344] text-[18px] font-Nunito flex items-center">
-              <Link to="/">Home</Link> <FaAngleRight /> Checkout
+            <h5 className="text-[#133344] text-[18px] font-Nunito flex items-center gap-2">
+              <Link to="/" className="hover:text-[#80B500]">
+                Home
+              </Link>{" "}
+              <FaAngleRight /> Checkout
             </h5>
           </div>
         </Container>
@@ -97,7 +118,7 @@ const Checkout = () => {
             className="flex flex-col lg:flex-row justify-between gap-10"
           >
             {/* Left Side: Billing Details Form */}
-            <div className="w-full lg:w-[65%] bg-white p-8 rounded-lg shadow-sm border border-gray-200">
+            <div className="w-full lg:w-[65%] bg-white p-8 rounded-xl shadow-sm border border-gray-200">
               <h3 className="text-Primary text-[22px] font-bold font-Inter mb-6 border-b pb-3">
                 Billing Details
               </h3>
@@ -187,11 +208,31 @@ const Checkout = () => {
                   type="text"
                   name="city"
                   required
+                  list="city-options"
                   value={formData.city}
                   onChange={handleChange}
                   className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-[#80B500]"
-                  placeholder="Dhaka"
+                  placeholder="Type or select city (e.g. Dhaka)"
                 />
+
+                {/* City Suggestions Datalist */}
+                <datalist id="city-options">
+                  <option value="Dhaka" />
+                  <option value="Chattogram" />
+                  <option value="Sylhet" />
+                  <option value="Rajshahi" />
+                  <option value="Khulna" />
+                  <option value="Barishal" />
+                  <option value="Rangpur" />
+                  <option value="Mymensingh" />
+                  <option value="Comilla" />
+                  <option value="Gazipur" />
+                  <option value="Narayanganj" />
+                  <option value="Cox's Bazar" />
+                  <option value="Jessore" />
+                  <option value="Bogra" />
+                  <option value="Dinajpur" />
+                </datalist>
               </div>
 
               <div>
@@ -211,31 +252,37 @@ const Checkout = () => {
 
             {/* Right Side: Order Summary */}
             <div className="w-full lg:w-[32%]">
-              <div className="bg-[#E5E4F8] p-8 rounded-lg shadow-sm">
+              <div className="bg-[#E5E4F8] p-8 rounded-xl shadow-sm sticky top-8">
                 <h4 className="text-Primary text-[22px] font-bold font-Inter mb-6 border-b border-[#BFC1C7] pb-3">
                   Your Order
                 </h4>
 
                 {/* Products mini list */}
                 <div className="space-y-4 mb-6 max-h-60 overflow-y-auto pr-2">
-                  {cartItems.map((item) => {
-                    const itemPrice =
-                      parseFloat(item.productPrice.replace(/[^0-9.]/g, "")) ||
-                      0;
-                    return (
-                      <div
-                        key={item.id}
-                        className="flex justify-between text-sm text-[#666E77]"
-                      >
-                        <span className="line-clamp-1 w-2/3 font-medium text-gray-800">
-                          {item.productTitle} × {item.quantity}
-                        </span>
-                        <span className="font-semibold">
-                          ${(itemPrice * item.quantity).toFixed(2)}
-                        </span>
-                      </div>
-                    );
-                  })}
+                  {cartItems.length === 0 ? (
+                    <p className="text-sm text-gray-500 text-center py-4">
+                      Your cart is empty
+                    </p>
+                  ) : (
+                    cartItems.map((item) => {
+                      const itemPrice =
+                        parseFloat(item.productPrice.replace(/[^0-9.]/g, "")) ||
+                        0;
+                      return (
+                        <div
+                          key={item.id}
+                          className="flex justify-between items-center text-sm text-[#666E77]"
+                        >
+                          <span className="line-clamp-1 w-2/3 font-medium text-gray-800">
+                            {item.productTitle} × {item.quantity}
+                          </span>
+                          <span className="font-semibold">
+                            ${(itemPrice * item.quantity).toFixed(2)}
+                          </span>
+                        </div>
+                      );
+                    })
+                  )}
                 </div>
 
                 <div className="flex justify-between border-t border-[#BFC1C7] pt-4 mb-3">
@@ -282,12 +329,20 @@ const Checkout = () => {
                   </label>
                 </div>
 
-                <Button
-                  btnTxt={"Place Order"}
-                  className={
-                    "text-sm w-full text-center flex justify-center cursor-pointer bg-[#80B500] hover:bg-[#6e9c00] text-white py-3 rounded-lg font-bold transition-colors"
-                  }
-                />
+                <button
+                  type="submit"
+                  disabled={isLoading || cartItems.length === 0}
+                  className="w-full text-center flex items-center justify-center gap-2 cursor-pointer bg-[#80B500] hover:bg-[#6e9c00] text-white py-3.5 rounded-lg font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+                >
+                  {isLoading ? (
+                    <>
+                      <FaSpinner className="animate-spin" size={18} /> Placing
+                      Order...
+                    </>
+                  ) : (
+                    "Place Order"
+                  )}
+                </button>
               </div>
             </div>
           </form>
