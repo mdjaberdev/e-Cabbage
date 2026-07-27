@@ -2,6 +2,7 @@ import React from 'react'
 import { FaAngleRight } from 'react-icons/fa';
 import Container from '../common/Container';
 import Button from '../common/Button';
+import { Link } from 'react-router-dom';
 
 const Loging = () => {
   return (

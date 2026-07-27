@@ -41,60 +41,74 @@ const ProductsFacilities = () => {
   ];
 
   return (
-    <div className="my-28">
+    <div className="my-16 sm:my-20 lg:my-28">
       <Container>
-        <div className="text-center">
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto px-4">
           <h3
             className="
-          text-Primary 
-          text-4xl
-          lg:text-5xl 
-          font-bold 
-          font-Inter
-          "
+              text-Primary 
+              text-3xl
+              sm:text-4xl
+              lg:text-5xl 
+              font-bold 
+              font-Inter
+            "
           >
             Product Facilities
           </h3>
 
           <p
             className="
-          text-[#546375] 
-          text-base 
-          font-Rubik 
-          mt-4
-          "
+              text-[#546375] 
+              text-sm
+              lg:text-base 
+              font-Rubik 
+              mt-3
+              sm:mt-4
+            "
           >
             A highly efficient slip-ring scanner for today's diagnostic
             requirements.
           </p>
         </div>
 
+        {/* Main Content Grid/Flex */}
         <div
           className="
-        flex 
-        flex-col
-        lg:flex-row
-        items-center
-        justify-between
-        gap-10
-        mt-10
-        "
+            flex 
+            flex-col
+            lg:flex-row
+            items-center
+            justify-between
+            gap-8
+            lg:gap-10
+            mt-10
+            lg:mt-12
+          "
         >
-          {/* Left Side */}
-
-          <div className="flex flex-col gap-8 order-2 lg:order-1">
+          {/* Left Side Facilities */}
+          <div className="flex flex-col gap-6 lg:gap-8 order-2 lg:order-1 w-full lg:w-auto">
             {leftFacilities.map((item, index) => (
-              <div key={index} className="flex items-center gap-x-4">
-                <Images srcImg={item.img} />
+              <div
+                key={index}
+                className="flex items-center gap-x-4 text-left justify-start"
+              >
+                <div className="shrink-0">
+                  <Images
+                    srcImg={item.img}
+                    className="w-12 h-12 sm:w-auto sm:h-auto object-contain"
+                  />
+                </div>
 
                 <div>
                   <h4
                     className="
-                    text-Primary 
-                    text-[20px]
-                    lg:text-[22px] 
-                    font-bold 
-                    font-Inter
+                      text-Primary 
+                      text-lg
+                      lg:text-[22px] 
+                      font-bold 
+                      font-Inter
                     "
                   >
                     {item.title}
@@ -102,12 +116,14 @@ const ProductsFacilities = () => {
 
                   <p
                     className="
-                    text-[#666E77] 
-                    text-base 
-                    font-Nunito 
-                    leading-5 
-                    w-full
-                    lg:w-60
+                      text-[#666E77] 
+                      text-sm
+                      lg:text-base 
+                      font-Nunito 
+                      leading-relaxed 
+                      w-full
+                      lg:w-60
+                      mt-1
                     "
                   >
                     Est ante in nibh mauris. Ullamcor morbi tincidunt ornare
@@ -119,31 +135,35 @@ const ProductsFacilities = () => {
           </div>
 
           {/* Center Image */}
-
-          <div className="order-1 lg:order-2">
-            <Images srcImg={ProfacilitiesImg} className="w-full" />
+          <div className="order-1 lg:order-2 w-full max-w-sm lg:max-w-none flex justify-center">
+            <Images
+              srcImg={ProfacilitiesImg}
+              className="w-full object-contain"
+            />
           </div>
 
-          {/* Right Side */}
-
-          <div className="flex flex-col gap-8 order-3">
+          {/* Right Side Facilities */}
+          <div className="flex flex-col gap-6 lg:gap-8 order-3 w-full lg:w-auto">
             {rightFacilities.map((item, index) => (
               <div
                 key={index}
                 className="
-                flex 
-                items-center 
-                gap-x-4
+                  flex 
+                  items-center 
+                  gap-x-4
+                  justify-between
+                  lg:justify-end
                 "
               >
-                <div className="text-right">
+                {/* Text for desktop will be right-aligned */}
+                <div className="text-left lg:text-right order-2 lg:order-1">
                   <h4
                     className="
-                    text-Primary 
-                    text-[20px]
-                    lg:text-[22px] 
-                    font-bold 
-                    font-Inter
+                      text-Primary 
+                      text-lg
+                      lg:text-[22px] 
+                      font-bold 
+                      font-Inter
                     "
                   >
                     {item.title}
@@ -151,12 +171,14 @@ const ProductsFacilities = () => {
 
                   <p
                     className="
-                    text-[#666E77] 
-                    text-base 
-                    font-Nunito 
-                    leading-5 
-                    w-full
-                    lg:w-60
+                      text-[#666E77] 
+                      text-sm
+                      lg:text-base 
+                      font-Nunito 
+                      leading-relaxed 
+                      w-full
+                      lg:w-60
+                      mt-1
                     "
                   >
                     Est ante in nibh mauris. Ullamcor morbi tincidunt ornare
@@ -164,7 +186,13 @@ const ProductsFacilities = () => {
                   </p>
                 </div>
 
-                <Images srcImg={item.img} />
+                {/* Image */}
+                <div className="shrink-0 order-1 lg:order-2">
+                  <Images
+                    srcImg={item.img}
+                    className="w-12 h-12 sm:w-auto sm:h-auto object-contain"
+                  />
+                </div>
               </div>
             ))}
           </div>
@@ -174,4 +202,4 @@ const ProductsFacilities = () => {
   );
 };
 
-export default ProductsFacilities;
+export default  ProductsFacilities;

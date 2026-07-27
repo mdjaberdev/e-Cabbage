@@ -12,6 +12,16 @@ export const CartProvider = ({ children }) => {
     }
   });
 
+  // Toast Notification State
+  const [notification, setNotification] = useState("");
+
+  const showNotification = (message) => {
+    setNotification(message);
+    setTimeout(() => {
+      setNotification("");
+    }, 3000);
+  };
+
   useEffect(() => {
     try {
       localStorage.setItem("cart", JSON.stringify(cartItems));
@@ -28,15 +38,21 @@ export const CartProvider = ({ children }) => {
           product.stock !== undefined &&
           existingItem.quantity >= product.stock
         ) {
-          alert("দুঃখিত, স্টকে আর পণ্য নেই!");
+          showNotification("দুঃখিত, স্টকে আর পণ্য নেই!");
           return prevItems;
         }
+        showNotification(
+          `"${product.productTitle || product.title}" quantity increased in cart!`,
+        );
         return prevItems.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
             : item,
         );
       }
+      showNotification(
+        `"${product.productTitle || product.title}" successfully added to cart!`,
+      );
       return [...prevItems, { ...product, quantity: 1 }];
     });
   };
@@ -46,7 +62,7 @@ export const CartProvider = ({ children }) => {
       prevItems.map((item) => {
         if (item.id === id) {
           if (item.stock !== undefined && item.quantity >= item.stock) {
-            alert("দুঃখিত, এর বেশি স্টক নেই!");
+            showNotification("দুঃখিত, এর বেশি স্টক নেই!");
             return item;
           }
           return { ...item, quantity: item.quantity + 1 };
@@ -81,6 +97,11 @@ export const CartProvider = ({ children }) => {
       }}
     >
       {children}
+      {notification && (
+        <div className="fixed top-5 right-5 z-[999999] bg-[#80B500] text-white px-6 py-3.5 rounded-2xl shadow-2xl font-Nunito font-bold transition-all duration-300 animate-bounce flex items-center gap-3 border border-white/20">
+          <span>{notification}</span>
+        </div>
+      )}
     </CartContext.Provider>
   );
 };

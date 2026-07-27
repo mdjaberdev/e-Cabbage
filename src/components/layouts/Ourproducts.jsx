@@ -6,11 +6,13 @@ import Container from "../common/Container";
 import Button from "../common/Button";
 import Products from "../common/Products";
 import Badge from "../common/Badge";
+import { useCart } from "../../context/CartContext";
 
 const Ourproducts = () => {
   const containerRef = useRef(null);
   const mixerRef = useRef(null);
   const [products, setProducts] = useState([]);
+  const { addToCart, cartItems } = useCart();
 
   useEffect(() => {
     const getProducts = async () => {
@@ -66,50 +68,63 @@ const Ourproducts = () => {
     };
   }, [products]);
 
+  const totalCartCount = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0,
+  );
+
   return (
-    <div className="my-20">
+    <div className="my-12 sm:my-16 lg:my-20 relative">
       <Container>
-        <div className="text-center">
-          <h3 className="text-Primary text-5xl font-bold font-Inter">
+        {/* Section Heading */}
+        <div className="text-center max-w-2xl mx-auto px-4">
+          <h3 className="text-Primary text-3xl sm:text-4xl lg:text-5xl font-bold font-Inter">
             Our Products
           </h3>
-          <p className="text-[#546375] text-base font-Rubik mt-4">
+          <p className="text-[#546375] text-sm lg:text-base font-Rubik mt-3 sm:mt-4">
             A highly efficient slip-ring scanner for today's diagnostic
             requirements.
           </p>
+
+          {/* Live Cart Counter Badge */}
+          <div className="mt-4 inline-block bg-gray-100 px-4 py-1.5 rounded-full shadow-sm text-xs font-bold text-[#80B500]">
+            Total Cart Items: {totalCartCount}
+          </div>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-4 lg:gap-x-10 mt-10">
+        {/* Filter Buttons */}
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-4 lg:gap-x-10 mt-8 sm:mt-10 px-2">
           <Button
             data-filter=".food"
-            className="[&.mixitup-control-active]:bg-white [&.mixitup-control-active]:text-[#223645] rounded-4xl duration-150 cursor-pointer"
+            className="[&.mixitup-control-active]:bg-white [&.mixitup-control-active]:text-[#223645] rounded-4xl duration-150 cursor-pointer text-xs sm:text-sm px-4 py-2"
             btnTxt="Food & Drinks"
           />
           <Button
             data-filter=".vegetables"
-            className="[&.mixitup-control-active]:bg-white [&.mixitup-control-active]:text-[#223645] rounded-4xl duration-150 cursor-pointer"
+            className="[&.mixitup-control-active]:bg-white [&.mixitup-control-active]:text-[#223645] rounded-4xl duration-150 cursor-pointer text-xs sm:text-sm px-4 py-2"
             btnTxt="Vegetables"
           />
           <Button
             data-filter=".dried"
-            className="[&.mixitup-control-active]:bg-white [&.mixitup-control-active]:text-[#223645] rounded-4xl duration-150 cursor-pointer"
+            className="[&.mixitup-control-active]:bg-white [&.mixitup-control-active]:text-[#223645] rounded-4xl duration-150 cursor-pointer text-xs sm:text-sm px-4 py-2"
             btnTxt="Dried Foods"
           />
           <Button
             data-filter=".brek"
-            className="[&.mixitup-control-active]:bg-white [&.mixitup-control-active]:text-[#223645] rounded-4xl duration-150 cursor-pointer"
+            className="[&.mixitup-control-active]:bg-white [&.mixitup-control-active]:text-[#223645] rounded-4xl duration-150 cursor-pointer text-xs sm:text-sm px-4 py-2"
             btnTxt="Bread & Cake"
           />
           <Button
             data-filter=".fish"
-            className="[&.mixitup-control-active]:bg-white [&.mixitup-control-active]:text-[#223645] rounded-4xl duration-150 cursor-pointer"
+            className="[&.mixitup-control-active]:bg-white [&.mixitup-control-active]:text-[#223645] rounded-4xl duration-150 cursor-pointer text-xs sm:text-sm px-4 py-2"
             btnTxt="Fish & Meat"
           />
         </div>
 
+        {/* Products Grid */}
         <div
           ref={containerRef}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8 sm:mt-10"
         >
           {products.map((item) => {
             const roundedDiscount = Math.round(item.discountPercentage);

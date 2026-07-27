@@ -37,35 +37,34 @@ const ProductCard = ({ item, onZoom }) => {
   return (
     <div
       className="
-     bg-white
-  border
-  border-[#A6A6C7]
-  relative
-  group
-  p-2
-
-  w-full
-  sm:w-[48%]
-  lg:w-[23%]
+        bg-white
+        border
+        border-[#A6A6C7]
+        relative
+        group
+        p-2
+        w-full
+        sm:w-[48%]
+        lg:w-[23%]
       "
     >
       <Images
         srcImg={item.thumbnail}
         className="
-        w-full
-        h-48
-        object-contain
+          w-full
+          h-48
+          object-contain
         "
       />
 
       <div>
         <h4
           className="
-          text-[#647589]
-          text-[11px]
-          font-Rubik
-          mt-2
-          capitalize
+            text-[#647589]
+            text-[11px]
+            font-Rubik
+            mt-2
+            capitalize
           "
         >
           {item.category}
@@ -73,13 +72,11 @@ const ProductCard = ({ item, onZoom }) => {
 
         <h3
           className="
-          text-Primary
-          text-base
-          font-Inter
-
-          py-2
-
-          truncate
+            text-Primary
+            text-base
+            font-Inter
+            py-2
+            truncate
           "
         >
           {item.title}
@@ -88,9 +85,9 @@ const ProductCard = ({ item, onZoom }) => {
         <div className="flex items-center gap-x-3">
           <h4
             className="
-            text-[#283C54]
-            text-sm
-            font-Nunito
+              text-[#283C54]
+              text-sm
+              font-Nunito
             "
           >
             ${item.price.toFixed(2)}
@@ -113,7 +110,7 @@ const ProductCard = ({ item, onZoom }) => {
             top-5
             rounded-tl-[10px]
             rounded-br-[10px]
-            "
+          "
           badgeTxt={`-${Math.round(item.discountPercentage)}%`}
         />
       )}
@@ -121,31 +118,31 @@ const ProductCard = ({ item, onZoom }) => {
       {/* Hover Buttons */}
       <div
         className="
-        opacity-0
-        group-hover:opacity-100
-        duration-300
-        absolute
-        bottom-1/2
-        left-1/2
-        -translate-x-1/2
-        flex
-        gap-x-2
+          opacity-0
+          group-hover:opacity-100
+          duration-300
+          absolute
+          bottom-1/2
+          left-1/2
+          -translate-x-1/2
+          flex
+          gap-x-2
         "
       >
         {/* Cart */}
         <div
           onClick={handleAddToCart}
           className="
-          translate-y-10
-          group-hover:translate-y-0
-          p-3
-          bg-white
-          text-[#80B500]
-          hover:bg-[#80B500]
-          hover:text-white
-          duration-200
-          rounded-full
-          cursor-pointer
+            translate-y-10
+            group-hover:translate-y-0
+            p-3
+            bg-white
+            text-[#80B500]
+            hover:bg-[#80B500]
+            hover:text-white
+            duration-200
+            rounded-full
+            cursor-pointer
           "
         >
           <LuShoppingCart />
@@ -155,19 +152,19 @@ const ProductCard = ({ item, onZoom }) => {
         <div
           onClick={() => setIsLoved(!isLoved)}
           className={`
-          translate-y-10
-          group-hover:translate-y-0
-          delay-100
-          p-3
-          bg-white
-          rounded-full
-          cursor-pointer
-          duration-200
-          ${
-            isLoved
-              ? "text-red-500 hover:bg-red-500 hover:text-white"
-              : "text-[#80B500] hover:bg-[#80B500] hover:text-white"
-          }
+            translate-y-10
+            group-hover:translate-y-0
+            delay-100
+            p-3
+            bg-white
+            rounded-full
+            cursor-pointer
+            duration-200
+            ${
+              isLoved
+                ? "text-red-500 hover:bg-red-500 hover:text-white"
+                : "text-[#80B500] hover:bg-[#80B500] hover:text-white"
+            }
           `}
         >
           {isLoved ? <FaHeart /> : <FaRegHeart />}
@@ -177,17 +174,17 @@ const ProductCard = ({ item, onZoom }) => {
         <div
           onClick={() => onZoom(item)}
           className="
-          translate-y-10
-          group-hover:translate-y-0
-          delay-200
-          p-3
-          bg-white
-          text-[#80B500]
-          hover:bg-[#80B500]
-          hover:text-white
-          duration-200
-          rounded-full
-          cursor-pointer
+            translate-y-10
+            group-hover:translate-y-0
+            delay-200
+            p-3
+            bg-white
+            text-[#80B500]
+            hover:bg-[#80B500]
+            hover:text-white
+            duration-200
+            rounded-full
+            cursor-pointer
           "
         >
           <AiOutlineZoomIn />
@@ -233,18 +230,18 @@ const TrendingProducts = () => {
 
   return (
     <>
-      <div className="my-30">
+      <div className="my-16 sm:my-20 lg:my-30">
         <Container>
           {/* Heading */}
-          <div className="text-center">
+          <div className="text-center max-w-2xl mx-auto px-4">
             <h3
               className="
-              text-Primary
-              text-3xl
-              sm:text-4xl
-              lg:text-5xl
-              font-bold
-              font-Inter
+                text-Primary
+                text-3xl
+                sm:text-4xl
+                lg:text-5xl
+                font-bold
+                font-Inter
               "
             >
               Trending Products
@@ -252,11 +249,12 @@ const TrendingProducts = () => {
 
             <p
               className="
-              text-[#546375]
-              text-sm
-              lg:text-base
-              font-Rubik
-              mt-4
+                text-[#546375]
+                text-sm
+                lg:text-base
+                font-Rubik
+                mt-3
+                sm:mt-4
               "
             >
               A highly efficient slip-ring scanner for today's diagnostic
@@ -267,35 +265,36 @@ const TrendingProducts = () => {
           {/* First Row */}
           <div
             className="
-            flex
-            flex-col
-            sm:flex-row
-            sm:flex-wrap
-            lg:flex-row
-            gap-5
-            justify-center
-            mt-10
+              flex
+              flex-col
+              sm:flex-row
+              sm:flex-wrap
+              lg:flex-row
+              gap-5
+              justify-center
+              mt-8
+              sm:mt-10
             "
           >
             {/* Offer Card */}
             <div
               className="
-              bg-[#F5F5F5]
-              p-6
-              w-full
-              sm:w-[48%]
-              lg:w-[25%]
-              flex
-              flex-col
-              justify-center
+                bg-[#F5F5F5]
+                p-6
+                w-full
+                sm:w-[48%]
+                lg:w-[25%]
+                flex
+                flex-col
+                justify-center
               "
             >
               <h4
                 className="
-                text-[#80B500]
-                text-[10px]
-                font-bold
-                font-Nunito
+                  text-[#80B500]
+                  text-[10px]
+                  font-bold
+                  font-Nunito
                 "
               >
                 FRUITS & ORGANIC
@@ -303,13 +302,13 @@ const TrendingProducts = () => {
 
               <h3
                 className="
-                text-Primary
-                text-[18px]
-                font-bold
-                font-Inter
-                max-w-[143px]
-                leading-5
-                py-2
+                  text-Primary
+                  text-[18px]
+                  font-bold
+                  font-Inter
+                  max-w-[143px]
+                  leading-5
+                  py-2
                 "
               >
                 50% off in Fresh Mango Drinks
@@ -317,14 +316,15 @@ const TrendingProducts = () => {
 
               <button
                 className="
-                flex
-                items-center
-                gap-x-1
-                text-[#80B500]
-                text-[13px]
-                font-bold
-                font-Nunito
-                mt-3
+                  flex
+                  items-center
+                  gap-x-1
+                  text-[#80B500]
+                  text-[13px]
+                  font-bold
+                  font-Nunito
+                  mt-3
+                  cursor-pointer
                 "
               >
                 Buy Now
@@ -344,51 +344,51 @@ const TrendingProducts = () => {
           {/* Second Row */}
           <div
             className="
-            flex
-            flex-col
-            sm:flex-row
-            sm:flex-wrap
-            lg:flex-row
-            items-center
-            gap-5
-            justify-center
-            mt-5
+              flex
+              flex-col
+              sm:flex-row
+              sm:flex-wrap
+              lg:flex-row
+              items-center
+              gap-5
+              justify-center
+              mt-5
             "
           >
             {/* Banner Card */}
             <div
               className="
-              relative
-              w-full
-              sm:w-[48%]
-              lg:w-[25%]
-              overflow-hidden
-              min-h-[233px]
+                relative
+                w-full
+                sm:w-[48%]
+                lg:w-[25%]
+                overflow-hidden
+                min-h-[233px]
               "
             >
               <Images
                 srcImg={trendingImg}
                 className="
-                w-full
-                h-full
-                object-cover
+                  w-full
+                  h-full
+                  object-cover
                 "
               />
 
               <div
                 className="
-                absolute
-                top-0
-                left-5
-                p-6
+                  absolute
+                  top-0
+                  left-5
+                  p-6
                 "
               >
                 <h4
                   className="
-                  text-[#80B500]
-                  text-[10px]
-                  font-bold
-                  font-Nunito
+                    text-[#80B500]
+                    text-[10px]
+                    font-bold
+                    font-Nunito
                   "
                 >
                   - 29% OFF
@@ -396,13 +396,13 @@ const TrendingProducts = () => {
 
                 <h3
                   className="
-                  text-Primary
-                  text-[18px]
-                  font-bold
-                  font-Inter
-                  max-w-[143px]
-                  leading-5
-                  py-2
+                    text-Primary
+                    text-[18px]
+                    font-bold
+                    font-Inter
+                    max-w-[143px]
+                    leading-5
+                    py-2
                   "
                 >
                   Green lemon & Orange Juice
@@ -410,14 +410,15 @@ const TrendingProducts = () => {
 
                 <button
                   className="
-                  flex
-                  items-center
-                  gap-x-1
-                  text-[#80B500]
-                  text-[13px]
-                  font-bold
-                  font-Nunito
-                  mt-3
+                    flex
+                    items-center
+                    gap-x-1
+                    text-[#80B500]
+                    text-[13px]
+                    font-bold
+                    font-Nunito
+                    mt-3
+                    cursor-pointer
                   "
                 >
                   Buy Now
@@ -437,7 +438,6 @@ const TrendingProducts = () => {
         </Container>
       </div>
 
-      {/* Zoom Modal with Enhanced Details and Add to Cart */}
       {zoomedProduct && (
         <div
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"

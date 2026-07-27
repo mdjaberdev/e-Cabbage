@@ -28,7 +28,7 @@ const HeaderTop = () => {
 
           {/* Right Side */}
           <div className="flex gap-x-3 lg:gap-x-4 items-center text-white text-xl lg:text-2xl font-Nunito">
-            <Link to={"/loging"}>
+            <Link to={"/login"}>
               <FaRegUser />
             </Link>
 

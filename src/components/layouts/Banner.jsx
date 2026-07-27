@@ -37,7 +37,8 @@ const Banner = () => {
       items-center
       lg:items-start
       justify-between
-      py-20
+      py-16
+      sm:py-20
       lg:py-40
       "
       >
@@ -49,6 +50,8 @@ const Banner = () => {
         lg:mt-10
         text-center
         lg:text-left
+        w-full
+        lg:w-auto
         "
         >
           <div
@@ -76,17 +79,19 @@ const Banner = () => {
 
           <h1
             className="
-          text-4xl
+          text-3xl
           sm:text-5xl
           lg:text-7xl
           text-Primary
           font-Inter
           font-bold
-          leading-tight
+          leading-snug
           lg:leading-20
-          mt-6
+          mt-4
           lg:mt-10
           max-w-[650px]
+          mx-auto
+          lg:mx-0
           "
           >
             Tasty & Healthy organic Food
@@ -94,7 +99,7 @@ const Banner = () => {
 
           <button
             className="
-          mt-8
+          mt-6
           lg:mt-10
 
           mx-auto
@@ -104,8 +109,10 @@ const Banner = () => {
           items-center
           gap-x-1
 
-          py-4
-          px-8
+          py-3
+          sm:py-4
+          px-6
+          sm:px-8
 
           rounded-full
 
@@ -113,7 +120,8 @@ const Banner = () => {
 
           text-white
 
-          text-base
+          text-sm
+          sm:text-base
 
           font-Nunito
 
@@ -121,7 +129,7 @@ const Banner = () => {
           "
           >
             Explore Products
-            <MdArrowRightAlt className="text-3xl" />
+            <MdArrowRightAlt className="text-2xl sm:text-3xl" />
           </button>
         </div>
 
@@ -129,16 +137,22 @@ const Banner = () => {
 
         <div
           className="
-        mt-12
+        mt-8
+        sm:mt-12
         lg:-mt-30
+        w-full
+        flex
+        justify-center
+        lg:block
         "
         >
           <Images
             srcImg={banner}
             className="
-          w-[260px]
+          w-[240px]
           sm:w-[380px]
           lg:w-auto
+          object-contain
           "
           />
         </div>
@@ -163,9 +177,13 @@ const Banner = () => {
       <div
         className="
       relative
-      -mt-10
+      -mt-6
+      sm:-mt-10
       lg:-mt-20
       z-20
+      px-4
+      sm:px-6
+      lg:px-0
       "
       >
         <Container>
@@ -184,7 +202,9 @@ const Banner = () => {
           lg:flex
           lg:justify-between
 
-          gap-y-8
+          gap-y-6
+          lg:gap-y-0
+          gap-x-6
           "
           >
             <TrustItem img={trustOne} title="Curated Products" />
@@ -217,7 +237,7 @@ last:border-none
       <h4
         className="
 text-Primary
-text-[20px]
+text-lg
 lg:text-[22px]
 
 font-Inter

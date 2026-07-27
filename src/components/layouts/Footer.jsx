@@ -25,7 +25,8 @@ const Footer = () => {
         bg-center
         bg-cover
         bg-no-repeat
-        py-16
+        py-12
+        sm:py-16
         lg:py-25
       "
       >
@@ -47,7 +48,8 @@ const Footer = () => {
               <h4
                 className="
                 text-white
-                text-[22px]
+                text-xl
+                lg:text-[22px]
                 font-bold
                 font-Inter
               "
@@ -58,10 +60,12 @@ const Footer = () => {
               <p
                 className="
                 text-white
-                text-base
+                text-sm
+                lg:text-base
                 font-Nunito
                 leading-6
-                mt-4
+                mt-3
+                lg:mt-4
                 w-full
                 lg:w-77.5
               "
@@ -75,7 +79,8 @@ const Footer = () => {
                 className="
                 flex
                 gap-x-2
-                mt-6
+                mt-5
+                lg:mt-6
               "
               >
                 <Social icon={<FaFacebookF />} />
@@ -94,7 +99,8 @@ const Footer = () => {
               <h4
                 className="
                 text-white
-                text-[22px]
+                text-xl
+                lg:text-[22px]
                 font-bold
                 font-Inter
               "
@@ -105,9 +111,11 @@ const Footer = () => {
               <ul
                 className="
                 text-white
-                text-base
+                text-sm
+                lg:text-base
                 font-Nunito
-                mt-4
+                mt-3
+                lg:mt-4
                 space-y-2
               "
               >
@@ -126,7 +134,8 @@ const Footer = () => {
               <h4
                 className="
                 text-white
-                text-[22px]
+                text-xl
+                lg:text-[22px]
                 font-bold
                 font-Inter
               "
@@ -137,9 +146,11 @@ const Footer = () => {
               <ul
                 className="
                 text-white
-                text-base
+                text-sm
+                lg:text-base
                 font-Nunito
-                mt-4
+                mt-3
+                lg:mt-4
                 space-y-2
               "
               >
@@ -160,10 +171,12 @@ const Footer = () => {
               <p
                 className="
                 text-white
-                text-base
+                text-sm
+                lg:text-base
                 font-Nunito
                 leading-6
-                mt-4
+                mt-3
+                lg:mt-4
                 w-full
                 lg:w-82.5
               "
@@ -175,12 +188,14 @@ const Footer = () => {
               <h5
                 className="
                 text-white
-                text-base
+                text-sm
+                lg:text-base
                 font-Nunito
                 flex
                 gap-x-1
                 items-center
-                py-4
+                py-3
+                lg:py-4
               "
               >
                 <IoLocationOutline />
@@ -275,7 +290,8 @@ const Social = ({ icon }) => {
   return (
     <div
       className="
-  p-3
+  p-2.5
+  lg:p-3
   bg-white
   text-[#6A7695]
   rounded-full

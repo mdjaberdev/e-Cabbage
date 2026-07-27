@@ -149,7 +149,7 @@ const TodaysHotDeals = () => {
       const day = hour * 24;
 
       setTime({
-        days: 0, // Daily flash deal, so days will be 0
+        days: 0,
         hours: Math.floor((millisTillEnd % day) / hour),
         minutes: Math.floor((millisTillEnd % hour) / minute),
         seconds: Math.floor((millisTillEnd % minute) / second),
@@ -165,21 +165,21 @@ const TodaysHotDeals = () => {
       : fallbackProducts[currentProductIndex];
 
   return (
-    <div className="bg-[#F8F9FA] py-20 lg:py-28 overflow-hidden">
+    <div className="bg-[#F8F9FA] py-12 sm:py-16 lg:py-28 overflow-hidden">
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-5 flex justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+          <div className="lg:col-span-5 flex justify-center w-full">
             {loading && hotProducts.length === 0 ? (
-              <div className="w-72 h-80 bg-gray-200 animate-pulse rounded-3xl flex items-center justify-center">
+              <div className="w-full max-w-md h-80 bg-gray-200 animate-pulse rounded-3xl flex items-center justify-center">
                 <p className="text-gray-500 font-Nunito">Loading product...</p>
               </div>
             ) : (
-              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 w-full max-w-md relative group text-center">
+              <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-lg border border-gray-100 w-full max-w-md relative group text-center">
                 <span className="absolute top-4 left-4 bg-[#80B500] text-white text-xs font-bold px-3 py-1 rounded-full z-10">
                   Hot Deal (Daily)
                 </span>
 
-                <div className="h-72 w-full overflow-hidden rounded-2xl bg-gray-50 flex items-center justify-center p-4">
+                <div className="h-60 sm:h-72 w-full overflow-hidden rounded-2xl bg-gray-50 flex items-center justify-center p-4">
                   <img
                     src={activeProduct.thumbnail}
                     alt={activeProduct.title}
@@ -191,11 +191,11 @@ const TodaysHotDeals = () => {
                   <span className="text-xs uppercase font-bold text-[#80B500] tracking-wider">
                     {activeProduct.category}
                   </span>
-                  <h4 className="text-Primary font-Inter font-bold text-lg mt-1 truncate">
+                  <h4 className="text-Primary font-Inter font-bold text-base sm:text-lg mt-1 truncate">
                     {activeProduct.title}
                   </h4>
                   <div className="flex items-center justify-between mt-3">
-                    <span className="text-[#80B500] font-bold text-2xl font-Inter">
+                    <span className="text-[#80B500] font-bold text-xl sm:text-2xl font-Inter">
                       ${activeProduct.price}
                     </span>
                     <span className="text-xs text-gray-400 font-Nunito">
@@ -206,19 +206,23 @@ const TodaysHotDeals = () => {
               </div>
             )}
           </div>
-          <div className="lg:col-span-7 lg:pl-6">
-            <h4 className="text-[#80B500] text-base font-Nunito font-bold">
+
+          {/* Right Side: Text & Countdown Timer */}
+          <div className="lg:col-span-7 lg:pl-6 text-center lg:text-left">
+            <h4 className="text-[#80B500] text-sm sm:text-base font-Nunito font-bold">
               Todays Hot Deals
             </h4>
 
-            <h3 className="text-Primary text-3xl sm:text-4xl lg:text-[50px] font-Inter font-bold leading-tight lg:leading-15 mt-2">
+            <h3 className="text-Primary text-2xl sm:text-3xl lg:text-[50px] font-Inter font-bold leading-snug sm:leading-tight lg:leading-[60px] mt-2">
               {activeProduct.title}
             </h3>
 
-            <p className="text-[#546375] text-base font-Nunito w-full sm:w-[450px] lg:w-112.5 leading-5 mt-5">
+            <p className="text-[#546375] text-sm sm:text-base font-Nunito w-full lg:w-[450px] xl:w-[450px] leading-relaxed mt-4 sm:mt-5 mx-auto lg:mx-0">
               {activeProduct.description}
             </p>
-            <div className="flex flex-wrap gap-5 sm:gap-x-10 mt-10">
+
+            {/* Countdown Boxes */}
+            <div className="flex flex-wrap justify-center lg:justify-start gap-4 sm:gap-x-10 mt-8 sm:mt-10">
               {[
                 { value: time.days, label: "Days" },
                 { value: time.hours, label: "Hours" },
@@ -226,26 +230,26 @@ const TodaysHotDeals = () => {
                 { value: time.seconds, label: "Seconds" },
               ].map((item, index) => (
                 <div key={index} className="text-center">
-                  <div className="bg-white hover:bg-[#80B500] text-[#80B500] hover:text-white duration-200 w-15 h-15 flex items-center justify-center rounded-full text-[18px] font-Nunito font-bold shadow-sm">
+                  <div className="bg-white hover:bg-[#80B500] text-[#80B500] hover:text-white duration-200 w-14 h-14 sm:w-15 sm:h-15 flex items-center justify-center rounded-full text-base sm:text-[18px] font-Nunito font-bold shadow-sm">
                     {item.value}
                   </div>
-                  <h4 className="text-[#223645] text-base font-Inter mt-1">
+                  <h4 className="text-[#223645] text-xs sm:text-base font-Inter mt-1">
                     {item.label}
                   </h4>
                 </div>
               ))}
             </div>
 
-            {/* Buttons */}
-            <div className="mt-10 flex flex-col sm:flex-row gap-5">
+            {/* Action Buttons */}
+            <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row justify-center lg:justify-start gap-4 sm:gap-5">
               <Button
                 btnTxt={"Shop Now"}
-                className="hover:bg-transparent hover:text-[#80B500] duration-200"
+                className="hover:bg-transparent hover:text-[#80B500] duration-200 w-full sm:w-auto"
               />
 
               <Button
                 btnTxt={"Deal of The Day"}
-                className="hover:bg-transparent hover:text-[#80B500] duration-200"
+                className="hover:bg-transparent hover:text-[#80B500] duration-200 w-full sm:w-auto"
               />
             </div>
           </div>
