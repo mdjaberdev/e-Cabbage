@@ -1,4 +1,3 @@
-/* ================= Banner Slider ================= */
 
 .slick-dots {
   position: absolute;
@@ -27,28 +26,9 @@
   display: none;
 }
 
-/* ================= Testimonial ================= */
-
-.testmonial .slick-dots {
-  top: 370px;
-}
-
-.testmonial .slick-dots li {
-  width: 15px !important;
-  height: 15px !important;
-  background: #c6dd8c;
-}
-
-.testmonial .slick-dots li.slick-active {
-  background: #fff;
-  border: 1px solid #90be20;
-}
-
-
 .about .slick-dots {
   top: 400px;
 }
-
 
 /* Laptop */
 @media (max-width: 1024px) {
@@ -71,10 +51,6 @@
     top: 430px;
   }
 
-  .testmonial .slick-dots {
-    top: 290px;
-  }
-
   .about .slick-dots {
     top: 310px;
   }
@@ -90,10 +66,6 @@
   .slick-dots {
     top: 350px;
     gap: 6px;
-  }
-
-  .testmonial .slick-dots {
-    top: 250px;
   }
 
   .about .slick-dots {
