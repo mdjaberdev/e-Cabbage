@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import Container from "../common/Container";
 import Images from "../common/Images";
 
@@ -37,31 +38,44 @@ const AboutUs = () => {
     return () => clearInterval(interval);
   }, [products]);
 
+  // Current display kora duiti product fetch kora
+  const product1 = products[currentIndex];
+  const product2 = products[currentIndex + 1];
+
   return (
     <section className="bg-white py-12 md:py-16 lg:py-20 overflow-hidden">
       <Container>
         <div className="flex flex-col lg:flex-row justify-between items-center gap-10 lg:gap-16">
-          
           {/* Left Side: Product Image Showcase with Modern Cards & Glow */}
           <div className="flex justify-center items-center gap-x-4 sm:gap-x-6 lg:gap-x-8 relative w-full lg:w-auto">
             {/* Subtle background glow effect */}
             <div className="absolute -inset-4 bg-[#80B500]/5 rounded-3xl blur-xl -z-10"></div>
 
             {/* First Image Box */}
-            <div className="bg-white p-2 sm:p-3 rounded-2xl shadow-md border border-gray-100 transition-all duration-500 hover:shadow-xl">
-              <Images
-                className="w-[140px] xs:w-[160px] sm:w-[200px] lg:w-[240px] h-[260px] sm:h-[380px] lg:h-[460px] object-cover rounded-xl bg-gray-50"
-                srcImg={products[currentIndex]?.thumbnail}
-              />
-            </div>
+            {product1 && (
+              <Link
+                to={`/product/${product1.id}`}
+                className="bg-white p-2 sm:p-3 rounded-2xl shadow-md border border-gray-100 transition-all duration-500 hover:shadow-xl hover:border-[#80B500]/50 block cursor-pointer group"
+              >
+                <Images
+                  className="w-[140px] xs:w-[160px] sm:w-[200px] lg:w-[240px] h-[260px] sm:h-[380px] lg:h-[460px] object-cover rounded-xl bg-gray-50 transition-transform duration-500 group-hover:scale-105"
+                  srcImg={product1.thumbnail}
+                />
+              </Link>
+            )}
 
             {/* Second Image Box (Staggered with mt-8/12/16 for modern look) */}
-            <div className="mt-8 sm:mt-12 lg:mt-16 bg-white p-2 sm:p-3 rounded-2xl shadow-md border border-gray-100 transition-all duration-500 hover:shadow-xl">
-              <Images
-                className="w-[140px] xs:w-[160px] sm:w-[200px] lg:w-[240px] h-[260px] sm:h-[380px] lg:h-[460px] object-cover rounded-xl bg-gray-50"
-                srcImg={products[currentIndex + 1]?.thumbnail}
-              />
-            </div>
+            {product2 && (
+              <Link
+                to={`/product/${product2.id}`}
+                className="mt-8 sm:mt-12 lg:mt-16 bg-white p-2 sm:p-3 rounded-2xl shadow-md border border-gray-100 transition-all duration-500 hover:shadow-xl hover:border-[#80B500]/50 block cursor-pointer group"
+              >
+                <Images
+                  className="w-[140px] xs:w-[160px] sm:w-[200px] lg:w-[240px] h-[260px] sm:h-[380px] lg:h-[460px] object-cover rounded-xl bg-gray-50 transition-transform duration-500 group-hover:scale-105"
+                  srcImg={product2.thumbnail}
+                />
+              </Link>
+            )}
           </div>
 
           {/* Right Side: Text Content */}
@@ -100,7 +114,6 @@ const AboutUs = () => {
               </div>
             </div>
           </div>
-
         </div>
       </Container>
     </section>

@@ -3,16 +3,16 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Container from "../common/Container";
 import { FaAngleRight } from "react-icons/fa";
-import { useCart } from "../../context/CartContext"; // Apnar cart context thakle use korte paren
+import { useCart } from "../../context/CartContext"; 
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
-  const [selectedImage, setSelectedImage] = useState(""); // Main big image control korar jonno
+  const [selectedImage, setSelectedImage] = useState("");
 
-  // const { addToCart } = useCart(); // Jodi Global Cart Context thake
+  const { addToCart } = useCart(); 
 
   useEffect(() => {
     const fetchSingleProduct = async () => {
@@ -22,7 +22,6 @@ const ProductDetails = () => {
           `https://dummyjson.com/products/${id}`,
         );
         setProduct(data);
-        // Product load howar por prothom image/thumbnail ta default main image set korchi
         setSelectedImage(data.thumbnail);
       } catch (error) {
         console.error("Error fetching product details:", error);
@@ -34,10 +33,19 @@ const ProductDetails = () => {
   }, [id]);
 
   const handleAddToCart = () => {
-    // Jodi global cart context thake ekhane addToCart call korben
-    alert(
-      `${quantity} item(s) of "${product.title}" added to cart successfully!`,
-    );
+    if (!product) return;
+
+    for (let i = 0; i < quantity; i++) {
+      addToCart({
+        id: product.id,
+        productTitle: product.title,
+        productPrice: `$${product.price}`,
+        productImg: product.thumbnail,
+        stock: product.stock,
+      });
+    }
+
+    setQuantity(1);
   };
 
   if (loading) {
@@ -78,9 +86,7 @@ const ProductDetails = () => {
 
       <Container>
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 gap-12 items-start font-Nunito">
-          {/* Left Side: Product Images (Main Display + Sample Gallery) */}
           <div className="flex flex-col gap-4">
-            {/* Main Big Image Preview */}
             <div className="bg-[#F4F4F4] p-8 rounded-2xl flex justify-center items-center shadow-inner h-[400px]">
               <img
                 src={selectedImage || product.thumbnail}
@@ -89,7 +95,6 @@ const ProductDetails = () => {
               />
             </div>
 
-            {/* Additional Sample Images / Gallery List */}
             {product.images && product.images.length > 0 && (
               <div className="flex items-center gap-3 overflow-x-auto pb-2">
                 {product.images.map((imgUrl, index) => (
@@ -124,6 +129,13 @@ const ProductDetails = () => {
             <p className="text-gray-600 leading-relaxed text-base">
               {product.description}
             </p>
+
+            {product.stock !== undefined && (
+              <p className="text-sm font-semibold text-gray-500">
+                Available Stock:{" "}
+                <span className="text-gray-800 font-bold">{product.stock}</span>
+              </p>
+            )}
 
             <div className="flex items-center gap-4">
               <span className="font-bold text-[#0A2C3D]">Quantity:</span>

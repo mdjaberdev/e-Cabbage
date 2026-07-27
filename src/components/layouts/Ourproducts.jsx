@@ -68,10 +68,7 @@ const Ourproducts = () => {
     };
   }, [products]);
 
-  const totalCartCount = cartItems.reduce(
-    (total, item) => total + item.quantity,
-    0,
-  );
+
 
   return (
     <div className="my-12 sm:my-16 lg:my-20 relative">
@@ -85,11 +82,7 @@ const Ourproducts = () => {
             A highly efficient slip-ring scanner for today's diagnostic
             requirements.
           </p>
-
-          {/* Live Cart Counter Badge */}
-          <div className="mt-4 inline-block bg-gray-100 px-4 py-1.5 rounded-full shadow-sm text-xs font-bold text-[#80B500]">
-            Total Cart Items: {totalCartCount}
-          </div>
+         
         </div>
 
         {/* Filter Buttons */}

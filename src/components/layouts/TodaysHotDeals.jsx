@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Container from "../common/Container";
 import Button from "../common/Button";
 
@@ -174,7 +175,10 @@ const TodaysHotDeals = () => {
                 <p className="text-gray-500 font-Nunito">Loading product...</p>
               </div>
             ) : (
-              <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-lg border border-gray-100 w-full max-w-md relative group text-center">
+              <Link
+                to={`/product/${activeProduct.id}`}
+                className="bg-white p-6 sm:p-8 rounded-3xl shadow-lg border border-gray-100 w-full max-w-md relative group text-center block cursor-pointer transition-all duration-300 hover:border-[#80B500]/50 hover:shadow-xl"
+              >
                 <span className="absolute top-4 left-4 bg-[#80B500] text-white text-xs font-bold px-3 py-1 rounded-full z-10">
                   Hot Deal (Daily)
                 </span>
@@ -191,7 +195,7 @@ const TodaysHotDeals = () => {
                   <span className="text-xs uppercase font-bold text-[#80B500] tracking-wider">
                     {activeProduct.category}
                   </span>
-                  <h4 className="text-Primary font-Inter font-bold text-base sm:text-lg mt-1 truncate">
+                  <h4 className="text-Primary font-Inter font-bold text-base sm:text-lg mt-1 truncate group-hover:text-[#80B500] transition-colors">
                     {activeProduct.title}
                   </h4>
                   <div className="flex items-center justify-between mt-3">
@@ -203,7 +207,7 @@ const TodaysHotDeals = () => {
                     </span>
                   </div>
                 </div>
-              </div>
+              </Link>
             )}
           </div>
 
@@ -213,9 +217,11 @@ const TodaysHotDeals = () => {
               Todays Hot Deals
             </h4>
 
-            <h3 className="text-Primary text-2xl sm:text-3xl lg:text-[50px] font-Inter font-bold leading-snug sm:leading-tight lg:leading-[60px] mt-2">
-              {activeProduct.title}
-            </h3>
+            <Link to={`/product/${activeProduct.id}`}>
+              <h3 className="text-Primary text-2xl sm:text-3xl lg:text-[50px] font-Inter font-bold leading-snug sm:leading-tight lg:leading-[60px] mt-2 hover:text-[#80B500] transition-colors duration-200 cursor-pointer">
+                {activeProduct.title}
+              </h3>
+            </Link>
 
             <p className="text-[#546375] text-sm sm:text-base font-Nunito w-full lg:w-[450px] xl:w-[450px] leading-relaxed mt-4 sm:mt-5 mx-auto lg:mx-0">
               {activeProduct.description}
@@ -242,15 +248,19 @@ const TodaysHotDeals = () => {
 
             {/* Action Buttons */}
             <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row justify-center lg:justify-start gap-4 sm:gap-5">
-              <Button
-                btnTxt={"Shop Now"}
-                className="hover:bg-transparent hover:text-[#80B500] duration-200 w-full sm:w-auto"
-              />
+              <Link to={`/product/${activeProduct.id}`}>
+                <Button
+                  btnTxt={"Shop Now"}
+                  className="hover:bg-transparent hover:text-[#80B500] duration-200 w-full sm:w-auto"
+                />
+              </Link>
 
-              <Button
-                btnTxt={"Deal of The Day"}
-                className="hover:bg-transparent hover:text-[#80B500] duration-200 w-full sm:w-auto"
-              />
+              <Link to={`/product/${activeProduct.id}`}>
+                <Button
+                  btnTxt={"Deal of The Day"}
+                  className="hover:bg-transparent hover:text-[#80B500] duration-200 w-full sm:w-auto"
+                />
+              </Link>
             </div>
           </div>
         </div>

@@ -47,10 +47,12 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Search submit korle shop page e na giye shudhu suggestions clear korbe ba first item select korbe
   const handleSearch = (e) => {
     e.preventDefault();
-    if (searchQuery && searchQuery.trim()) {
-      navigate(`/shop?search=${encodeURIComponent(searchQuery.trim())}`);
+    if (suggestions.length > 0) {
+      navigate(`/product/${suggestions[0].id}`);
+      setSearchQuery("");
       setSuggestions([]);
       setOpenMenu(false);
     }
@@ -66,12 +68,11 @@ const Header = () => {
   return (
     <>
       <Container>
-        <div className="flex items-center justify-between my-4 sm:my-6">
+        <div className="flex items-center justify-between my-6">
           <Link to="/">
-            <Images srcImg={logo} className="w-28 sm:w-auto" />
+            <Images srcImg={logo} />
           </Link>
 
-          {/* Desktop Navigation & Search */}
           <div className="hidden lg:flex items-center gap-x-12">
             <ul className="flex items-center gap-x-8 text-[17px] text-[#0A2C3D] font-Nunito font-bold">
               <li className="hover:text-[#80B500] duration-300">
@@ -140,17 +141,15 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setOpenMenu(true)}
-            className="lg:hidden text-3xl sm:text-4xl text-[#0A2C3D] cursor-pointer"
+            className="lg:hidden text-4xl text-[#0A2C3D] cursor-pointer"
           >
             <HiMenuAlt3 />
           </button>
         </div>
       </Container>
 
-      {/* Mobile Sidebar Overlay */}
       {openMenu && (
         <div
           onClick={() => setOpenMenu(false)}
@@ -158,14 +157,13 @@ const Header = () => {
         ></div>
       )}
 
-      {/* Mobile Sidebar */}
       <div
-        className={`fixed top-0 right-0 h-screen w-[280px] sm:w-[320px] bg-white z-50 shadow-2xl duration-500 lg:hidden flex flex-col ${
+        className={`fixed top-0 right-0 h-screen w-[280px] bg-white z-50 shadow-2xl duration-500 lg:hidden ${
           openMenu ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex items-center justify-between p-5 border-b">
-          <Images srcImg={logo} className="w-28" />
+          <Images srcImg={logo} />
           <button
             onClick={() => setOpenMenu(false)}
             className="text-3xl text-[#0A2C3D] cursor-pointer"
@@ -173,30 +171,7 @@ const Header = () => {
             <HiX />
           </button>
         </div>
-
-        {/* Mobile Search Box */}
-        <div className="p-5 border-b">
-          <form
-            onSubmit={handleSearch}
-            className="flex justify-between items-center py-1.5 px-3 bg-[#F4F4F4] rounded-[50px]"
-          >
-            <input
-              type="text"
-              placeholder="Find Products"
-              value={searchQuery || ""}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="outline-none text-sm text-[#797D95] font-Nunito w-full bg-transparent"
-            />
-            <button
-              type="submit"
-              className="cursor-pointer bg-transparent border-none flex items-center justify-center"
-            >
-              <IoSearchOutline className="text-3xl text-white bg-[#80B500] p-1.5 rounded-full" />
-            </button>
-          </form>
-        </div>
-
-        <ul className="flex flex-col gap-y-6 p-6 text-[17px] text-[#0A2C3D] font-Nunito font-bold overflow-y-auto">
+        <ul className="flex flex-col gap-y-6 p-6 text-[17px] text-[#0A2C3D] font-Nunito font-bold">
           <li>
             <Link onClick={() => setOpenMenu(false)} to="/">
               Home
