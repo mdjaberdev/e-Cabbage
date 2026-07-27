@@ -1,31 +1,4 @@
 
-.slick-dots {
-  position: absolute;
-  top: 570px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex !important;
-  justify-content: center;
-  gap: 8px;
-}
-
-.slick-dots li {
-  width: 13px !important;
-  height: 13px !important;
-  border-radius: 50%;
-  background: #80b500;
-  border: 2px solid #fff;
-}
-
-.slick-dots li.slick-active {
-  transform: scale(1.3);
-  border: none;
-}
-
-.slick-dots li button::before {
-  display: none;
-}
-
 .about .slick-dots {
   top: 400px;
 }

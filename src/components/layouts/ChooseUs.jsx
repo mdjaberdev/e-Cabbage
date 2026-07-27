@@ -11,19 +11,27 @@ const ChooseUs = () => {
   const cards = [
     {
       img: cOne,
-      title: "Eat More Healthfully",
+      title: "100% Fresh & Natural",
+      description:
+        "We source our products directly from trusted organic farms to ensure absolute freshness, premium quality, and natural nutrition for your daily diet.",
     },
     {
       img: cTwo,
-      title: "Eat More Healthfully",
+      title: "Safe & Fast Delivery",
+      description:
+        "Experience quick and reliable doorstep delivery. Our temperature-controlled packaging ensures your items stay fresh and secure all the way.",
     },
     {
       img: cThree,
-      title: "Eat More Healthfully",
+      title: "Certified Organic",
+      description:
+        "All our items go through strict quality checks and are 100% certified organic, free from harmful chemical pesticides and artificial preservatives.",
     },
     {
       img: cFour,
-      title: "Eat More Healthfully",
+      title: "24/7 Friendly Support",
+      description:
+        "Have questions about your order or products? Our dedicated customer support team is always here to assist you around the clock.",
     },
   ];
 
@@ -65,8 +73,8 @@ const ChooseUs = () => {
               sm:mt-4
             "
           >
-            A highly efficient slip-ring scanner for today's diagnostic
-            requirements.
+            Discover the core benefits that make us your favorite destination
+            for fresh, organic, and healthy grocery shopping.
           </p>
         </div>
 
@@ -155,8 +163,7 @@ const ChooseUs = () => {
                       duration-200
                     "
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipisic do eiusmod
-                    tempor incididunt ut labore et
+                    {item.description}
                   </p>
                 </div>
               </div>
