@@ -12,7 +12,6 @@ export const CartProvider = ({ children }) => {
     }
   });
 
-  // Toast Notification State
   const [notification, setNotification] = useState("");
 
   const showNotification = (message) => {

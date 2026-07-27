@@ -5,7 +5,7 @@ import Images from "../common/Images";
 import topLogo from "/src/assets/topLogo.png";
 import { Link } from "react-router-dom";
 import { FaHeart } from "react-icons/fa6";
-import { useWishlist } from "../../context/WishlistContext"; // Wishlist Context import
+import { useWishlist } from "../../context/WishlistContext";
 
 const HeaderTop = () => {
   const { wishlistItems } = useWishlist();
@@ -29,8 +29,6 @@ const HeaderTop = () => {
             <Link to={"/login"}>
               <FaRegUser />
             </Link>
-
-            {/* Wishlist Link with dynamic count */}
             <Link to={"/wishlist"} className="relative">
               <FaHeart />
               {wishlistItems.length > 0 && (

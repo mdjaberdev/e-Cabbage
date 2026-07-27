@@ -28,8 +28,9 @@ const Banner = () => {
   useEffect(() => {
     const fetchBannerProducts = async () => {
       try {
+        // Fetching from the groceries category endpoint where vegetables are typically located
         const { data } = await axios.get(
-          "https://dummyjson.com/products?limit=4"
+          "https://dummyjson.com/products/category/groceries",
         );
         setSliderProducts(data.products);
       } catch (error) {
@@ -59,7 +60,7 @@ const Banner = () => {
         loop={true}
       >
         {sliderProducts.length > 0 ? (
-          sliderProducts.map((product) => (
+          sliderProducts.slice(7, 11).map((product) => (
             <SwiperSlide key={product.id}>
               <Container>
                 <div
@@ -113,7 +114,7 @@ const Banner = () => {
                           font-Nunito
                         "
                       >
-                        100% Genuine Product
+                        100% Fresh & Organic
                       </h4>
                     </div>
 
@@ -249,7 +250,7 @@ const Banner = () => {
         ) : (
           <SwiperSlide>
             <div className="bg-[#F9F4EE] py-40 text-center font-Nunito text-xl text-gray-500">
-              Loading Banner Products...
+              Loading Vegetable Products...
             </div>
           </SwiperSlide>
         )}

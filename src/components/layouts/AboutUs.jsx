@@ -37,8 +37,6 @@ const AboutUs = () => {
 
     return () => clearInterval(interval);
   }, [products]);
-
-  // Current display kora duiti product fetch kora
   const product1 = products[currentIndex];
   const product2 = products[currentIndex + 1];
 
@@ -77,8 +75,6 @@ const AboutUs = () => {
               </Link>
             )}
           </div>
-
-          {/* Right Side: Text Content */}
           <div className="text-center lg:text-left lg:max-w-xl w-full">
             <span className="inline-block bg-[#80B500]/10 text-[#80B500] text-xs sm:text-sm lg:text-[16px] font-Nunito font-bold px-4 py-1.5 rounded-full mb-3 lg:mb-4">
               Know More About Shop
@@ -101,8 +97,6 @@ const AboutUs = () => {
                 content.
               </p>
             </div>
-
-            {/* Director Details */}
             <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-gray-100 flex flex-col lg:flex-row items-center lg:items-start gap-4">
               <div>
                 <h4 className="text-[#223645] text-base sm:text-lg font-bold font-Playfair">

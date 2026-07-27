@@ -6,7 +6,7 @@ import { LuShoppingCart } from "react-icons/lu";
 import { FaRegHeart, FaHeart } from "react-icons/fa6";
 import { AiOutlineZoomIn, AiOutlineClose } from "react-icons/ai";
 import { useCart } from "../../context/CartContext";
-import { useWishlist } from "../../context/WishlistContext"; // Wishlist hook
+import { useWishlist } from "../../context/WishlistContext"; 
 import { Link } from "react-router-dom";
 
 const Products = ({
@@ -21,8 +21,6 @@ const Products = ({
   const [isZoomed, setIsZoomed] = useState(false);
   const { addToCart } = useCart();
   const { wishlistItems, toggleWishlist } = useWishlist();
-
-  // Check if this product is already in the wishlist
   const isLoved = wishlistItems.some((item) => item.id === id);
 
   useEffect(() => {
@@ -47,7 +45,6 @@ const Products = ({
 
   return (
     <>
-      {/* Product Card Container as a Link */}
       <Link
         to={`/product/${id}`}
         className={`group bg-white border border-gray-200 p-4 h-full flex flex-col justify-between transition-all duration-300 hover:border-[#80B500]/50 block cursor-pointer ${className}`}
@@ -101,8 +98,6 @@ const Products = ({
               >
                 {isLoved ? <FaHeart size={18} /> : <FaRegHeart size={18} />}
               </button>
-
-              {/* Quick View Button */}
               <button
                 onClick={(e) => {
                   e.preventDefault();

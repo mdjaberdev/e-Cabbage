@@ -36,7 +36,6 @@ const Header = () => {
     return () => clearTimeout(timer);
   }, [searchQuery]);
 
-  // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -47,7 +46,6 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Search submit korle shop page e na giye shudhu suggestions clear korbe ba first item select korbe
   const handleSearch = (e) => {
     e.preventDefault();
     if (suggestions.length > 0) {
@@ -91,8 +89,6 @@ const Header = () => {
                 <Link to="/contact">Contact</Link>
               </li>
             </ul>
-
-            {/* Search Box with Suggestions */}
             <div className="relative" ref={searchRef}>
               <form
                 onSubmit={handleSearch}
