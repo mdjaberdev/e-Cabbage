@@ -13,25 +13,30 @@ import Checkout from "./components/pages/Checkout";
 import FloatingCart from "./components/common/FloatingCart";
 import { SearchProvider } from "./context/SearchContext";
 import ProductDetails from "./components/common/ProductDetails";
+import { WishlistProvider } from "./context/WishlistContext";
+import Wishlist from "./components/pages/Wishlist";
 
 function App() {
   return (
     <SearchProvider>
-      <FloatingCart />
-      <Routes>
-        <Route path="/" element={<RootLayout />}>
-          <Route index element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/pages" element={<Pages />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/Contact" element={<Contacts />} />
-          <Route path="/login" element={<Loging />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/product/:id" element={<ProductDetails />} />
-        </Route>
-      </Routes>
+      <WishlistProvider>
+        <FloatingCart />
+        <Routes>
+          <Route path="/" element={<RootLayout />}>
+            <Route index element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/pages" element={<Pages />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/Contact" element={<Contacts />} />
+            <Route path="/login" element={<Loging />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/product/:id" element={<ProductDetails />} />
+            <Route path="/wishlist" element={<Wishlist />} />
+          </Route>
+        </Routes>
+      </WishlistProvider>
     </SearchProvider>
   );
 }

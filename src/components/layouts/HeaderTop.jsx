@@ -1,16 +1,14 @@
 import React from "react";
 import Container from "../common/Container";
 import { FaRegUser } from "react-icons/fa";
-import { AiOutlineShoppingCart } from "react-icons/ai";
 import Images from "../common/Images";
 import topLogo from "/src/assets/topLogo.png";
 import { Link } from "react-router-dom";
-import { useCart } from "../../context/CartContext";
-
+import { FaHeart } from "react-icons/fa6";
+import { useWishlist } from "../../context/WishlistContext"; // Wishlist Context import
 
 const HeaderTop = () => {
-  const { cartItems } = useCart();
-  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const { wishlistItems } = useWishlist();
 
   return (
     <div className="bg-[#0A472E] py-3 lg:py-4">
@@ -32,11 +30,12 @@ const HeaderTop = () => {
               <FaRegUser />
             </Link>
 
-            <Link to={"/cart"} className="relative">
-              <AiOutlineShoppingCart />
-              {totalItems > 0 && (
-                <span className="absolute -top-2 -right-2.5 bg-[#80B500] text-white text-[11px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-[#0A472E]">
-                  {totalItems}
+            {/* Wishlist Link with dynamic count */}
+            <Link to={"/wishlist"} className="relative">
+              <FaHeart />
+              {wishlistItems.length > 0 && (
+                <span className="absolute -top-2 -right-2.5 bg-[#80B500] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                  {wishlistItems.length}
                 </span>
               )}
             </Link>

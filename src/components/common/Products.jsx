@@ -6,6 +6,7 @@ import { LuShoppingCart } from "react-icons/lu";
 import { FaRegHeart, FaHeart } from "react-icons/fa6";
 import { AiOutlineZoomIn, AiOutlineClose } from "react-icons/ai";
 import { useCart } from "../../context/CartContext";
+import { useWishlist } from "../../context/WishlistContext"; // Wishlist hook
 import { Link } from "react-router-dom";
 
 const Products = ({
@@ -17,9 +18,12 @@ const Products = ({
   productImg,
   stock,
 }) => {
-  const [isLoved, setIsLoved] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
   const { addToCart } = useCart();
+  const { wishlistItems, toggleWishlist } = useWishlist();
+
+  // Check if this product is already in the wishlist
+  const isLoved = wishlistItems.some((item) => item.id === id);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -59,8 +63,8 @@ const Products = ({
               {/* Add to Cart Button */}
               <button
                 onClick={(e) => {
-                  e.preventDefault(); // Link e jabe na
-                  e.stopPropagation(); // Event bubble hote dibe na
+                  e.preventDefault();
+                  e.stopPropagation();
                   addToCart({
                     id,
                     productTitle,
@@ -80,7 +84,13 @@ const Products = ({
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
-                  setIsLoved(!isLoved);
+                  toggleWishlist({
+                    id,
+                    productTitle,
+                    productPrice,
+                    productImg,
+                    stock,
+                  });
                 }}
                 aria-label="Add to wishlist"
                 className={`translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75 p-3.5 bg-white rounded-full shadow-lg cursor-pointer ${

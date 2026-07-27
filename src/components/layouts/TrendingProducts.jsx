@@ -13,18 +13,23 @@ import Container from "../common/Container";
 import Images from "../common/Images";
 import Badge from "../common/Badge";
 import { useCart } from "../../context/CartContext";
+import { useWishlist } from "../../context/WishlistContext"; // Wishlist context import
 
 // ================= Product Card =================
 
 const ProductCard = ({ item, onZoom }) => {
-  const [isLoved, setIsLoved] = useState(false);
   const { addToCart } = useCart();
+  const { wishlistItems, toggleWishlist } = useWishlist();
+
+  // Check if item is already in wishlist
+  const isLoved = wishlistItems.some((wItem) => wItem.id === item.id);
 
   const handleAddToCart = () => {
     const productToAdd = {
       id: item.id,
       productTitle: item.title,
       productPrice: `$${item.price.toFixed(2)}`,
+      productImg: item.thumbnail, // wishlist-er sathe match korar jonno productImg use kora holo
       thumbnail: item.thumbnail,
       quantity: 1,
     };
@@ -32,6 +37,18 @@ const ProductCard = ({ item, onZoom }) => {
     if (addToCart) {
       addToCart(productToAdd);
     }
+  };
+
+  const handleToggleWishlist = () => {
+    const productToWishlist = {
+      id: item.id,
+      productTitle: item.title,
+      productPrice: `$${item.price.toFixed(2)}`,
+      productImg: item.thumbnail,
+      stock: item.stock || "In Stock",
+    };
+
+    toggleWishlist(productToWishlist);
   };
 
   return (
@@ -150,7 +167,7 @@ const ProductCard = ({ item, onZoom }) => {
 
         {/* Wishlist */}
         <div
-          onClick={() => setIsLoved(!isLoved)}
+          onClick={handleToggleWishlist}
           className={`
             translate-y-10
             group-hover:translate-y-0
@@ -219,6 +236,7 @@ const TrendingProducts = () => {
       id: item.id,
       productTitle: item.title,
       productPrice: `$${item.price.toFixed(2)}`,
+      productImg: item.thumbnail,
       thumbnail: item.thumbnail,
       quantity: 1,
     };
