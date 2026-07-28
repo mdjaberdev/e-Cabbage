@@ -40,26 +40,31 @@ const Banner = () => {
     fetchBannerProducts();
   }, []);
 
+  const bannerSlides =
+    sliderProducts.length > 0 ? sliderProducts.slice(7, 11) : [];
+
   return (
     <div className="relative bg-[#F9F4EE] pb-24 sm:pb-28 lg:pb-32 [&_.swiper-pagination]:!bottom-[15px] sm:[&_.swiper-pagination]:!bottom-[20px] [&_.swiper-pagination]:!flex [&_.swiper-pagination]:!justify-center [&_.swiper-pagination]:!items-center [&_.swiper-pagination]:!gap-2 [&_.swiper-pagination]:!z-20 [&_.swiper-pagination-bullet]:!w-[13px] [&_.swiper-pagination-bullet]:!h-[13px] [&_.swiper-pagination-bullet]:!rounded-full [&_.swiper-pagination-bullet]:!bg-[#80b500] [&_.swiper-pagination-bullet]:!border-2 [&_.swiper-pagination-bullet]:!border-white [&_.swiper-pagination-bullet]:!opacity-100 [&_.swiper-pagination-bullet]:!m-0 [&_.swiper-pagination-bullet]:!transition-all [&_.swiper-pagination-bullet]:!duration-300 [&_.swiper-pagination-bullet-active]:!scale-125 [&_.swiper-pagination-bullet-active]:!border-none [&_.swiper-slide]:!opacity-0 [&_.swiper-slide]:!pointer-events-none [&_.swiper-slide-active]:!opacity-100 [&_.swiper-slide-active]:!pointer-events-auto">
-      <Swiper
-        modules={[Autoplay, Pagination, EffectFade]}
-        effect={"fade"}
-        fadeEffect={{
-          crossFade: true,
-        }}
-        watchSlidesProgress={true}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
-        pagination={{
-          clickable: true,
-        }}
-        loop={true}
-      >
-        {sliderProducts.length > 0 ? (
-          sliderProducts.slice(7, 11).map((product) => (
+      {bannerSlides.length > 0 ? (
+        <Swiper
+          modules={[Autoplay, Pagination, EffectFade]}
+          effect={"fade"}
+          fadeEffect={{
+            crossFade: true,
+          }}
+          watchSlidesProgress={true}
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+          pagination={{
+            clickable: true,
+          }}
+          loop={true}
+          observer={true}
+          observeParents={true}
+        >
+          {bannerSlides.map((product) => (
             <SwiperSlide key={product.id}>
               <Container>
                 <div
@@ -245,15 +250,13 @@ const Banner = () => {
                 </div>
               </Container>
             </SwiperSlide>
-          ))
-        ) : (
-          <SwiperSlide>
-            <div className="bg-[#F9F4EE] py-40 text-center font-Nunito text-xl text-gray-500">
-              Loading Vegetable Products...
-            </div>
-          </SwiperSlide>
-        )}
-      </Swiper>
+          ))}
+        </Swiper>
+      ) : (
+        <div className="bg-[#F9F4EE] py-40 text-center font-Nunito text-xl text-gray-500">
+          Loading Vegetable Products...
+        </div>
+      )}
 
       {/* Trust Section */}
       <div
