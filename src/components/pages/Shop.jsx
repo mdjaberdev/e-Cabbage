@@ -7,7 +7,7 @@ import Products from "../common/Products";
 import Badge from "../common/Badge";
 import { useSearch } from "../../context/SearchContext";
 import { Link } from "react-router-dom";
-
+import { Helmet } from "react-helmet-async";
 
 const Shop = () => {
   const [allProducts, setAllProducts] = useState([]);
@@ -73,14 +73,18 @@ const Shop = () => {
 
   return (
     <div className="">
+      <Helmet>
+        <title>Cabbage Shop</title>
+        <meta name="shop" content="welcome to shop page" />
+      </Helmet>
       {/* Banner */}
-      <div className="bg-[url('/src/assets/commonBanner.png')] bg-no-repeat bg-cover bg-center py-[150px]">
+      <div className="bg-[url('/src/assets/commonBanner.png')] bg-no-repeat bg-cover bg-center py-24 lg:py-36">
         <Container>
           <div className="">
-            <h3 className="text-Primary text-[55px] font-bold font-Inter">
+            <h3 className="text-Primary text-4xl sm:text-5xl font-bold font-Inter">
               Shop
             </h3>
-            <h5 className="text-[#133344] text-[18px] font-Nunito flex items-center gap-2">
+            <h5 className="text-[#133344] text-base sm:text-lg font-Nunito flex items-center gap-2 mt-2">
               <Link to="/" className="hover:text-[#80B500]">
                 Home
               </Link>{" "}

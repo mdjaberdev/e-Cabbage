@@ -20,13 +20,13 @@ const Cart = () => {
   return (
     <section>
       {/* Banner Section */}
-      <div className="bg-[url('/src/assets/commonBanner.png')] bg-no-repeat bg-cover bg-center py-37.5">
+      <div className="bg-[url('/src/assets/commonBanner.png')] bg-no-repeat bg-cover bg-center py-24 lg:py-36">
         <Container>
           <div>
-            <h3 className="text-Primary text-[55px] font-bold font-Inter">
+            <h3 className="text-Primary text-4xl sm:text-5xl font-bold font-Inter">
               Cart Page
             </h3>
-            <h5 className="text-[#133344] text-[18px] font-Nunito flex items-center gap-2">
+            <h5 className="text-[#133344] text-base sm:text-lg font-Nunito flex items-center gap-2 mt-2">
               <Link to="/" className="hover:text-[#80B500]">
                 Home
               </Link>{" "}

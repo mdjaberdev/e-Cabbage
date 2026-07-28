@@ -21,7 +21,7 @@ const HeaderTop = () => {
               +1 8008339780
             </p>
 
-            <marquee className="hidden sm:block">Welcome to Xprako!</marquee>
+            <marquee className="hidden sm:block">Welcome to Cabbage!</marquee>
           </div>
 
           {/* Right Side */}
@@ -45,7 +45,7 @@ const HeaderTop = () => {
                 className={"w-5 h-5 lg:w-6.25 lg:h-6.25"}
                 srcImg={topLogo}
               />
-              <p className="text-sm lg:text-base">EN</p>
+              {/* <p className="text-sm lg:text-base">EN</p> */}
             </div>
           </div>
         </div>

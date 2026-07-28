@@ -16,6 +16,7 @@ import Images from "../common/Images";
 import client from "/src/assets/blogpageClient.png";
 import star from "/src/assets/productsStat.png";
 import stardark from "/src/assets/productStardrak.png";
+import { Helmet } from "react-helmet-async";
 
 const Blog = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -145,198 +146,204 @@ const Blog = () => {
   });
 
   return (
-    <section className="bg-gray-50/50 pb-24">
-      {/* Banner Section */}
-      <div className="bg-[url('/src/assets/commonBanner.png')] bg-no-repeat bg-cover bg-center py-24 md:py-32">
+    <>
+      <Helmet>
+        <title>Cabbage Blog</title>
+        <meta name="blog" content="welcome to blog page" />
+      </Helmet>
+      <section className="bg-gray-50/50 pb-24">
+        {/* Banner Section */}
+        <div className="bg-[url('/src/assets/commonBanner.png')] bg-no-repeat bg-cover bg-center py-24 lg:py-36">
+          <Container>
+            <div>
+              <h3 className="text-Primary text-4xl sm:text-5xl font-bold font-Inter">
+                Blog
+              </h3>
+              <h5 className="text-[#133344] text-base sm:text-lg font-Nunito flex items-center gap-2 mt-2">
+                <Link to="/" className="hover:text-[#80B500]">
+                  Home
+                </Link>{" "}
+                <FaAngleRight /> Blog
+              </h5>
+            </div>
+          </Container>
+        </div>
+
+        {/* Main Container */}
         <Container>
-          <div>
-            <h3 className="text-Primary text-4xl md:text-[55px] font-bold font-Inter">
-              Our Organic Blog
-            </h3>
-            <h5 className="text-[#133344] text-[18px] font-Nunito flex items-center gap-2">
-              <Link to="/" className="hover:text-[#80B500]">
-                Home
-              </Link>{" "}
-              <FaAngleRight /> Blog
-            </h5>
-          </div>
-        </Container>
-      </div>
-
-      {/* Main Container */}
-      <Container>
-        <div className="mt-16 lg:mt-24">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-            <div className="lg:col-span-2 flex flex-col gap-12">
-              {filteredPosts.length > 0 ? (
-                filteredPosts.map((post) => (
-                  <div
-                    key={post.id}
-                    className="bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100 group transition-all duration-300 hover:shadow-xl"
-                  >
-                    <div className="overflow-hidden h-72 sm:h-96 w-full bg-gray-100">
-                      <Images
-                        srcImg={post.img}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-
-                    {/* Blog Content */}
-                    <div className="p-6 sm:p-8">
-                      <span className="text-xs bg-[#80B500]/10 text-[#80B500] font-bold px-3 py-1 rounded-full mb-3 inline-block">
-                        {post.category}
-                      </span>
-
-                      <div className="flex flex-wrap items-center gap-6 mb-4">
-                        <p className="flex items-center gap-2 text-[#647589] text-sm sm:text-base font-bold font-Nunito">
-                          <FaCalendarAlt className="text-[#80B500]" />{" "}
-                          {post.date}
-                        </p>
-                        <p className="flex items-center gap-2 text-[#647589] text-sm sm:text-base font-bold font-Nunito">
-                          <FaCommentDots className="text-[#80B500]" />{" "}
-                          {post.comments}
-                        </p>
+          <div className="mt-16 lg:mt-24">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+              <div className="lg:col-span-2 flex flex-col gap-12">
+                {filteredPosts.length > 0 ? (
+                  filteredPosts.map((post) => (
+                    <div
+                      key={post.id}
+                      className="bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100 group transition-all duration-300 hover:shadow-xl"
+                    >
+                      <div className="overflow-hidden h-72 sm:h-96 w-full bg-gray-100">
+                        <Images
+                          srcImg={post.img}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
                       </div>
 
-                      <h4 className="text-Primary text-xl sm:text-2xl lg:text-[26px] font-Inter font-bold leading-snug hover:text-[#80B500] duration-200 cursor-pointer">
-                        {post.title}
-                      </h4>
+                      {/* Blog Content */}
+                      <div className="p-6 sm:p-8">
+                        <span className="text-xs bg-[#80B500]/10 text-[#80B500] font-bold px-3 py-1 rounded-full mb-3 inline-block">
+                          {post.category}
+                        </span>
 
-                      <p className="text-[#5C727D] text-sm sm:text-base font-Nunito leading-relaxed mt-4">
-                        {post.desc}
-                      </p>
+                        <div className="flex flex-wrap items-center gap-6 mb-4">
+                          <p className="flex items-center gap-2 text-[#647589] text-sm sm:text-base font-bold font-Nunito">
+                            <FaCalendarAlt className="text-[#80B500]" />{" "}
+                            {post.date}
+                          </p>
+                          <p className="flex items-center gap-2 text-[#647589] text-sm sm:text-base font-bold font-Nunito">
+                            <FaCommentDots className="text-[#80B500]" />{" "}
+                            {post.comments}
+                          </p>
+                        </div>
 
-                      <Link
-                        to="#"
-                        className="text-[#80B500] text-base font-bold font-Nunito inline-flex items-center gap-x-2 mt-6 hover:translate-x-1 duration-200"
-                      >
-                        Read Full Article <FaCircleChevronRight />
-                      </Link>
+                        <h4 className="text-Primary text-xl sm:text-2xl lg:text-[26px] font-Inter font-bold leading-snug hover:text-[#80B500] duration-200 cursor-pointer">
+                          {post.title}
+                        </h4>
+
+                        <p className="text-[#5C727D] text-sm sm:text-base font-Nunito leading-relaxed mt-4">
+                          {post.desc}
+                        </p>
+
+                        <Link
+                          to="#"
+                          className="text-[#80B500] text-base font-bold font-Nunito inline-flex items-center gap-x-2 mt-6 hover:translate-x-1 duration-200"
+                        >
+                          Read Full Article <FaCircleChevronRight />
+                        </Link>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="bg-white p-12 text-center rounded-2xl shadow-sm">
+                    <p className="text-xl font-bold font-Nunito text-gray-500">
+                      No articles found matching your search or category.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              <div className="flex flex-col gap-8">
+                <div className="py-8 px-6 text-center bg-white rounded-2xl shadow-md border border-gray-100">
+                  <Images
+                    className="mx-auto rounded-full w-24 h-24 object-cover shadow-sm"
+                    srcImg={client}
+                  />
+                  <h4 className="text-Primary text-xl font-Inter font-bold mt-4">
+                    Jehnny Rose
+                  </h4>
+                  <p className="text-[#5C727D] text-xs font-Nunito mt-1">
+                    Organic Food Specialist / Nutritionist
+                  </p>
+
+                  {/* Rating Stars */}
+                  <div className="flex justify-center items-center gap-1 mt-3">
+                    <Images srcImg={star} className="w-3.5 h-3.5" />
+                    <Images srcImg={star} className="w-3.5 h-3.5" />
+                    <Images srcImg={star} className="w-3.5 h-3.5" />
+                    <Images srcImg={star} className="w-3.5 h-3.5" />
+                    <Images srcImg={stardark} className="w-3.5 h-3.5" />
+                    <span className="text-[#5C727D] text-xs font-Nunito ml-1">
+                      (1 Review)
+                    </span>
+                  </div>
+
+                  <p className="text-[#5C727D] text-sm font-Nunito leading-relaxed mt-4">
+                    Passionate about organic living, natural health remedies,
+                    and sustainable farm-to-table nutrition.
+                  </p>
+
+                  {/* Social Links */}
+                  <div className="flex justify-center gap-3 mt-6">
+                    <Link
+                      to="#"
+                      className="p-2.5 bg-gray-100 text-[#6A7695] rounded-full hover:bg-[#80B500] hover:text-white duration-200 shadow-sm"
+                    >
+                      <FaFacebookF size={14} />
+                    </Link>
+                    <Link
+                      to="#"
+                      className="p-2.5 bg-gray-100 text-[#6A7695] rounded-full hover:bg-[#80B500] hover:text-white duration-200 shadow-sm"
+                    >
+                      <FaTwitter size={14} />
+                    </Link>
+                    <Link
+                      to="#"
+                      className="p-2.5 bg-gray-100 text-[#6A7695] rounded-full hover:bg-[#80B500] hover:text-white duration-200 shadow-sm"
+                    >
+                      <FaInstagram size={14} />
+                    </Link>
+                    <Link
+                      to="#"
+                      className="p-2.5 bg-gray-100 text-[#6A7695] rounded-full hover:bg-[#80B500] hover:text-white duration-200 shadow-sm"
+                    >
+                      <FaGooglePlusG size={14} />
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Live Search Widget */}
+                <div className="p-6 bg-white rounded-2xl shadow-md border border-gray-100">
+                  <h4 className="text-Primary text-xl font-Inter font-bold pb-3 border-b border-gray-200">
+                    Search Articles
+                  </h4>
+                  <div className="mt-5 flex items-center bg-gray-50 border border-gray-200 rounded-xl overflow-hidden focus-within:border-[#80B500] transition-colors">
+                    <input
+                      type="text"
+                      placeholder="Search by keywords..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="outline-none text-sm text-[#797D95] font-Nunito py-3 px-4 w-full bg-transparent"
+                    />
+                    <div className="bg-[#80B500] px-5 py-3 text-white flex items-center justify-center">
+                      <IoSearchOutline size={18} />
                     </div>
                   </div>
-                ))
-              ) : (
-                <div className="bg-white p-12 text-center rounded-2xl shadow-sm">
-                  <p className="text-xl font-bold font-Nunito text-gray-500">
-                    No articles found matching your search or category.
-                  </p>
-                </div>
-              )}
-            </div>
-
-            <div className="flex flex-col gap-8">
-              <div className="py-8 px-6 text-center bg-white rounded-2xl shadow-md border border-gray-100">
-                <Images
-                  className="mx-auto rounded-full w-24 h-24 object-cover shadow-sm"
-                  srcImg={client}
-                />
-                <h4 className="text-Primary text-xl font-Inter font-bold mt-4">
-                  Jehnny Rose
-                </h4>
-                <p className="text-[#5C727D] text-xs font-Nunito mt-1">
-                  Organic Food Specialist / Nutritionist
-                </p>
-
-                {/* Rating Stars */}
-                <div className="flex justify-center items-center gap-1 mt-3">
-                  <Images srcImg={star} className="w-3.5 h-3.5" />
-                  <Images srcImg={star} className="w-3.5 h-3.5" />
-                  <Images srcImg={star} className="w-3.5 h-3.5" />
-                  <Images srcImg={star} className="w-3.5 h-3.5" />
-                  <Images srcImg={stardark} className="w-3.5 h-3.5" />
-                  <span className="text-[#5C727D] text-xs font-Nunito ml-1">
-                    (1 Review)
-                  </span>
                 </div>
 
-                <p className="text-[#5C727D] text-sm font-Nunito leading-relaxed mt-4">
-                  Passionate about organic living, natural health remedies, and
-                  sustainable farm-to-table nutrition.
-                </p>
-
-                {/* Social Links */}
-                <div className="flex justify-center gap-3 mt-6">
-                  <Link
-                    to="#"
-                    className="p-2.5 bg-gray-100 text-[#6A7695] rounded-full hover:bg-[#80B500] hover:text-white duration-200 shadow-sm"
-                  >
-                    <FaFacebookF size={14} />
-                  </Link>
-                  <Link
-                    to="#"
-                    className="p-2.5 bg-gray-100 text-[#6A7695] rounded-full hover:bg-[#80B500] hover:text-white duration-200 shadow-sm"
-                  >
-                    <FaTwitter size={14} />
-                  </Link>
-                  <Link
-                    to="#"
-                    className="p-2.5 bg-gray-100 text-[#6A7695] rounded-full hover:bg-[#80B500] hover:text-white duration-200 shadow-sm"
-                  >
-                    <FaInstagram size={14} />
-                  </Link>
-                  <Link
-                    to="#"
-                    className="p-2.5 bg-gray-100 text-[#6A7695] rounded-full hover:bg-[#80B500] hover:text-white duration-200 shadow-sm"
-                  >
-                    <FaGooglePlusG size={14} />
-                  </Link>
-                </div>
-              </div>
-
-              {/* Live Search Widget */}
-              <div className="p-6 bg-white rounded-2xl shadow-md border border-gray-100">
-                <h4 className="text-Primary text-xl font-Inter font-bold pb-3 border-b border-gray-200">
-                  Search Articles
-                </h4>
-                <div className="mt-5 flex items-center bg-gray-50 border border-gray-200 rounded-xl overflow-hidden focus-within:border-[#80B500] transition-colors">
-                  <input
-                    type="text"
-                    placeholder="Search by keywords..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="outline-none text-sm text-[#797D95] font-Nunito py-3 px-4 w-full bg-transparent"
-                  />
-                  <div className="bg-[#80B500] px-5 py-3 text-white flex items-center justify-center">
-                    <IoSearchOutline size={18} />
-                  </div>
-                </div>
-              </div>
-
-              {/* Interactive Categories Widget */}
-              <div className="p-6 bg-white rounded-2xl shadow-md border border-gray-100">
-                <h4 className="text-Primary text-xl font-Inter font-bold pb-3 border-b border-gray-200">
-                  Categories
-                </h4>
-                <div className="flex flex-col gap-3 mt-5">
-                  {categories.map((cat, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setSelectedCategory(cat.name)}
-                      className={`font-medium text-sm font-Nunito py-2.5 px-4 rounded-xl duration-200 flex justify-between items-center group cursor-pointer text-left ${
-                        selectedCategory === cat.name
-                          ? "bg-[#80B500] text-white shadow-md"
-                          : "bg-gray-50 text-[#5C727D] hover:text-white hover:bg-[#80B500]"
-                      }`}
-                    >
-                      <span>{cat.name}</span>
-                      <span
-                        className={`text-xs px-2 py-0.5 rounded-full font-bold ${
+                {/* Interactive Categories Widget */}
+                <div className="p-6 bg-white rounded-2xl shadow-md border border-gray-100">
+                  <h4 className="text-Primary text-xl font-Inter font-bold pb-3 border-b border-gray-200">
+                    Categories
+                  </h4>
+                  <div className="flex flex-col gap-3 mt-5">
+                    {categories.map((cat, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setSelectedCategory(cat.name)}
+                        className={`font-medium text-sm font-Nunito py-2.5 px-4 rounded-xl duration-200 flex justify-between items-center group cursor-pointer text-left ${
                           selectedCategory === cat.name
-                            ? "bg-white/20 text-white"
-                            : "bg-white text-[#80B500] group-hover:bg-white/20 group-hover:text-white"
+                            ? "bg-[#80B500] text-white shadow-md"
+                            : "bg-gray-50 text-[#5C727D] hover:text-white hover:bg-[#80B500]"
                         }`}
                       >
-                        ({cat.count})
-                      </span>
-                    </button>
-                  ))}
+                        <span>{cat.name}</span>
+                        <span
+                          className={`text-xs px-2 py-0.5 rounded-full font-bold ${
+                            selectedCategory === cat.name
+                              ? "bg-white/20 text-white"
+                              : "bg-white text-[#80B500] group-hover:bg-white/20 group-hover:text-white"
+                          }`}
+                        >
+                          ({cat.count})
+                        </span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </Container>
-    </section>
+        </Container>
+      </section>
+    </>
   );
 };
 
