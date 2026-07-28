@@ -28,7 +28,6 @@ const Banner = () => {
   useEffect(() => {
     const fetchBannerProducts = async () => {
       try {
-        // Fetching from the groceries category endpoint where vegetables are typically located
         const { data } = await axios.get(
           "https://dummyjson.com/products/category/groceries",
         );
