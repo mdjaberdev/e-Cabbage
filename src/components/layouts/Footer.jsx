@@ -119,12 +119,15 @@ const Footer = () => {
                 space-y-2
               "
               >
-                <li>About</li>
+                <li>
+                  <Link to={"/about"}>About</Link>
+                </li>
                 <li>News</li>
                 <li>Partners</li>
                 <li>Room Details</li>
                 <li>Gallery</li>
-                <li>Contacts</li>
+
+                <Link to={"/contact"}>Contacts</Link>
               </ul>
             </div>
 

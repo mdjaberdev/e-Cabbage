@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import { FaCircleChevronRight, FaRegHeart, FaHeart } from "react-icons/fa6";
 import { LuShoppingCart } from "react-icons/lu";
@@ -13,7 +14,7 @@ import Container from "../common/Container";
 import Images from "../common/Images";
 import Badge from "../common/Badge";
 import { useCart } from "../../context/CartContext";
-import { useWishlist } from "../../context/WishlistContext"; // Wishlist context import
+import { useWishlist } from "../../context/WishlistContext";
 
 // ================= Product Card =================
 
@@ -21,15 +22,16 @@ const ProductCard = ({ item, onZoom }) => {
   const { addToCart } = useCart();
   const { wishlistItems, toggleWishlist } = useWishlist();
 
-  // Check if item is already in wishlist
   const isLoved = wishlistItems.some((wItem) => wItem.id === item.id);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     const productToAdd = {
       id: item.id,
       productTitle: item.title,
       productPrice: `$${item.price.toFixed(2)}`,
-      productImg: item.thumbnail, // wishlist-er sathe match korar jonno productImg use kora holo
+      productImg: item.thumbnail,
       thumbnail: item.thumbnail,
       quantity: 1,
     };
@@ -39,7 +41,9 @@ const ProductCard = ({ item, onZoom }) => {
     }
   };
 
-  const handleToggleWishlist = () => {
+  const handleToggleWishlist = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     const productToWishlist = {
       id: item.id,
       productTitle: item.title,
@@ -51,163 +55,186 @@ const ProductCard = ({ item, onZoom }) => {
     toggleWishlist(productToWishlist);
   };
 
+  const handleZoomClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onZoom(item);
+  };
+
   return (
-    <div
+    <Link
+      to={`/product/${item.id}`}
       className="
         bg-white
         border
         border-[#A6A6C7]
         relative
         group
-        p-2
+        p-4
         w-full
         sm:w-[48%]
         lg:w-[23%]
+        flex
+        col
+        flex-col
+        justify-between
+        cursor-pointer
+        transition-all
+        duration-300
+        hover:border-[#80B500]/50
       "
     >
-      <Images
-        srcImg={item.thumbnail}
-        className="
-          w-full
-          h-48
-          object-contain
-        "
-      />
-
       <div>
-        <h4
-          className="
-            text-[#647589]
-            text-[11px]
-            font-Rubik
-            mt-2
-            capitalize
-          "
-        >
-          {item.category}
-        </h4>
+        <div className="relative w-full h-48 bg-gray-50 overflow-hidden flex items-center justify-center">
+          <Images
+            srcImg={item.thumbnail}
+            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+          />
 
-        <h3
-          className="
-            text-Primary
-            text-base
-            font-Inter
-            py-2
-            truncate
-          "
-        >
-          {item.title}
-        </h3>
+          {item.discountPercentage > 0 && (
+            <Badge
+              className="
+                absolute
+                top-2
+                right-2
+                z-10
+                rounded-tl-[10px]
+                rounded-br-[10px]
+              "
+              badgeTxt={`-${Math.round(item.discountPercentage)}%`}
+            />
+          )}
 
-        <div className="flex items-center gap-x-3">
-          <h4
+          {/* Hover Buttons */}
+          <div
             className="
-              text-[#283C54]
-              text-sm
-              font-Nunito
+              opacity-0
+              group-hover:opacity-100
+              duration-300
+              absolute
+              inset-0
+              bg-black/10
+              flex
+              items-center
+              justify-center
+              gap-x-3
             "
           >
-            ${item.price.toFixed(2)}
+            {/* Cart */}
+            <div
+              onClick={handleAddToCart}
+              className="
+                translate-y-4
+                group-hover:translate-y-0
+                p-3
+                bg-white
+                text-[#80B500]
+                hover:bg-[#80B500]
+                hover:text-white
+                duration-200
+                rounded-full
+                shadow-md
+                cursor-pointer
+              "
+            >
+              <LuShoppingCart size={18} />
+            </div>
+
+            {/* Wishlist */}
+            <div
+              onClick={handleToggleWishlist}
+              className={`
+                translate-y-4
+                group-hover:translate-y-0
+                delay-75
+                p-3
+                bg-white
+                rounded-full
+                shadow-md
+                cursor-pointer
+                duration-200
+                ${
+                  isLoved
+                    ? "text-red-500 hover:bg-red-500 hover:text-white"
+                    : "text-[#80B500] hover:bg-[#80B500] hover:text-white"
+                }
+              `}
+            >
+              {isLoved ? <FaHeart size={18} /> : <FaRegHeart size={18} />}
+            </div>
+
+            {/* Zoom */}
+            <div
+              onClick={handleZoomClick}
+              className="
+                translate-y-4
+                group-hover:translate-y-0
+                delay-150
+                p-3
+                bg-white
+                text-[#80B500]
+                hover:bg-[#80B500]
+                hover:text-white
+                duration-200
+                rounded-full
+                shadow-md
+                cursor-pointer
+              "
+            >
+              <AiOutlineZoomIn size={18} />
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-3">
+          <h4
+            className="
+              text-[#647589]
+              text-[11px]
+              font-Rubik
+              capitalize
+            "
+          >
+            {item.category}
           </h4>
 
-          <div className="flex gap-x-1">
-            <Images srcImg={star} className="w-[13px] h-[13px]" />
-            <Images srcImg={star} className="w-[13px] h-[13px]" />
-            <Images srcImg={star} className="w-[13px] h-[13px]" />
-            <Images srcImg={star} className="w-[13px] h-[13px]" />
-            <Images srcImg={stardark} className="w-[13px] h-[13px]" />
+          <h3
+            className="
+              text-Primary
+              text-base
+              font-Inter
+              py-1
+              truncate
+              group-hover:text-[#80B500]
+              transition-colors
+            "
+          >
+            {item.title}
+          </h3>
+
+          <div className="flex items-center gap-x-3 mt-1">
+            <h4
+              className="
+                text-[#283C54]
+                text-sm
+                font-bold
+                font-Nunito
+              "
+            >
+              ${item.price.toFixed(2)}
+            </h4>
+
+            <div className="flex gap-x-1">
+              <Images srcImg={star} className="w-[13px] h-[13px]" />
+              <Images srcImg={star} className="w-[13px] h-[13px]" />
+              <Images srcImg={star} className="w-[13px] h-[13px]" />
+              <Images srcImg={star} className="w-[13px] h-[13px]" />
+              <Images srcImg={stardark} className="w-[13px] h-[13px]" />
+            </div>
           </div>
         </div>
       </div>
-
-      {item.discountPercentage > 0 && (
-        <Badge
-          className="
-            -mr-1
-            top-5
-            rounded-tl-[10px]
-            rounded-br-[10px]
-          "
-          badgeTxt={`-${Math.round(item.discountPercentage)}%`}
-        />
-      )}
-
-      {/* Hover Buttons */}
-      <div
-        className="
-          opacity-0
-          group-hover:opacity-100
-          duration-300
-          absolute
-          bottom-1/2
-          left-1/2
-          -translate-x-1/2
-          flex
-          gap-x-2
-        "
-      >
-        {/* Cart */}
-        <div
-          onClick={handleAddToCart}
-          className="
-            translate-y-10
-            group-hover:translate-y-0
-            p-3
-            bg-white
-            text-[#80B500]
-            hover:bg-[#80B500]
-            hover:text-white
-            duration-200
-            rounded-full
-            cursor-pointer
-          "
-        >
-          <LuShoppingCart />
-        </div>
-
-        {/* Wishlist */}
-        <div
-          onClick={handleToggleWishlist}
-          className={`
-            translate-y-10
-            group-hover:translate-y-0
-            delay-100
-            p-3
-            bg-white
-            rounded-full
-            cursor-pointer
-            duration-200
-            ${
-              isLoved
-                ? "text-red-500 hover:bg-red-500 hover:text-white"
-                : "text-[#80B500] hover:bg-[#80B500] hover:text-white"
-            }
-          `}
-        >
-          {isLoved ? <FaHeart /> : <FaRegHeart />}
-        </div>
-
-        {/* Zoom */}
-        <div
-          onClick={() => onZoom(item)}
-          className="
-            translate-y-10
-            group-hover:translate-y-0
-            delay-200
-            p-3
-            bg-white
-            text-[#80B500]
-            hover:bg-[#80B500]
-            hover:text-white
-            duration-200
-            rounded-full
-            cursor-pointer
-          "
-        >
-          <AiOutlineZoomIn />
-        </div>
-      </div>
-    </div>
+    </Link>
   );
 };
 
@@ -301,7 +328,7 @@ const TrendingProducts = () => {
                 p-6
                 w-full
                 sm:w-[48%]
-                lg:w-[25%]
+                lg:w-[23%]
                 flex
                 flex-col
                 justify-center
@@ -379,7 +406,7 @@ const TrendingProducts = () => {
                 relative
                 w-full
                 sm:w-[48%]
-                lg:w-[25%]
+                lg:w-[23%]
                 overflow-hidden
                 min-h-[233px]
               "
@@ -514,17 +541,25 @@ const TrendingProducts = () => {
                 </div>
 
                 {/* Modal Action Button */}
-                <div className="mt-6 pt-4 border-t border-gray-100">
+                <div className="mt-6 pt-4 border-t border-gray-100 flex gap-3">
                   <button
                     onClick={() => {
                       handleModalAddToCart(zoomedProduct);
                       setZoomedProduct(null);
                     }}
-                    className="w-full flex items-center justify-center gap-2 bg-[#80B500] hover:bg-[#6e9c00] text-white py-3 rounded-xl font-bold transition-colors duration-200 cursor-pointer shadow-md"
+                    className="flex-1 flex items-center justify-center gap-2 bg-[#80B500] hover:bg-[#6e9c00] text-white py-3 rounded-xl font-bold transition-colors duration-200 cursor-pointer shadow-md"
                   >
                     <LuShoppingCart size={18} />
                     Add to Cart
                   </button>
+
+                  <Link
+                    to={`/product/${zoomedProduct.id}`}
+                    onClick={() => setZoomedProduct(null)}
+                    className="px-4 flex items-center justify-center border border-gray-300 hover:border-[#80B500] text-gray-700 hover:text-[#80B500] py-3 rounded-xl font-bold transition-colors duration-200"
+                  >
+                    View Details
+                  </Link>
                 </div>
               </div>
             </div>

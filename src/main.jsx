@@ -4,16 +4,16 @@ import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { CartProvider } from "./context/CartContext.jsx";
-
+import { HelmetProvider } from "react-helmet-async"; 
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
-      <CartProvider>
-        {" "}
-        {/* ২. এখানে CartProvider দিয়ে র‍্যাপ করুন */}
-        <App />
-      </CartProvider>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <CartProvider>
+          <App />
+        </CartProvider>
+      </BrowserRouter>
+    </HelmetProvider>
   </StrictMode>,
 );
