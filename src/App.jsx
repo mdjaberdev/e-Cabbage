@@ -1,41 +1,46 @@
 import { Route, Routes } from "react-router-dom";
+import { lazy, Suspense } from "react";
 import "./App.css";
+
 import RootLayout from "./components/layouts/RootLayout";
-import Home from "./components/pages/Home";
-import About from "./components/pages/About";
-import Shop from "./components/pages/Shop";
-import Pages from "./components/pages/Pages";
-import Contacts from "./components/pages/Contacts";
-import Loging from "./components/pages/Loging";
-import Blog from "./components/pages/Blog";
-import Cart from "./components/pages/Cart";
-import Checkout from "./components/pages/Checkout";
 import FloatingCart from "./components/common/FloatingCart";
 import { SearchProvider } from "./context/SearchContext";
-import ProductDetails from "./components/common/ProductDetails";
 import { WishlistProvider } from "./context/WishlistContext";
-import Wishlist from "./components/pages/Wishlist";
+import Loading from "./components/common/Loading";
+const Home = lazy(() => import("./components/pages/Home"));
+const About = lazy(() => import("./components/pages/About"));
+const Shop = lazy(() => import("./components/pages/Shop"));
+const Pages = lazy(() => import("./components/pages/Pages"));
+const Blog = lazy(() => import("./components/pages/Blog"));
+const Contacts = lazy(() => import("./components/pages/Contacts"));
+const Loging = lazy(() => import("./components/pages/Loging"));
+const Cart = lazy(() => import("./components/pages/Cart"));
+const Checkout = lazy(() => import("./components/pages/Checkout"));
+const ProductDetails = lazy(() => import("./components/pages/ProductDetails"));
+const Wishlist = lazy(() => import("./components/pages/Wishlist"));
 
 function App() {
   return (
     <SearchProvider>
       <WishlistProvider>
         <FloatingCart />
-        <Routes>
-          <Route path="/" element={<RootLayout />}>
-            <Route index element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/pages" element={<Pages />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/Contact" element={<Contacts />} />
-            <Route path="/login" element={<Loging />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/product/:id" element={<ProductDetails />} />
-            <Route path="/wishlist" element={<Wishlist />} />
-          </Route>
-        </Routes>
+        <Suspense fallback={<Loading />}>
+          <Routes>
+            <Route path="/" element={<RootLayout />}>
+              <Route index element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/pages" element={<Pages />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/contact" element={<Contacts />} />
+              <Route path="/login" element={<Loging />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/product/:id" element={<ProductDetails />} />
+              <Route path="/wishlist" element={<Wishlist />} />
+            </Route>
+          </Routes>
+        </Suspense>
       </WishlistProvider>
     </SearchProvider>
   );
