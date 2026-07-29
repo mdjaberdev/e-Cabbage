@@ -18,6 +18,7 @@ const Cart = lazy(() => import("./components/pages/Cart"));
 const Checkout = lazy(() => import("./components/pages/Checkout"));
 const ProductDetails = lazy(() => import("./components/pages/ProductDetails"));
 const Wishlist = lazy(() => import("./components/pages/Wishlist"));
+const Error = lazy(() => import("./components/pages/Error"));
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
               <Route path="/product/:id" element={<ProductDetails />} />
               <Route path="/wishlist" element={<Wishlist />} />
             </Route>
+            <Route path="*" element={<Error />} />
           </Routes>
         </Suspense>
       </WishlistProvider>
