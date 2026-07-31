@@ -3,10 +3,10 @@ import Images from "./Images";
 import productStar from "/src/assets/productsStat.png";
 import productStarDrk from "/src/assets/productStardrak.png";
 import { LuShoppingCart } from "react-icons/lu";
-import { FaRegHeart, FaHeart } from "react-icons/fa6";
+import { FaRegHeart, FaHeart, FaCartShopping } from "react-icons/fa6"; // FaCartShopping বা প্রয়োজনমতো আইকন
 import { AiOutlineZoomIn, AiOutlineClose } from "react-icons/ai";
 import { useCart } from "../../context/CartContext";
-import { useWishlist } from "../../context/WishlistContext"; 
+import { useWishlist } from "../../context/WishlistContext";
 import { Link } from "react-router-dom";
 
 const Products = ({
@@ -19,9 +19,11 @@ const Products = ({
   stock,
 }) => {
   const [isZoomed, setIsZoomed] = useState(false);
-  const { addToCart } = useCart();
+  const { cartItems, addToCart } = useCart();
   const { wishlistItems, toggleWishlist } = useWishlist();
+
   const isLoved = wishlistItems.some((item) => item.id === id);
+  const isInCart = cartItems.some((item) => item.id === id); // কার্টে আছে কি না চেক করার জন্য
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -71,7 +73,11 @@ const Products = ({
                   });
                 }}
                 aria-label="Add to cart"
-                className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300 p-3.5 bg-white text-[#80B500] hover:bg-[#80B500] hover:text-white rounded-full shadow-lg cursor-pointer"
+                className={`translate-y-4 group-hover:translate-y-0 transition-all duration-300 p-3.5 rounded-full shadow-lg cursor-pointer ${
+                  isInCart
+                    ? "bg-[#80B500] text-white hover:bg-[#6e9c00]"
+                    : "bg-white text-[#80B500] hover:bg-[#80B500] hover:text-white"
+                }`}
               >
                 <LuShoppingCart size={18} />
               </button>
@@ -98,6 +104,7 @@ const Products = ({
               >
                 {isLoved ? <FaHeart size={18} /> : <FaRegHeart size={18} />}
               </button>
+
               <button
                 onClick={(e) => {
                   e.preventDefault();
@@ -199,9 +206,14 @@ const Products = ({
                   });
                   setIsZoomed(false);
                 }}
-                className="mt-6 w-full bg-[#80B500] text-white py-3.5 px-8 rounded-full font-semibold hover:bg-[#6e9c00] transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                className={`mt-6 w-full py-3.5 px-8 rounded-full font-semibold transition-colors flex items-center justify-center gap-2 cursor-pointer ${
+                  isInCart
+                    ? "bg-[#6e9c00] text-white"
+                    : "bg-[#80B500] text-white hover:bg-[#6e9c00]"
+                }`}
               >
-                <LuShoppingCart /> Add to Cart
+                <LuShoppingCart />{" "}
+                {isInCart ? "Already in Cart (Add More)" : "Add to Cart"}
               </button>
             </div>
           </div>
