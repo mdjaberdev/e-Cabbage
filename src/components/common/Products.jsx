@@ -3,7 +3,7 @@ import Images from "./Images";
 import productStar from "/src/assets/productsStat.png";
 import productStarDrk from "/src/assets/productStardrak.png";
 import { LuShoppingCart } from "react-icons/lu";
-import { FaRegHeart, FaHeart, FaCartShopping } from "react-icons/fa6"; // FaCartShopping বা প্রয়োজনমতো আইকন
+import { FaRegHeart, FaHeart } from "react-icons/fa6";
 import { AiOutlineZoomIn, AiOutlineClose } from "react-icons/ai";
 import { useCart } from "../../context/CartContext";
 import { useWishlist } from "../../context/WishlistContext";
@@ -23,7 +23,7 @@ const Products = ({
   const { wishlistItems, toggleWishlist } = useWishlist();
 
   const isLoved = wishlistItems.some((item) => item.id === id);
-  const isInCart = cartItems.some((item) => item.id === id); // কার্টে আছে কি না চেক করার জন্য
+  const isInCart = cartItems.some((item) => item.id === id);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -81,8 +81,6 @@ const Products = ({
               >
                 <LuShoppingCart size={18} />
               </button>
-
-              {/* Wishlist Button */}
               <button
                 onClick={(e) => {
                   e.preventDefault();
@@ -96,15 +94,16 @@ const Products = ({
                   });
                 }}
                 aria-label="Add to wishlist"
-                className={`translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75 p-3.5 bg-white rounded-full shadow-lg cursor-pointer ${
+                className={`translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75 p-3.5 rounded-full shadow-lg cursor-pointer ${
                   isLoved
-                    ? "text-red-500 hover:bg-red-500 hover:text-white"
-                    : "text-gray-700 hover:bg-[#80B500] hover:text-white"
+                    ? "bg-[#80B500] text-white hover:bg-[#6e9c00]"
+                    : "bg-white text-[#80B500] hover:bg-[#80B500] hover:text-white"
                 }`}
               >
                 {isLoved ? <FaHeart size={18} /> : <FaRegHeart size={18} />}
               </button>
 
+              {/* Quick View Button */}
               <button
                 onClick={(e) => {
                   e.preventDefault();
@@ -112,7 +111,7 @@ const Products = ({
                   setIsZoomed(true);
                 }}
                 aria-label="Quick view"
-                className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-150 p-3.5 bg-white text-gray-700 hover:bg-[#80B500] hover:text-white rounded-full shadow-lg cursor-pointer"
+                className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-150 p-3.5 bg-white text-[#80B500] hover:bg-[#80B500] hover:text-white rounded-full shadow-lg cursor-pointer"
               >
                 <AiOutlineZoomIn size={18} />
               </button>
