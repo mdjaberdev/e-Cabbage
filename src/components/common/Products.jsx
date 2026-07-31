@@ -17,8 +17,9 @@ const Products = ({
   productTitle,
   productImg,
   stock,
+  itemData,
 }) => {
-  const [isZoomed, setIsZoomed] = useState(false);
+  const [zoomedProduct, setZoomedProduct] = useState(null);
   const { cartItems, addToCart } = useCart();
   const { wishlistItems, toggleWishlist } = useWishlist();
 
@@ -28,16 +29,32 @@ const Products = ({
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
-        setIsZoomed(false);
+        setZoomedProduct(null);
       }
     };
-    if (isZoomed) {
+    if (zoomedProduct) {
       window.addEventListener("keydown", handleKeyDown);
     }
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isZoomed]);
+  }, [zoomedProduct]);
+
+  const handleModalAddToCart = (product) => {
+    const productToAdd = {
+      id: product.id || id,
+      productTitle: product.title || productTitle,
+      productPrice: product.price
+        ? `$${product.price.toFixed(2)}`
+        : productPrice,
+      productImg: product.thumbnail || productImg,
+      thumbnail: product.thumbnail || productImg,
+      quantity: 1,
+    };
+    if (addToCart) {
+      addToCart(productToAdd);
+    }
+  };
 
   const hasReview =
     productReview &&
@@ -81,6 +98,8 @@ const Products = ({
               >
                 <LuShoppingCart size={18} />
               </button>
+
+              {/* Wishlist Button */}
               <button
                 onClick={(e) => {
                   e.preventDefault();
@@ -108,7 +127,16 @@ const Products = ({
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
-                  setIsZoomed(true);
+                  setZoomedProduct(
+                    itemData || {
+                      id,
+                      title: productTitle,
+                      price: parseFloat(productPrice.replace("$", "")) || 0,
+                      thumbnail: productImg,
+                      category: stock || "Organic",
+                      description: productTitle,
+                    },
+                  );
                 }}
                 aria-label="Quick view"
                 className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-150 p-3.5 bg-white text-[#80B500] hover:bg-[#80B500] hover:text-white rounded-full shadow-lg cursor-pointer"
@@ -155,65 +183,103 @@ const Products = ({
         </div>
       </Link>
 
-      {/* Zoom Modal */}
-      {isZoomed && (
+      {/* Unified Zoom Modal */}
+      {zoomedProduct && (
         <div
-          onClick={() => setIsZoomed(false)}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-md p-4 transition-all"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+          onClick={() => setZoomedProduct(null)}
         >
           <div
+            className="relative w-full max-w-3xl bg-white rounded-2xl p-6 md:p-8 shadow-2xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
-            className="relative max-w-3xl w-full bg-white rounded-3xl p-8 shadow-2xl flex flex-col md:flex-row gap-8"
           >
+            {/* Close Button */}
             <button
-              onClick={() => setIsZoomed(false)}
-              className="absolute -top-3 -right-3 bg-white text-gray-600 p-2.5 rounded-full shadow-md hover:bg-gray-100 duration-200 cursor-pointer"
+              onClick={() => setZoomedProduct(null)}
+              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 text-gray-700 flex items-center justify-center hover:bg-red-500 hover:text-white transition-colors duration-200 cursor-pointer z-10"
             >
               <AiOutlineClose size={20} />
             </button>
 
-            <div className="w-full md:w-1/2 aspect-square flex items-center justify-center bg-gray-50 rounded-2xl p-4">
-              <Images
-                srcImg={productImg}
-                className="max-h-full object-contain mix-blend-multiply"
-              />
-            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+              {/* Image Section */}
+              <div className="bg-gray-50 p-6 rounded-xl flex justify-center items-center h-[300px]">
+                <Images
+                  srcImg={zoomedProduct.thumbnail}
+                  className="max-h-full object-contain drop-shadow-md"
+                />
+              </div>
 
-            <div className="w-full md:w-1/2 flex flex-col text-left justify-center">
-              <h3 className="text-2xl font-bold font-Inter text-gray-950">
-                {productTitle}
-              </h3>
-              <p className="text-3xl font-bold font-Nunito text-[#80B500] mt-3">
-                {productPrice}
-              </p>
+              {/* Product Info Section */}
+              <div className="flex flex-col justify-between text-left">
+                <div>
+                  <span className="text-[#80B500] text-xs font-bold uppercase tracking-wider bg-green-50 px-2.5 py-1 rounded-full font-Nunito">
+                    {zoomedProduct.category}
+                  </span>
 
-              {stock !== undefined && (
-                <p className="text-xs text-gray-500 mt-2">
-                  Available Stock:{" "}
-                  <span className="font-bold text-gray-700">{stock}</span>
-                </p>
-              )}
+                  <h3 className="text-2xl font-bold text-Primary mt-3 font-Inter">
+                    {zoomedProduct.title}
+                  </h3>
 
-              <button
-                onClick={() => {
-                  addToCart({
-                    id,
-                    productTitle,
-                    productPrice,
-                    productImg,
-                    stock,
-                  });
-                  setIsZoomed(false);
-                }}
-                className={`mt-6 w-full py-3.5 px-8 rounded-full font-semibold transition-colors flex items-center justify-center gap-2 cursor-pointer ${
-                  isInCart
-                    ? "bg-[#6e9c00] text-white"
-                    : "bg-[#80B500] text-white hover:bg-[#6e9c00]"
-                }`}
-              >
-                <LuShoppingCart />{" "}
-                {isInCart ? "Already in Cart (Add More)" : "Add to Cart"}
-              </button>
+                  <div className="flex items-center gap-x-2 my-2.5">
+                    <div className="flex gap-x-1">
+                      <Images
+                        srcImg={productStar}
+                        className="w-[14px] h-[14px]"
+                      />
+                      <Images
+                        srcImg={productStar}
+                        className="w-[14px] h-[14px]"
+                      />
+                      <Images
+                        srcImg={productStar}
+                        className="w-[14px] h-[14px]"
+                      />
+                      <Images
+                        srcImg={productStar}
+                        className="w-[14px] h-[14px]"
+                      />
+                      <Images
+                        srcImg={productStarDrk}
+                        className="w-[14px] h-[14px]"
+                      />
+                    </div>
+                    <span className="text-xs text-gray-400 font-Nunito">
+                      (4.0)
+                    </span>
+                  </div>
+
+                  <p className="text-2xl font-extrabold text-[#80B500] my-2 font-Nunito">
+                    ${zoomedProduct.price.toFixed(2)}
+                  </p>
+
+                  <p className="text-sm text-[#647589] line-clamp-3 mt-2 leading-relaxed font-Inter">
+                    {zoomedProduct.description}
+                  </p>
+                </div>
+
+                {/* Modal Action Buttons */}
+                <div className="mt-6 pt-4 border-t border-gray-100 flex gap-3">
+                  <button
+                    onClick={() => {
+                      handleModalAddToCart(zoomedProduct);
+                      setZoomedProduct(null);
+                    }}
+                    className="flex-1 flex items-center justify-center gap-2 bg-[#80B500] hover:bg-[#6e9c00] text-white py-3 rounded-xl font-bold transition-colors duration-200 cursor-pointer shadow-md"
+                  >
+                    <LuShoppingCart size={18} />
+                    Add to Cart
+                  </button>
+
+                  <Link
+                    to={`/product/${zoomedProduct.id}`}
+                    onClick={() => setZoomedProduct(null)}
+                    className="px-4 flex items-center justify-center border border-gray-300 hover:border-[#80B500] text-gray-700 hover:text-[#80B500] py-3 rounded-xl font-bold transition-colors duration-200"
+                  >
+                    View Details
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -19,10 +19,11 @@ import { useWishlist } from "../../context/WishlistContext";
 // ================= Product Card =================
 
 const ProductCard = ({ item, onZoom }) => {
-  const { addToCart } = useCart();
+  const { cartItems, addToCart } = useCart();
   const { wishlistItems, toggleWishlist } = useWishlist();
 
   const isLoved = wishlistItems.some((wItem) => wItem.id === item.id);
+  const isInCart = cartItems.some((cItem) => cItem.id === item.id);
 
   const handleAddToCart = (e) => {
     e.preventDefault();
@@ -75,7 +76,6 @@ const ProductCard = ({ item, onZoom }) => {
         sm:w-[48%]
         lg:w-[23%]
         flex
-        col
         flex-col
         justify-between
         cursor-pointer
@@ -120,27 +120,27 @@ const ProductCard = ({ item, onZoom }) => {
               gap-x-3
             "
           >
-            {/* Cart */}
             <div
               onClick={handleAddToCart}
-              className="
+              className={`
                 translate-y-4
                 group-hover:translate-y-0
                 p-3
-                bg-white
-                text-[#80B500]
-                hover:bg-[#80B500]
-                hover:text-white
-                duration-200
                 rounded-full
                 shadow-md
                 cursor-pointer
-              "
+                duration-200
+                ${
+                  isInCart
+                    ? "bg-[#80B500] text-white hover:bg-[#6e9c00]"
+                    : "bg-white text-[#80B500] hover:bg-[#80B500] hover:text-white"
+                }
+              `}
             >
               <LuShoppingCart size={18} />
             </div>
 
-            {/* Wishlist */}
+            {/* Wishlist Button */}
             <div
               onClick={handleToggleWishlist}
               className={`
@@ -148,22 +148,21 @@ const ProductCard = ({ item, onZoom }) => {
                 group-hover:translate-y-0
                 delay-75
                 p-3
-                bg-white
                 rounded-full
                 shadow-md
                 cursor-pointer
                 duration-200
                 ${
                   isLoved
-                    ? "text-red-500 hover:bg-red-500 hover:text-white"
-                    : "text-[#80B500] hover:bg-[#80B500] hover:text-white"
+                    ? "bg-[#80B500] text-white hover:bg-[#6e9c00]"
+                    : "bg-white text-[#80B500] hover:bg-[#80B500] hover:text-white"
                 }
               `}
             >
               {isLoved ? <FaHeart size={18} /> : <FaRegHeart size={18} />}
             </div>
 
-            {/* Zoom */}
+            {/* Zoom Button */}
             <div
               onClick={handleZoomClick}
               className="
@@ -483,6 +482,7 @@ const TrendingProducts = () => {
         </Container>
       </div>
 
+      {/* Unified Zoom Modal */}
       {zoomedProduct && (
         <div
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
@@ -495,14 +495,14 @@ const TrendingProducts = () => {
             {/* Close Button */}
             <button
               onClick={() => setZoomedProduct(null)}
-              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 text-gray-700 flex items-center justify-center hover:bg-red-500 hover:text-white transition-colors duration-200 cursor-pointer"
+              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 text-gray-700 flex items-center justify-center hover:bg-red-500 hover:text-white transition-colors duration-200 cursor-pointer z-10"
             >
               <AiOutlineClose size={20} />
             </button>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
               {/* Image Section */}
-              <div className="bg-gray-50 p-4 rounded-xl flex justify-center items-center h-[280px]">
+              <div className="bg-gray-50 p-6 rounded-xl flex justify-center items-center h-[300px]">
                 <Images
                   srcImg={zoomedProduct.thumbnail}
                   className="max-h-full object-contain drop-shadow-md"
@@ -510,17 +510,17 @@ const TrendingProducts = () => {
               </div>
 
               {/* Product Info Section */}
-              <div className="flex flex-col justify-between">
+              <div className="flex flex-col justify-between text-left">
                 <div>
-                  <span className="text-[#80B500] text-xs font-bold uppercase tracking-wider bg-green-50 px-2.5 py-1 rounded-full">
+                  <span className="text-[#80B500] text-xs font-bold uppercase tracking-wider bg-green-50 px-2.5 py-1 rounded-full font-Nunito">
                     {zoomedProduct.category}
                   </span>
 
-                  <h3 className="text-2xl font-bold text-Primary mt-3">
+                  <h3 className="text-2xl font-bold text-Primary mt-3 font-Inter">
                     {zoomedProduct.title}
                   </h3>
 
-                  <div className="flex items-center gap-x-2 my-2">
+                  <div className="flex items-center gap-x-2 my-2.5">
                     <div className="flex gap-x-1">
                       <Images srcImg={star} className="w-[14px] h-[14px]" />
                       <Images srcImg={star} className="w-[14px] h-[14px]" />
@@ -528,19 +528,21 @@ const TrendingProducts = () => {
                       <Images srcImg={star} className="w-[14px] h-[14px]" />
                       <Images srcImg={stardark} className="w-[14px] h-[14px]" />
                     </div>
-                    <span className="text-xs text-gray-400">(4.0)</span>
+                    <span className="text-xs text-gray-400 font-Nunito">
+                      (4.0)
+                    </span>
                   </div>
 
-                  <p className="text-2xl font-extrabold text-[#80B500] my-2">
+                  <p className="text-2xl font-extrabold text-[#80B500] my-2 font-Nunito">
                     ${zoomedProduct.price.toFixed(2)}
                   </p>
 
-                  <p className="text-sm text-[#647589] line-clamp-3 mt-2 leading-relaxed">
+                  <p className="text-sm text-[#647589] line-clamp-3 mt-2 leading-relaxed font-Inter">
                     {zoomedProduct.description}
                   </p>
                 </div>
 
-                {/* Modal Action Button */}
+                {/* Modal Action Buttons */}
                 <div className="mt-6 pt-4 border-t border-gray-100 flex gap-3">
                   <button
                     onClick={() => {
