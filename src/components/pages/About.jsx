@@ -12,9 +12,11 @@ import {
 } from "react-icons/fa";
 import { IoPlay } from "react-icons/io5";
 import { HiX } from "react-icons/hi";
+import { MdEco, MdLocalShipping, MdVerified } from "react-icons/md";
 import ReactModal from "react-modal";
 
 import clientTst from "/src/assets/clientTastm.png";
+import bnrLogo from "/src/assets/bannerLogo.png";
 import NextArrow from "../common/NextArrow";
 import PreveArrow from "../common/PreveArrow";
 import { Helmet } from "react-helmet-async";
@@ -159,23 +161,102 @@ const About = () => {
       </Helmet>
       <section className="overflow-hidden">
         {/* Banner Section */}
-        <div className="bg-[url('/src/assets/commonBanner.png')] bg-no-repeat bg-cover bg-center py-24 lg:py-36">
+        <div className="relative bg-[#F6F9F0] pt-12 pb-16 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-24 overflow-hidden select-none border-b border-[#80B500]/15">
+          <div className="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] bg-[#80B500]/15 rounded-full blur-[130px] pointer-events-none -z-10" />
+          <div className="absolute bottom-[-20%] left-[-10%] w-[400px] h-[400px] bg-[#E2ECD5]/70 rounded-full blur-[110px] pointer-events-none -z-10" />
+
           <Container>
-            <div>
-              <h3 className="text-Primary text-4xl sm:text-5xl font-bold font-Inter">
-                About us
-              </h3>
-              <h5 className="text-[#133344] text-base sm:text-lg font-Nunito flex items-center gap-2 mt-2">
-                <Link to="/" className="hover:text-[#80B500] transition-colors">
-                  Home
-                </Link>
-                <FaAngleRight /> About
-              </h5>
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-8">
+              <div className="w-full lg:w-[60%] text-center lg:text-left z-10">
+                <div className="inline-flex items-center gap-x-2 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full shadow-sm border border-[#80B500]/30 mb-5">
+                  <img
+                    src={bnrLogo}
+                    alt="Logo"
+                    className="w-4 h-4 object-contain"
+                  />
+                  <span className="text-[#80B500] text-xs sm:text-sm font-bold font-Nunito uppercase tracking-wider">
+                    100% Certified Organic Products
+                  </span>
+                </div>
+
+                {/* Title */}
+                <h1 className="text-3xl sm:text-5xl lg:text-6xl text-gray-900 font-Inter font-black tracking-tight leading-[1.12] mb-4">
+                  Explore Our Fresh Organic Story
+                </h1>
+
+                {/* Description */}
+                <p className="text-gray-600 text-sm sm:text-base font-Nunito max-w-[540px] mb-8 mx-auto lg:mx-0 leading-relaxed">
+                  Learn more about our mission to provide 100% natural and
+                  organic products directly from trusted local farmers to your
+                  table with ultimate care.
+                </p>
+                <div className="inline-flex items-center gap-2 text-gray-600 text-sm font-Nunito font-medium bg-white/80 backdrop-blur-sm px-5 py-2.5 rounded-full border border-gray-200/80 shadow-sm mx-auto lg:mx-0">
+                  <Link
+                    to="/"
+                    className="hover:text-[#80B500] transition-colors"
+                  >
+                    Home
+                  </Link>
+                  <FaAngleRight className="text-xs text-[#80B500]" />
+                  <span className="text-gray-900 font-bold">About Us</span>
+                </div>
+              </div>
+
+              {/* Right Feature Card  */}
+              <div className="w-full lg:w-[38%] z-10">
+                <div className="bg-white/90 backdrop-blur-xl p-6 sm:p-8 rounded-3xl shadow-xl shadow-gray-200/50 border border-white flex flex-col gap-5">
+                  <h3 className="text-gray-900 font-Inter font-bold text-lg border-b border-gray-100 pb-3">
+                    Why Shop With Us?
+                  </h3>
+
+                  <div className="flex items-center gap-4">
+                    <div className="w-11 h-11 shrink-0 rounded-2xl bg-[#F6F9F0] text-[#80B500] flex items-center justify-center text-xl shadow-sm">
+                      <MdEco />
+                    </div>
+                    <div>
+                      <h4 className="text-gray-900 font-bold text-sm font-Inter">
+                        100% Natural Harvest
+                      </h4>
+                      <p className="text-gray-500 text-xs font-Nunito">
+                        Directly sourced from trusted local farmers
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                    <div className="w-11 h-11 shrink-0 rounded-2xl bg-[#F6F9F0] text-[#80B500] flex items-center justify-center text-xl shadow-sm">
+                      <MdLocalShipping />
+                    </div>
+                    <div>
+                      <h4 className="text-gray-900 font-bold text-sm font-Inter">
+                        Express Home Delivery
+                      </h4>
+                      <p className="text-gray-500 text-xs font-Nunito">
+                        Fast and temperature-controlled shipping
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                    <div className="w-11 h-11 shrink-0 rounded-2xl bg-[#F6F9F0] text-[#80B500] flex items-center justify-center text-xl shadow-sm">
+                      <MdVerified />
+                    </div>
+                    <div>
+                      <h4 className="text-gray-900 font-bold text-sm font-Inter">
+                        Quality Guaranteed
+                      </h4>
+                      <p className="text-gray-500 text-xs font-Nunito">
+                        Strict quality checks on every order
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </Container>
         </div>
 
-        {/*  About Details Section */}
+        {/* About Details Section */}
         <div className="bg-white py-12 md:py-16 lg:py-20 overflow-hidden">
           <Container>
             <div className="flex flex-col lg:flex-row justify-between items-center gap-10 lg:gap-16">
@@ -244,7 +325,7 @@ const About = () => {
           </Container>
         </div>
 
-        {/* Interactive Video Modal Section */}
+        {/* Video Section */}
         <div className="relative bg-[#F9F4EE] py-20 sm:py-28 lg:py-36 flex items-center justify-center overflow-hidden">
           <Container className="relative z-10 w-full">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
@@ -273,7 +354,7 @@ const About = () => {
             </div>
           </Container>
 
-          {/* Video Modal Popup */}
+          {/* Video  Popup */}
           <ReactModal
             isOpen={modalIsOpen}
             onRequestClose={() => setModalIsOpen(false)}
@@ -298,7 +379,7 @@ const About = () => {
           </ReactModal>
         </div>
 
-        {/*  Team Member Section */}
+        {/* Team Member Section */}
         <Container>
           <div className="my-20 lg:my-28 text-center">
             <span className="text-[#80B500] text-sm font-Nunito font-bold uppercase tracking-widest bg-[#F4F9EB] px-4 py-1.5 rounded-full inline-block mb-3">
@@ -350,7 +431,7 @@ const About = () => {
           </div>
         </Container>
 
-        {/* Client Testimonial Section */}
+        {/* Testimonial Section */}
         <div className="py-16 sm:py-20 bg-[#f7f5eb]">
           <Container>
             <div className="text-center max-w-2xl mx-auto mb-12 px-4">
