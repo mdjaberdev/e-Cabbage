@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Container from "../common/Container";
-import { FaAngleRight } from "react-icons/fa";
-import { useCart } from "../../context/CartContext"; 
+import { FaAngleRight, FaStar } from "react-icons/fa";
+import { FaRegHeart, FaHeart } from "react-icons/fa6";
+import { LuShoppingCart } from "react-icons/lu";
+import { useCart } from "../../context/CartContext";
+import { useWishlist } from "../../context/WishlistContext";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -12,7 +15,15 @@ const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState("");
 
-  const { addToCart } = useCart(); 
+  const { cartItems, addToCart } = useCart();
+  const { wishlistItems, toggleWishlist } = useWishlist();
+
+  const isLoved = product
+    ? wishlistItems.some((item) => item.id === product.id)
+    : false;
+  const isInCart = product
+    ? cartItems.some((item) => item.id === product.id)
+    : false;
 
   useEffect(() => {
     const fetchSingleProduct = async () => {
@@ -48,6 +59,17 @@ const ProductDetails = () => {
     setQuantity(1);
   };
 
+  const handleToggleWishlist = () => {
+    if (!product) return;
+    toggleWishlist({
+      id: product.id,
+      productTitle: product.title,
+      productPrice: `$${product.price}`,
+      productImg: product.thumbnail,
+      stock: product.stock,
+    });
+  };
+
   if (loading) {
     return (
       <Container>
@@ -81,7 +103,8 @@ const ProductDetails = () => {
               <Link to="/" className="hover:text-[#80B500] transition-colors">
                 Home
               </Link>{" "}
-              <FaAngleRight /> {product.title}
+              <FaAngleRight />{" "}
+              <span className="truncate max-w-[250px]">{product.title}</span>
             </h5>
           </div>
         </Container>
@@ -121,9 +144,25 @@ const ProductDetails = () => {
             )}
           </div>
           <div className="flex flex-col gap-6">
+            {product.category && (
+              <span className="text-xs uppercase tracking-widest text-[#80B500] font-bold bg-[#80B500]/10 px-3 py-1 rounded-full w-fit">
+                {product.category}
+              </span>
+            )}
+
             <h1 className="text-3xl lg:text-4xl font-bold text-[#0A2C3D]">
               {product.title}
             </h1>
+
+            {product.rating && (
+              <div className="flex items-center text-amber-400 gap-1">
+                <FaStar />
+                <span className="text-sm font-bold text-gray-800">
+                  {product.rating}
+                </span>
+              </div>
+            )}
+
             <p className="text-3xl font-bold text-[#80B500]">
               ${product.price}
             </p>
@@ -153,20 +192,54 @@ const ProductDetails = () => {
                   {quantity}
                 </span>
                 <button
-                  onClick={() => setQuantity((prev) => prev + 1)}
-                  className="px-4 py-2 bg-gray-100 text-lg font-bold hover:bg-gray-200 duration-200 cursor-pointer"
+                  onClick={() => {
+                    if (
+                      product.stock !== undefined &&
+                      quantity >= product.stock
+                    ) {
+                      return;
+                    }
+                    setQuantity((prev) => prev + 1);
+                  }}
+                  disabled={
+                    product.stock !== undefined && quantity >= product.stock
+                  }
+                  className={`px-4 py-2 text-lg font-bold duration-200 ${
+                    product.stock !== undefined && quantity >= product.stock
+                      ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                      : "bg-gray-100 text-[#0A2C3D] hover:bg-gray-200 cursor-pointer"
+                  }`}
                 >
                   +
                 </button>
               </div>
             </div>
 
-            <button
-              onClick={handleAddToCart}
-              className="mt-2 bg-[#80B500] text-white py-4 px-10 rounded-full font-bold text-lg hover:bg-[#6da000] duration-300 w-fit cursor-pointer shadow-lg shadow-[#80B500]/30"
-            >
-              Add to Cart
-            </button>
+            <div className="flex items-center gap-4 mt-2">
+              <button
+                onClick={handleAddToCart}
+                className={`py-4 px-10 rounded-full font-bold text-lg duration-300 cursor-pointer shadow-md flex items-center justify-center gap-2.5 ${
+                  isInCart
+                    ? "bg-[#80B500] text-white hover:bg-[#6e9c00]"
+                    : "bg-gray-100 text-[#80B500] hover:bg-[#80B500] hover:text-white"
+                }`}
+              >
+                <LuShoppingCart size={22} />
+                {isInCart ? "Added to Cart" : "Add to Cart"}
+              </button>
+
+              <button
+                onClick={handleToggleWishlist}
+                aria-label="Toggle wishlist"
+                className={`p-4 rounded-full shadow-md cursor-pointer transition-all duration-300 flex items-center justify-center ${
+                  isLoved
+                    ? "bg-[#80B500] text-white hover:bg-[#6e9c00]"
+                    : "bg-gray-100 text-[#80B500] hover:bg-[#80B500] hover:text-white"
+                }`}
+              >
+                {isLoved ? <FaHeart size={22} /> : <FaRegHeart size={22} />}
+              </button>
+            </div>
           </div>
         </div>
       </Container>
