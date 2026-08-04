@@ -167,6 +167,7 @@ const About = () => {
 
           <Container>
             <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-8">
+              {/* Left Content */}
               <div className="w-full lg:w-[60%] text-center lg:text-left z-10">
                 <div className="inline-flex items-center gap-x-2 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full shadow-sm border border-[#80B500]/30 mb-5">
                   <img
@@ -175,21 +176,23 @@ const About = () => {
                     className="w-4 h-4 object-contain"
                   />
                   <span className="text-[#80B500] text-xs sm:text-sm font-bold font-Nunito uppercase tracking-wider">
-                    100% Certified Organic Products
+                    Fresh From Farm to Your Doorstep
                   </span>
                 </div>
 
                 {/* Title */}
                 <h1 className="text-3xl sm:text-5xl lg:text-6xl text-gray-900 font-Inter font-black tracking-tight leading-[1.12] mb-4">
-                  Explore Our Fresh Organic Story
+                  Bringing Nature's Purest Harvest to Cabbage
                 </h1>
 
                 {/* Description */}
                 <p className="text-gray-600 text-sm sm:text-base font-Nunito max-w-[540px] mb-8 mx-auto lg:mx-0 leading-relaxed">
-                  Learn more about our mission to provide 100% natural and
-                  organic products directly from trusted local farmers to your
-                  table with ultimate care.
+                  At Cabbage, we connect you directly with local organic farmers
+                  to deliver 100% chemical-free, handpicked freshness with care,
+                  transparency, and speed.
                 </p>
+
+                {/* Breadcrumb */}
                 <div className="inline-flex items-center gap-2 text-gray-600 text-sm font-Nunito font-medium bg-white/80 backdrop-blur-sm px-5 py-2.5 rounded-full border border-gray-200/80 shadow-sm mx-auto lg:mx-0">
                   <Link
                     to="/"
@@ -202,11 +205,11 @@ const About = () => {
                 </div>
               </div>
 
-              {/* Right Feature Card  */}
+              {/* Right Feature Card */}
               <div className="w-full lg:w-[38%] z-10">
                 <div className="bg-white/90 backdrop-blur-xl p-6 sm:p-8 rounded-3xl shadow-xl shadow-gray-200/50 border border-white flex flex-col gap-5">
                   <h3 className="text-gray-900 font-Inter font-bold text-lg border-b border-gray-100 pb-3">
-                    Why Shop With Us?
+                    Why Choose Cabbage?
                   </h3>
 
                   <div className="flex items-center gap-4">
@@ -215,10 +218,10 @@ const About = () => {
                     </div>
                     <div>
                       <h4 className="text-gray-900 font-bold text-sm font-Inter">
-                        100% Natural Harvest
+                        100% Farm Fresh
                       </h4>
                       <p className="text-gray-500 text-xs font-Nunito">
-                        Directly sourced from trusted local farmers
+                        Harvested daily by certified organic growers
                       </p>
                     </div>
                   </div>
@@ -229,10 +232,10 @@ const About = () => {
                     </div>
                     <div>
                       <h4 className="text-gray-900 font-bold text-sm font-Inter">
-                        Express Home Delivery
+                        Temperature Controlled
                       </h4>
                       <p className="text-gray-500 text-xs font-Nunito">
-                        Fast and temperature-controlled shipping
+                        Maintains crispness and peak nutritional value
                       </p>
                     </div>
                   </div>
@@ -243,10 +246,10 @@ const About = () => {
                     </div>
                     <div>
                       <h4 className="text-gray-900 font-bold text-sm font-Inter">
-                        Quality Guaranteed
+                        Purity Guaranteed
                       </h4>
                       <p className="text-gray-500 text-xs font-Nunito">
-                        Strict quality checks on every order
+                        Zero synthetic pesticides or harmful preservatives
                       </p>
                     </div>
                   </div>

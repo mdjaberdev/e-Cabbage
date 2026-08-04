@@ -79,7 +79,7 @@ const Shop = () => {
         <meta name="shop" content="welcome to shop page" />
       </Helmet>
 
-      {/* Hero / Banner Section */}
+      {/* Banner Section */}
       <div className="relative bg-[#F6F9F0] pt-10 pb-12 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-24 overflow-hidden select-none border-b border-[#80B500]/15">
         <div className="absolute top-[-20%] right-[-10%] w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-[#80B500]/15 rounded-full blur-[100px] sm:blur-[130px] pointer-events-none -z-10" />
         <div className="absolute bottom-[-20%] left-[-10%] w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-[#E2ECD5]/70 rounded-full blur-[90px] sm:blur-[110px] pointer-events-none -z-10" />
@@ -121,7 +121,7 @@ const Shop = () => {
               </div>
             </div>
 
-            {/* Right  */}
+            {/* Right Feature Card */}
             <div className="w-full lg:w-[38%] z-10">
               <div className="bg-white/90 backdrop-blur-xl p-5 sm:p-8 rounded-3xl shadow-xl shadow-gray-200/50 border border-white flex flex-col gap-4 sm:gap-5">
                 <h3 className="text-gray-900 font-Inter font-bold text-base sm:text-lg border-b border-gray-100 pb-3">
