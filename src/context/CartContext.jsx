@@ -85,6 +85,11 @@ export const CartProvider = ({ children }) => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
+  const clearCart = () => {
+    setCartItems([]);
+    localStorage.removeItem("cart");
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -93,11 +98,12 @@ export const CartProvider = ({ children }) => {
         increaseQuantity,
         decreaseQuantity,
         removeFromCart,
+        clearCart, 
       }}
     >
       {children}
       {notification && (
-        <div className="fixed top-5 right-5 z-[999999] bg-[#80B500] text-white px-6 py-3.5 rounded-2xl shadow-2xl font-Nunito font-bold transition-all duration-300 animate-bounce flex items-center gap-3 border border-white/20">
+        <div className="fixed top-5 right-5 z-[999999] bg-[#80B500] text-white px-6 py-3.5 rounded-2xl shadow-2xl font-Nunito font-bold transition-all duration-300 animate-bounce flex items-center gap-3 border border-white/25">
           <span>{notification}</span>
         </div>
       )}
