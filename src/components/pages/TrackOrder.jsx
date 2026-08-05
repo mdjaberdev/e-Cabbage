@@ -72,14 +72,14 @@ const TrackOrder = () => {
             </button>
           </form>
 
-          {/* Not Found Message */}
+          {/* not found  */}
           {notFound && (
             <div className="text-center py-6 text-red-500 text-sm font-medium bg-red-50 rounded-lg border border-red-100">
               Sorry! No order found with this ID. Please check and try again.
             </div>
           )}
 
-          {/* Order Details Found */}
+          {/* order details  */}
           {searchedOrder && (
             <div className="border border-gray-100 rounded-xl p-6 bg-gray-50/50 space-y-4">
               <div className="flex justify-between items-center border-b pb-3">
@@ -116,8 +116,32 @@ const TrackOrder = () => {
                 </p>
                 <p>
                   <strong className="text-gray-800">Payment Method:</strong>{" "}
-                  Cash on Delivery
+                  <span className="uppercase font-semibold text-gray-800">
+                    {searchedOrder.customer.paymentMethod}
+                  </span>
                 </p>
+
+                {(searchedOrder.customer.paymentMethod === "bkash" ||
+                  searchedOrder.customer.paymentMethod === "nagad") && (
+                  <div className="bg-green-50/70 p-3 rounded-lg border border-green-200 mt-2 space-y-1 text-xs">
+                    <p>
+                      <span className="font-semibold text-gray-700">
+                        Sender Number:
+                      </span>{" "}
+                      <span className="text-gray-900 font-mono">
+                        {searchedOrder.customer.senderNumber}
+                      </span>
+                    </p>
+                    <p>
+                      <span className="font-semibold text-gray-700">
+                        TrxID:
+                      </span>{" "}
+                      <span className="text-gray-900 font-mono font-bold">
+                        {searchedOrder.customer.transactionId}
+                      </span>
+                    </p>
+                  </div>
+                )}
               </div>
 
               <div className="border-t pt-4">

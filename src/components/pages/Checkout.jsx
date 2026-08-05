@@ -31,7 +31,7 @@ const Checkout = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [placedOrderSummary, setPlacedOrderSummary] = useState(null);
   const [copiedNumber, setCopiedNumber] = useState("");
-
+  const [isOrderIdCopied, setIsOrderIdCopied] = useState(false);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -40,6 +40,13 @@ const Checkout = () => {
     navigator.clipboard.writeText(number);
     setCopiedNumber(type);
     setTimeout(() => setCopiedNumber(""), 2000);
+  };
+
+
+  const handleCopyOrderId = (orderId) => {
+    navigator.clipboard.writeText(orderId);
+    setIsOrderIdCopied(true);
+    setTimeout(() => setIsOrderIdCopied(false), 2000);
   };
 
   const subtotal = cartItems.reduce((total, item) => {
@@ -124,9 +131,32 @@ const Checkout = () => {
           <h2 className="text-2xl sm:text-3xl font-bold font-Inter text-Primary mb-2">
             Thank You For Your Order!
           </h2>
-          <p className="text-xs text-gray-400 font-mono mb-4">
-            Order Reference: {placedOrderSummary.orderId}
-          </p>
+
+          {/* Order ID with Copy Button */}
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <p className="text-xs text-gray-400 font-mono">
+              Order Reference:{" "}
+              <span className="text-sm font-bold text-gray-800">
+                {placedOrderSummary.orderId}
+              </span>
+            </p>
+            <button
+              onClick={() => handleCopyOrderId(placedOrderSummary.orderId)}
+              className="text-[#80B500] hover:text-[#6e9c00] flex items-center gap-1 text-xs font-semibold bg-gray-50 hover:bg-gray-100 px-2.5 py-1 rounded border border-gray-200 transition-colors cursor-pointer"
+              title="Copy Order ID"
+            >
+              {isOrderIdCopied ? (
+                <>
+                  <FaCheck size={12} /> Copied
+                </>
+              ) : (
+                <>
+                  <FaRegCopy size={12} /> Copy
+                </>
+              )}
+            </button>
+          </div>
+
           <p className="text-[#666E77] text-sm mb-6 leading-relaxed">
             Your order has been successfully placed. Payment method:{" "}
             <span className="font-semibold text-gray-800 uppercase">
@@ -380,7 +410,7 @@ const Checkout = () => {
                   </span>
                 </div>
 
-                {/* Payment Methods */}
+                {/* payment methods */}
                 <div className="space-y-3 mb-6">
                   <span className="block text-xs font-bold text-gray-800 mb-1">
                     Select Payment Method *
@@ -434,7 +464,7 @@ const Checkout = () => {
                             <button
                               type="button"
                               onClick={() => handleCopy("01700000000", "bkash")}
-                              className="text-[#80B500] hover:text-[#6e9c00] flex items-center gap-1 text-[10px] font-semibold bg-white px-2 py-0.5 rounded border border-gray-200"
+                              className="text-[#80B500] hover:text-[#6e9c00] flex items-center gap-1 text-[10px] font-semibold bg-white px-2 py-0.5 rounded border border-gray-200 cursor-pointer"
                             >
                               {copiedNumber === "bkash" ? (
                                 <>
@@ -478,7 +508,7 @@ const Checkout = () => {
                             <button
                               type="button"
                               onClick={() => handleCopy("01800000000", "nagad")}
-                              className="text-[#80B500] hover:text-[#6e9c00] flex items-center gap-1 text-[10px] font-semibold bg-white px-2 py-0.5 rounded border border-gray-200"
+                              className="text-[#80B500] hover:text-[#6e9c00] flex items-center gap-1 text-[10px] font-semibold bg-white px-2 py-0.5 rounded border border-gray-200 cursor-pointer"
                             >
                               {copiedNumber === "nagad" ? (
                                 <>
@@ -496,7 +526,7 @@ const Checkout = () => {
                     </div>
                   </div>
 
-                  {/* Card / Online Gateway */}
+                  {/* card online gateway */}
                   <div className="bg-gray-50 p-3 rounded-lg border border-gray-200">
                     <label className="flex items-start gap-2.5 cursor-pointer">
                       <input
@@ -518,7 +548,7 @@ const Checkout = () => {
                     </label>
                   </div>
 
-                  {/* bKash / Nagad Transaction Details Input Box */}
+                  {/* bKash / nagad transaction details input  */}
                   {(formData.paymentMethod === "bkash" ||
                     formData.paymentMethod === "nagad") && (
                     <div className="p-3 bg-green-50/50 border border-green-200 rounded-lg space-y-3 mt-3 animate-fadeIn">
