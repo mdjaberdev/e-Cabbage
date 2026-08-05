@@ -4,7 +4,7 @@ import { FaRegUser } from "react-icons/fa";
 import Images from "../common/Images";
 import topLogo from "/src/assets/topLogo.png";
 import { Link } from "react-router-dom";
-import { FaHeart } from "react-icons/fa6";
+import { FaHeart, FaTruckFast } from "react-icons/fa6"; // 🔹 ট্র্যাকিংয়ের জন্য FaTruckFast ইমপোর্ট করা হলো
 import { useWishlist } from "../../context/WishlistContext";
 
 const HeaderTop = () => {
@@ -25,11 +25,27 @@ const HeaderTop = () => {
           </div>
 
           {/* Right Side */}
-          <div className="flex gap-x-3 lg:gap-x-4 items-center text-white text-xl lg:text-2xl font-Nunito">
-            <Link to={"/login"}>
+          <div className="flex gap-x-3.5 lg:gap-x-5 items-center text-white text-xl lg:text-2xl font-Nunito">
+            {/* 🔹 Track Order Icon Link */}
+            <Link
+              to={"/track-order"}
+              title="Track Order"
+              className="hover:text-[#80B500] transition-colors"
+            >
+              <FaTruckFast />
+            </Link>
+
+            <Link
+              to={"/login"}
+              className="hover:text-[#80B500] transition-colors"
+            >
               <FaRegUser />
             </Link>
-            <Link to={"/wishlist"} className="relative">
+
+            <Link
+              to={"/wishlist"}
+              className="relative hover:text-[#80B500] transition-colors"
+            >
               <FaHeart />
               {wishlistItems.length > 0 && (
                 <span className="absolute -top-2 -right-2.5 bg-[#80B500] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
@@ -45,7 +61,6 @@ const HeaderTop = () => {
                 className={"w-5 h-5 lg:w-6.25 lg:h-6.25"}
                 srcImg={topLogo}
               />
-              {/* <p className="text-sm lg:text-base">EN</p> */}
             </div>
           </div>
         </div>

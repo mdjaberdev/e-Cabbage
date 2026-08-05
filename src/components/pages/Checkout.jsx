@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import Container from "../common/Container";
-import { FaAngleRight, FaCheckCircle, FaSpinner } from "react-icons/fa";
+import {
+  FaAngleRight,
+  FaCheckCircle,
+  FaSpinner,
+  FaRegCopy,
+  FaCheck,
+} from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 
@@ -17,16 +23,24 @@ const Checkout = () => {
     city: "Dhaka",
     orderNotes: "",
     paymentMethod: "cod",
+    senderNumber: "",
+    transactionId: "",
   });
 
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [placedOrderSummary, setPlacedOrderSummary] = useState(null);
+  const [copiedNumber, setCopiedNumber] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleCopy = (number, type) => {
+    navigator.clipboard.writeText(number);
+    setCopiedNumber(type);
+    setTimeout(() => setCopiedNumber(""), 2000);
+  };
 
   const subtotal = cartItems.reduce((total, item) => {
     const priceNumber =
@@ -36,15 +50,14 @@ const Checkout = () => {
     return total + priceNumber * item.quantity;
   }, 0);
 
- 
   const getShippingCost = (cityName) => {
     const city = cityName.toLowerCase().trim();
     if (city === "dhaka") {
-      return 60; 
+      return 60;
     } else if (city === "") {
       return 0;
     } else {
-      return 130; 
+      return 130;
     }
   };
 
@@ -56,6 +69,18 @@ const Checkout = () => {
     if (cartItems.length === 0) {
       alert("Your cart is empty!");
       return;
+    }
+
+    if (
+      formData.paymentMethod === "bkash" ||
+      formData.paymentMethod === "nagad"
+    ) {
+      if (!formData.senderNumber.trim() || !formData.transactionId.trim()) {
+        alert(
+          `Please provide your ${formData.paymentMethod.toUpperCase()} mobile number and Transaction ID (TrxID).`,
+        );
+        return;
+      }
     }
 
     setIsLoading(true);
@@ -70,6 +95,12 @@ const Checkout = () => {
         totalAmount: grandTotal,
         date: new Date().toLocaleDateString(),
       };
+
+      const existingOrders = JSON.parse(localStorage.getItem("myOrders")) || [];
+      localStorage.setItem(
+        "myOrders",
+        JSON.stringify([...existingOrders, orderData]),
+      );
 
       setPlacedOrderSummary(orderData);
       setIsLoading(false);
@@ -97,23 +128,34 @@ const Checkout = () => {
             Order Reference: {placedOrderSummary.orderId}
           </p>
           <p className="text-[#666E77] text-sm mb-6 leading-relaxed">
-            Your order has been successfully placed. We will contact you shortly
-            at{" "}
+            Your order has been successfully placed. Payment method:{" "}
+            <span className="font-semibold text-gray-800 uppercase">
+              {placedOrderSummary.customer.paymentMethod}
+            </span>
+            . We will contact you shortly at{" "}
             <span className="font-semibold text-gray-800">
               {placedOrderSummary.customer.phone}
             </span>{" "}
-            to verify your Cash on Delivery address. Total Payable (including
-            shipping):{" "}
+            to verify details. Total Payable (including shipping):{" "}
             <span className="font-bold text-[#80B500]">
               ${placedOrderSummary.totalAmount.toFixed(2)}
             </span>
           </p>
-          <button
-            onClick={() => navigate("/")}
-            className="bg-[#80B500] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#6e9c00] transition-colors cursor-pointer shadow-sm text-sm"
-          >
-            Continue Shopping
-          </button>
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <button
+              onClick={() => navigate("/track-order")}
+              className="bg-gray-100 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors cursor-pointer text-sm"
+            >
+              Track Order Status
+            </button>
+            <button
+              onClick={() => navigate("/")}
+              className="bg-[#80B500] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#6e9c00] transition-colors cursor-pointer shadow-sm text-sm"
+            >
+              Continue Shopping
+            </button>
+          </div>
         </div>
       </Container>
     );
@@ -143,7 +185,7 @@ const Checkout = () => {
             onSubmit={handleOrderSubmit}
             className="flex flex-col lg:flex-row justify-between gap-8"
           >
-            {/*  Billing Details Form */}
+            {/* Details Form */}
             <div className="w-full lg:w-[64%] bg-white p-6 sm:p-8 rounded-xl shadow-sm border border-gray-100">
               <h3 className="text-Primary text-lg sm:text-xl font-bold font-Inter mb-6 border-b border-gray-100 pb-3">
                 Billing Details
@@ -338,25 +380,181 @@ const Checkout = () => {
                   </span>
                 </div>
 
-            
-                <div className="bg-gray-50 p-3 rounded-lg mb-6 border border-gray-200">
-                  <label className="flex items-start gap-2.5 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      value="cod"
-                      defaultChecked
-                      className="mt-0.5 accent-[#80B500]"
-                    />
-                    <div>
-                      <span className="block text-xs font-bold text-gray-800">
-                        Cash on Delivery
-                      </span>
-                      <span className="block text-[11px] text-gray-500 mt-0.5 leading-tight">
-                        Pay with cash at your doorstep. Shipping fee included.
-                      </span>
+                {/* Payment Methods */}
+                <div className="space-y-3 mb-6">
+                  <span className="block text-xs font-bold text-gray-800 mb-1">
+                    Select Payment Method *
+                  </span>
+
+                  {/* COD */}
+                  <div className="bg-gray-50 p-3 rounded-lg border border-gray-200">
+                    <label className="flex items-start gap-2.5 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="paymentMethod"
+                        value="cod"
+                        checked={formData.paymentMethod === "cod"}
+                        onChange={handleChange}
+                        className="mt-0.5 accent-[#80B500]"
+                      />
+                      <div>
+                        <span className="block text-xs font-bold text-gray-800">
+                          Cash on Delivery
+                        </span>
+                        <span className="block text-[11px] text-gray-500 mt-0.5 leading-tight">
+                          Pay with cash at your doorstep.
+                        </span>
+                      </div>
+                    </label>
+                  </div>
+
+                  {/* bKash */}
+                  <div className="bg-gray-50 p-3 rounded-lg border border-gray-200">
+                    <div className="flex items-start justify-between">
+                      <label className="flex items-start gap-2.5 cursor-pointer w-full">
+                        <input
+                          type="radio"
+                          name="paymentMethod"
+                          value="bkash"
+                          checked={formData.paymentMethod === "bkash"}
+                          onChange={handleChange}
+                          className="mt-0.5 accent-[#80B500]"
+                        />
+                        <div className="w-full">
+                          <span className="block text-xs font-bold text-gray-800">
+                            bKash Personal
+                          </span>
+                          <span className="block text-[11px] text-gray-500 mt-0.5 leading-tight flex items-center justify-between">
+                            <span>
+                              Send money to:{" "}
+                              <strong className="text-gray-700">
+                                01700-000000
+                              </strong>
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => handleCopy("01700000000", "bkash")}
+                              className="text-[#80B500] hover:text-[#6e9c00] flex items-center gap-1 text-[10px] font-semibold bg-white px-2 py-0.5 rounded border border-gray-200"
+                            >
+                              {copiedNumber === "bkash" ? (
+                                <>
+                                  <FaCheck size={10} /> Copied
+                                </>
+                              ) : (
+                                <>
+                                  <FaRegCopy size={10} /> Copy
+                                </>
+                              )}
+                            </button>
+                          </span>
+                        </div>
+                      </label>
                     </div>
-                  </label>
+                  </div>
+
+                  {/* Nagad */}
+                  <div className="bg-gray-50 p-3 rounded-lg border border-gray-200">
+                    <div className="flex items-start justify-between">
+                      <label className="flex items-start gap-2.5 cursor-pointer w-full">
+                        <input
+                          type="radio"
+                          name="paymentMethod"
+                          value="nagad"
+                          checked={formData.paymentMethod === "nagad"}
+                          onChange={handleChange}
+                          className="mt-0.5 accent-[#80B500]"
+                        />
+                        <div className="w-full">
+                          <span className="block text-xs font-bold text-gray-800">
+                            Nagad Personal
+                          </span>
+                          <span className="block text-[11px] text-gray-500 mt-0.5 leading-tight flex items-center justify-between">
+                            <span>
+                              Send money to:{" "}
+                              <strong className="text-gray-700">
+                                01800-000000
+                              </strong>
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => handleCopy("01800000000", "nagad")}
+                              className="text-[#80B500] hover:text-[#6e9c00] flex items-center gap-1 text-[10px] font-semibold bg-white px-2 py-0.5 rounded border border-gray-200"
+                            >
+                              {copiedNumber === "nagad" ? (
+                                <>
+                                  <FaCheck size={10} /> Copied
+                                </>
+                              ) : (
+                                <>
+                                  <FaRegCopy size={10} /> Copy
+                                </>
+                              )}
+                            </button>
+                          </span>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Card / Online Gateway */}
+                  <div className="bg-gray-50 p-3 rounded-lg border border-gray-200">
+                    <label className="flex items-start gap-2.5 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="paymentMethod"
+                        value="card"
+                        checked={formData.paymentMethod === "card"}
+                        onChange={handleChange}
+                        className="mt-0.5 accent-[#80B500]"
+                      />
+                      <div>
+                        <span className="block text-xs font-bold text-gray-800">
+                          Credit / Debit Card
+                        </span>
+                        <span className="block text-[11px] text-gray-500 mt-0.5 leading-tight">
+                          Secure online card payment.
+                        </span>
+                      </div>
+                    </label>
+                  </div>
+
+                  {/* bKash / Nagad Transaction Details Input Box */}
+                  {(formData.paymentMethod === "bkash" ||
+                    formData.paymentMethod === "nagad") && (
+                    <div className="p-3 bg-green-50/50 border border-green-200 rounded-lg space-y-3 mt-3 animate-fadeIn">
+                      <p className="text-[11px] text-[#80B500] font-semibold">
+                        Please send ${grandTotal.toFixed(2)} using{" "}
+                        {formData.paymentMethod.toUpperCase()} and enter your
+                        details below:
+                      </p>
+                      <div>
+                        <label className="block text-[11px] font-semibold text-gray-700 mb-1">
+                          Sender Phone Number *
+                        </label>
+                        <input
+                          type="tel"
+                          name="senderNumber"
+                          value={formData.senderNumber}
+                          onChange={handleChange}
+                          placeholder="e.g. 01XXXXXXXXX"
+                          className="w-full border border-gray-200 rounded-md p-2 text-xs focus:outline-none focus:border-[#80B500] bg-white"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[11px] font-semibold text-gray-700 mb-1">
+                          Transaction ID (TrxID) *
+                        </label>
+                        <input
+                          type="text"
+                          name="transactionId"
+                          value={formData.transactionId}
+                          onChange={handleChange}
+                          placeholder="e.g. 9H7K3L2M1N"
+                          className="w-full border border-gray-200 rounded-md p-2 text-xs focus:outline-none focus:border-[#80B500] bg-white"
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <button
