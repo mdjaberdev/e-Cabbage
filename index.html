@@ -5,23 +5,27 @@
     <link rel="icon" type="image/svg+xml" href="/titleLogo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cabbage</title>
-    <!-- Google Fonts Start  -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
       rel="stylesheet"
     />
-    <!-- Google Fonts End  -->
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
 
-    <!--Start of Tawk.to Script-->
     <script type="text/javascript">
       var Tawk_API = Tawk_API || {},
         Tawk_LoadStart = new Date();
+
+      Tawk_API.onLoad = function () {
+        if (typeof Tawk_API.hideWidget === "function") {
+          Tawk_API.hideWidget();
+        }
+      };
+
       (function () {
         var s1 = document.createElement("script"),
           s0 = document.getElementsByTagName("script")[0];
@@ -32,6 +36,5 @@
         s0.parentNode.insertBefore(s1, s0);
       })();
     </script>
-    <!--End of Tawk.to Script-->
   </body>
 </html>

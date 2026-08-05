@@ -4,6 +4,8 @@ import Header from "./Header";
 import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
 import Companylogo from "./Companylogo";
+import SupportChatWidget from "../common/SupportChatWidget";
+
 
 const RootLayout = () => {
   return (
@@ -11,8 +13,9 @@ const RootLayout = () => {
       <HeaderTop />
       <Header />
       <Outlet />
-      <Companylogo/>
+      <Companylogo />
       <Footer />
+      <SupportChatWidget/>
     </>
   );
 };
