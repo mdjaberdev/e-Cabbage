@@ -65,86 +65,88 @@ const Header = () => {
 
   return (
     <>
-      <Container>
-        <div className="flex items-center justify-between my-6">
-          <Link to="/">
-            <Images srcImg={logo} />
-          </Link>
+      <header className="sticky top-0 z-50 bg-white shadow-sm">
+        <Container>
+          <div className="flex items-center justify-between py-4 my-0">
+            <Link to="/">
+              <Images srcImg={logo} />
+            </Link>
 
-          <div className="hidden lg:flex items-center gap-x-12">
-            <ul className="flex items-center gap-x-8 text-[17px] text-[#0A2C3D] font-Nunito font-bold">
-              <li className="hover:text-[#80B500] duration-300">
-                <Link to="/">Home</Link>
-              </li>
-              <li className="hover:text-[#80B500] duration-300">
-                <Link to="/about">About</Link>
-              </li>
-              <li className="hover:text-[#80B500] duration-300">
-                <Link to="/shop">Shop</Link>
-              </li>
-              <li className="hover:text-[#80B500] duration-300">
-                <Link to="/blog">Blog</Link>
-              </li>
-              <li className="hover:text-[#80B500] duration-300">
-                <Link to="/contact">Contact</Link>
-              </li>
-            </ul>
-            <div className="relative" ref={searchRef}>
-              <form
-                onSubmit={handleSearch}
-                className="w-75 flex justify-between items-center py-1 px-3 bg-[#F4F4F4] rounded-[50px]"
-              >
-                <input
-                  type="text"
-                  placeholder="Find Products"
-                  value={searchQuery || ""}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="outline-none text-sm text-[#797D95] font-Nunito w-full bg-transparent"
-                />
-                <button
-                  type="submit"
-                  className="cursor-pointer bg-transparent border-none flex items-center justify-center"
+            <div className="hidden lg:flex items-center gap-x-12">
+              <ul className="flex items-center gap-x-8 text-[17px] text-[#0A2C3D] font-Nunito font-bold">
+                <li className="hover:text-[#80B500] duration-300">
+                  <Link to="/">Home</Link>
+                </li>
+                <li className="hover:text-[#80B500] duration-300">
+                  <Link to="/about">About</Link>
+                </li>
+                <li className="hover:text-[#80B500] duration-300">
+                  <Link to="/shop">Shop</Link>
+                </li>
+                <li className="hover:text-[#80B500] duration-300">
+                  <Link to="/blog">Blog</Link>
+                </li>
+                <li className="hover:text-[#80B500] duration-300">
+                  <Link to="/contact">Contact</Link>
+                </li>
+              </ul>
+              <div className="relative" ref={searchRef}>
+                <form
+                  onSubmit={handleSearch}
+                  className="w-75 flex justify-between items-center py-1 px-3 bg-[#F4F4F4] rounded-[50px]"
                 >
-                  <IoSearchOutline className="text-5xl text-white bg-[#80B500] w-20 py-3 rounded-4xl" />
-                </button>
-              </form>
+                  <input
+                    type="text"
+                    placeholder="Find Products"
+                    value={searchQuery || ""}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="outline-none text-sm text-[#797D95] font-Nunito w-full bg-transparent"
+                  />
+                  <button
+                    type="submit"
+                    className="cursor-pointer bg-transparent border-none flex items-center justify-center"
+                  >
+                    <IoSearchOutline className="text-5xl text-white bg-[#80B500] w-20 py-3 rounded-4xl" />
+                  </button>
+                </form>
 
-              {suggestions.length > 0 && (
-                <ul className="absolute left-0 right-0 mt-2 bg-white border border-gray-200 rounded-xl shadow-xl z-50 overflow-hidden">
-                  {suggestions.map((product) => (
-                    <li
-                      key={product.id}
-                      onClick={() => handleSelectProduct(product.id)}
-                      className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-100 cursor-pointer border-b last:border-none duration-200"
-                    >
-                      <img
-                        src={product.thumbnail}
-                        alt={product.title}
-                        className="w-10 h-10 object-cover rounded-md"
-                      />
-                      <div className="flex flex-col">
-                        <span className="text-sm font-semibold text-[#0A2C3D] font-Nunito">
-                          {product.title}
-                        </span>
-                        <span className="text-xs text-gray-500 font-Nunito">
-                          ${product.price}
-                        </span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              )}
+                {suggestions.length > 0 && (
+                  <ul className="absolute left-0 right-0 mt-2 bg-white border border-gray-200 rounded-xl shadow-xl z-50 overflow-hidden">
+                    {suggestions.map((product) => (
+                      <li
+                        key={product.id}
+                        onClick={() => handleSelectProduct(product.id)}
+                        className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-100 cursor-pointer border-b last:border-none duration-200"
+                      >
+                        <img
+                          src={product.thumbnail}
+                          alt={product.title}
+                          className="w-10 h-10 object-cover rounded-md"
+                        />
+                        <div className="flex flex-col">
+                          <span className="text-sm font-semibold text-[#0A2C3D] font-Nunito">
+                            {product.title}
+                          </span>
+                          <span className="text-xs text-gray-500 font-Nunito">
+                            ${product.price}
+                          </span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
-          </div>
 
-          <button
-            onClick={() => setOpenMenu(true)}
-            className="lg:hidden text-4xl text-[#0A2C3D] cursor-pointer"
-          >
-            <HiMenuAlt3 />
-          </button>
-        </div>
-      </Container>
+            <button
+              onClick={() => setOpenMenu(true)}
+              className="lg:hidden text-4xl text-[#0A2C3D] cursor-pointer"
+            >
+              <HiMenuAlt3 />
+            </button>
+          </div>
+        </Container>
+      </header>
 
       {openMenu && (
         <div
