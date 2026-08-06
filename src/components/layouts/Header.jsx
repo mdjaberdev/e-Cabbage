@@ -155,9 +155,10 @@ const Header = () => {
         ></div>
       )}
 
+      {/* Mobile  */}
       <div
-        className={`fixed top-0 right-0 h-screen w-[280px] bg-white z-50 shadow-2xl duration-500 lg:hidden ${
-          openMenu ? "translate-x-0" : "translate-x-full"
+        className={`fixed top-0 left-0  w-full bg-white z-50 shadow-2xl duration-500 lg:hidden ${
+          openMenu ? "translate-y-0" : "-translate-y-full"
         }`}
       >
         <div className="flex items-center justify-between p-5 border-b">
@@ -169,7 +170,7 @@ const Header = () => {
             <HiX />
           </button>
         </div>
-        <ul className="flex flex-col gap-y-6 p-6 text-[17px] text-[#0A2C3D] font-Nunito font-bold">
+        <ul className="flex flex-col gap-y-4 p-6 text-center text-[17px] text-[#0A2C3D] font-Nunito font-bold">
           <li>
             <Link onClick={() => setOpenMenu(false)} to="/">
               Home
