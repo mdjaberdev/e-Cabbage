@@ -6,7 +6,6 @@ import { IoGridSharp, IoSearchOutline } from "react-icons/io5";
 import { MdVerified, MdLocalShipping, MdEco } from "react-icons/md";
 import Products from "../common/Products";
 import Badge from "../common/Badge";
-import { useSearch } from "../../context/SearchContext";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import bnrLogo from "/src/assets/bannerLogo.png";
@@ -14,7 +13,7 @@ import bnrLogo from "/src/assets/bannerLogo.png";
 const Shop = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const { searchQuery, setSearchQuery } = useSearch();
+const [localSearchQuery, setLocalSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("best-match");
 
   const [viewMode, setViewMode] = useState("grid");
@@ -39,30 +38,20 @@ const Shop = () => {
   useEffect(() => {
     let result = [...allProducts];
 
-    if (searchQuery && searchQuery.trim() !== "") {
+    if (localSearchQuery && localSearchQuery.trim() !== "") {
       result = result.filter(
         (item) =>
-          item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          item.category.toLowerCase().includes(searchQuery.toLowerCase()),
+          item.title.toLowerCase().includes(localSearchQuery.toLowerCase()) ||
+          item.category.toLowerCase().includes(localSearchQuery.toLowerCase()),
       );
-    }
-
-    if (sortBy === "price-low") {
-      result.sort((a, b) => a.price - b.price);
-    } else if (sortBy === "price-high") {
-      result.sort((a, b) => b.price - a.price);
-    } else if (sortBy === "rating") {
-      result.sort((a, b) => b.rating - a.rating);
     }
 
     setFilteredProducts(result);
     setCurrentPage(1);
-  }, [searchQuery, sortBy, allProducts]);
-
+  }, [localSearchQuery, sortBy, allProducts]); 
   const handleShopSearchChange = (e) => {
-    setSearchQuery(e.target.value);
+    setLocalSearchQuery(e.target.value);
   };
-
 
   const indexOfLastItem = currentPage * perPage;
   const indexOfFirstItem = indexOfLastItem - perPage;
@@ -257,7 +246,7 @@ const Shop = () => {
                 <input
                   type="text"
                   placeholder="Search products..."
-                  value={searchQuery || ""}
+                  value={localSearchQuery}
                   onChange={handleShopSearchChange}
                   className="outline-0 text-sm text-[#797D95] font-Nunito h-9 w-full sm:w-[196px] bg-transparent pr-12"
                 />

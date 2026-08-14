@@ -19,7 +19,7 @@ const Checkout = lazy(() => import("./components/pages/Checkout"));
 const ProductDetails = lazy(() => import("./components/pages/ProductDetails"));
 const Wishlist = lazy(() => import("./components/pages/Wishlist"));
 const Error = lazy(() => import("./components/pages/Error"));
-const TrackOrder = lazy (()=> import("./components/pages/TrackOrder"))
+const TrackOrder = lazy(() => import("./components/pages/TrackOrder"));
 
 function App() {
   return (
