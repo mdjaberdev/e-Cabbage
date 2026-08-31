@@ -28,6 +28,7 @@ const customStyles = {
 };
 
 const AboutVideoModal = () => {
+  
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const videoEmbedLink = "https://www.youtube.com/embed/SdIfXWAKioI?autoplay=1";
 
