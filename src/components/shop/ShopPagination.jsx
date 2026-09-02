@@ -15,6 +15,9 @@ const ShopPagination = ({
     setCurrentPage(event.selected + 1);
   };
 
+  // Safe page index conversion for forcePage
+  const safeForcePage = Math.min(Math.max(0, currentPage - 1), pageCount - 1);
+
   return (
     <div className="mt-12 sm:mt-16 mb-20 sm:mb-28 flex justify-center px-4 w-full">
       <ReactPaginate
@@ -25,7 +28,7 @@ const ShopPagination = ({
         pageRangeDisplayed={4}
         marginPagesDisplayed={2}
         pageCount={pageCount}
-        forcePage={currentPage - 1}
+        forcePage={safeForcePage}
         renderOnZeroPageCount={null}
         containerClassName="flex items-center justify-center gap-2.5 flex-wrap"
         pageClassName="w-10 h-10 flex items-center justify-center rounded-lg border border-[#D0D5DD] text-[#344054] font-medium text-sm transition-all cursor-pointer hover:bg-gray-50"

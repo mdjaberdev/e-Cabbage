@@ -4,7 +4,6 @@ import Products from "../common/Products";
 import Badge from "../common/Badge";
 
 const ProductGrid = ({
-  allProducts,
   setAllProducts,
   filteredProducts,
   setFilteredProducts,

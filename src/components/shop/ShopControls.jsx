@@ -21,8 +21,8 @@ const ShopControls = ({
       const query = searchQuery.toLowerCase();
       result = result.filter(
         (item) =>
-          item.title.toLowerCase().includes(query) ||
-          item.category.toLowerCase().includes(query),
+          item.title?.toLowerCase().includes(query) ||
+          item.category?.toLowerCase().includes(query),
       );
     }
 
