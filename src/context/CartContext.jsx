@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CartContext = createContext();
 
@@ -12,15 +14,6 @@ export const CartProvider = ({ children }) => {
     }
   });
 
-  const [notification, setNotification] = useState("");
-
-  const showNotification = (message) => {
-    setNotification(message);
-    setTimeout(() => {
-      setNotification("");
-    }, 3000);
-  };
-
   useEffect(() => {
     try {
       localStorage.setItem("cart", JSON.stringify(cartItems));
@@ -30,44 +23,54 @@ export const CartProvider = ({ children }) => {
   }, [cartItems]);
 
   const addToCart = (product) => {
-    setCartItems((prevItems) => {
-      const existingItem = prevItems.find((item) => item.id === product.id);
-      if (existingItem) {
-        if (
-          product.stock !== undefined &&
-          existingItem.quantity >= product.stock
-        ) {
-          showNotification("দুঃখিত, স্টকে আর পণ্য নেই!");
-          return prevItems;
-        }
-        showNotification(
-          `"${product.productTitle || product.title}" quantity increased in cart!`,
-        );
-        return prevItems.map((item) =>
+    const title = product?.productTitle || product?.title || "Item";
+    const toastId = `cart-${product.id}`;
+
+    const existingItem = cartItems.find((item) => item.id === product.id);
+
+    if (existingItem) {
+      if (
+        product.stock !== undefined &&
+        existingItem.quantity >= product.stock
+      ) {
+        toast.error("Sorry, this item is out of stock!", {
+          toastId: `${toastId}-out`,
+        });
+        return;
+      }
+
+      toast.info(`Quantity updated for "${title}"!`, { toastId });
+      setCartItems((prevItems) =>
+        prevItems.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
             : item,
-        );
-      }
-      showNotification(
-        `"${product.productTitle || product.title}" successfully added to cart!`,
+        ),
       );
-      return [...prevItems, { ...product, quantity: 1 }];
-    });
+    } else {
+      toast.success(`"${title}" added to your cart!`, { toastId });
+      setCartItems((prevItems) => [...prevItems, { ...product, quantity: 1 }]);
+    }
   };
 
   const increaseQuantity = (id) => {
+    const existingItem = cartItems.find((item) => item.id === id);
+    if (!existingItem) return;
+
+    if (
+      existingItem.stock !== undefined &&
+      existingItem.quantity >= existingItem.stock
+    ) {
+      toast.warning("Maximum available stock reached!", {
+        toastId: `stock-${id}`,
+      });
+      return;
+    }
+
     setCartItems((prevItems) =>
-      prevItems.map((item) => {
-        if (item.id === id) {
-          if (item.stock !== undefined && item.quantity >= item.stock) {
-            showNotification("দুঃখিত, এর বেশি স্টক নেই!");
-            return item;
-          }
-          return { ...item, quantity: item.quantity + 1 };
-        }
-        return item;
-      }),
+      prevItems.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
+      ),
     );
   };
 
@@ -82,12 +85,18 @@ export const CartProvider = ({ children }) => {
   };
 
   const removeFromCart = (id) => {
+    const itemToRemove = cartItems.find((item) => item.id === id);
+    if (itemToRemove) {
+      const title = itemToRemove.productTitle || itemToRemove.title || "Item";
+      toast.info(`"${title}" removed from cart!`, { toastId: `remove-${id}` });
+    }
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
   const clearCart = () => {
     setCartItems([]);
     localStorage.removeItem("cart");
+    toast.info("Cart cleared successfully!");
   };
 
   return (
@@ -102,11 +111,19 @@ export const CartProvider = ({ children }) => {
       }}
     >
       {children}
-      {notification && (
-        <div className="fixed top-5 right-5 z-[999999] bg-[#80B500] text-white px-6 py-3.5 rounded-2xl shadow-2xl font-Nunito font-bold transition-all duration-300 animate-bounce flex items-center gap-3 border border-white/25">
-          <span>{notification}</span>
-        </div>
-      )}
+      <ToastContainer
+        position="top-right"
+        autoClose={2500}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        limit={1}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </CartContext.Provider>
   );
 };

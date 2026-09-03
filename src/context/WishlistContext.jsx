@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 const WishlistContext = createContext();
 
@@ -22,17 +23,28 @@ export const WishlistProvider = ({ children }) => {
   }, [wishlistItems]);
 
   const toggleWishlist = (product) => {
-    setWishlistItems((prev) => {
-      const exists = prev.some((item) => item.id === product.id);
-      if (exists) {
-        return prev.filter((item) => item.id !== product.id);
-      } else {
-        return [...prev, product];
-      }
-    });
+    const title = product?.productTitle || product?.title || "Item";
+    const toastId = `wishlist-${product.id}`;
+
+    const exists = wishlistItems.some((item) => item.id === product.id);
+
+    if (exists) {
+      toast.denger(`"${title}" removed from your wishlist!`, { toastId });
+      setWishlistItems((prev) => prev.filter((item) => item.id !== product.id));
+    } else {
+      toast.success(`"${title}" added to your wishlist!`, { toastId });
+      setWishlistItems((prev) => [...prev, product]);
+    }
   };
 
   const removeFromWishlist = (id) => {
+    const itemToRemove = wishlistItems.find((item) => item.id === id);
+    if (itemToRemove) {
+      const title = itemToRemove.productTitle || itemToRemove.title || "Item";
+      toast.info(`"${title}" removed from your wishlist!`, {
+        toastId: `wishlist-remove-${id}`,
+      });
+    }
     setWishlistItems((prev) => prev.filter((item) => item.id !== id));
   };
 
@@ -45,4 +57,10 @@ export const WishlistProvider = ({ children }) => {
   );
 };
 
-export const useWishlist = () => useContext(WishlistContext);
+export const useWishlist = () => {
+  const context = useContext(WishlistContext);
+  if (!context) {
+    throw new Error("useWishlist must be used within a WishlistProvider");
+  }
+  return context;
+};
